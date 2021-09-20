@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.Controls;
 
 namespace TurismoPresentacion
 {
@@ -36,5 +39,14 @@ namespace TurismoPresentacion
                 //imgDynamic.Source = new BitmapImage(fileUri);
             }
         }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+
+        }
+
+
     }
 }

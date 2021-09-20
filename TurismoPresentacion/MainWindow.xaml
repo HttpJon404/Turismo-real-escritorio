@@ -5,34 +5,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TurismoPresentacion" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Modern" xmlns:iconPacks1="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FontAwesome"
-                 mc:Ignorable="d" Background="#f2f2f2"
-        Title="Turismo Real" Height="900" Width="1500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+                 mc:Ignorable="d" 
+        Title="Turismo Real" Height="800" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
-            <Button Click="LaunchGitHubSite" ToolTip="Open up the GitHub site">
+            <Button  ToolTip="Abrir página web">
                 <iconPacks1:PackIconFontAwesome Kind="BuildingRegular" />
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 
-   
+
     <Grid>
-        <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1250" Height="850" Margin="233,10,0,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1095" Height="771" Margin="199,0,0,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
         </Button>
         <mah:Flyout x:Name="menu" Width="228" Header="Turismo Real" Foreground="#FFE65D0F" Background="White">
             <Grid Height="774" Background="#CCFA6800">
+
                 <mah:Tile x:Name="btnGestionDpto" Margin="0,0,0,634" Width="Auto" Title="Gestión departamentos" Click="btnGestionDpto_Click">
                     <iconPacks1:PackIconFontAwesome Kind="BuildingSolid" Height="68" Width="77" />
                 </mah:Tile>
                 <mah:Tile x:Name="btnListaDpto" Margin="0,140,0,494" Width="Auto" Title="Listado departamentos" Click="btnListaDpto_Click">
                     <iconPacks1:PackIconFontAwesome Kind="ClipboardListSolid" Height="68" Width="77" />
                 </mah:Tile>
+                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,280,0,354" Width="Auto" Click="btnApagar_Click" >
+                    <iconPacks1:PackIconFontAwesome Kind="PowerOffSolid" Height="68" Width="77" />
+                </mah:Tile>
             </Grid>
 
         </mah:Flyout>
-        <Image HorizontalAlignment="Left" Height="100" Margin="1144,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo.png"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="944,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo.png"/>
 
 
     </Grid>

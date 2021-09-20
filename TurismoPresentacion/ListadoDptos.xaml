@@ -9,42 +9,40 @@
       Background="#f2f2f2"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListadoDptos">
+     Title="ListadoDptos">
+  
+    <Grid >
 
-    <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="472" Margin="88,305,0,0" VerticalAlignment="Top" Width="1072"/>
-        <Label Content="Listado departamentos" HorizontalAlignment="Left" Margin="356,10,0,0" VerticalAlignment="Top" Width="522" FontSize="48"/>
-        <Label Content="Región" HorizontalAlignment="Left" Margin="368,111,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="476,111,0,0" VerticalAlignment="Top" Width="250" >
-            <ComboBoxItem Content="Quilicura"/>
-            <ComboBoxItem Content="Renca"/>
-            <ComboBoxItem Content="Santiago"/>
-            <ComboBoxItem Content="Viña del Mar"/>
-        </ComboBox>
-        <Label Content="Provincias" HorizontalAlignment="Left" Margin="368,152,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="476,152,0,0" VerticalAlignment="Top" Width="250" >
-            <ComboBoxItem Content="Quilicura"/>
-            <ComboBoxItem Content="Renca"/>
-            <ComboBoxItem Content="Santiago"/>
-            <ComboBoxItem Content="Viña del Mar"/>
-        </ComboBox>
-        <ComboBox HorizontalAlignment="Left" Margin="476,152,0,0" VerticalAlignment="Top" Width="250" >
-            <ComboBoxItem Content="Quilicura"/>
-            <ComboBoxItem Content="Renca"/>
-            <ComboBoxItem Content="Santiago"/>
-            <ComboBoxItem Content="Viña del Mar"/>
-        </ComboBox>
-        <Label Content="Comuna" HorizontalAlignment="Left" Margin="368,192,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="476,192,0,0" VerticalAlignment="Top" Width="250" >
-            <ComboBoxItem Content="Quilicura"/>
-            <ComboBoxItem Content="Renca"/>
-            <ComboBoxItem Content="Santiago"/>
-            <ComboBoxItem Content="Viña del Mar"/>
-        </ComboBox>
+        
+        <DataGrid HorizontalAlignment="Left" Height="472" Margin="88,305,0,0" VerticalAlignment="Top" Width="790"/>
+        <Label Content="Listado departamentos" HorizontalAlignment="Left" Margin="88,10,0,0" VerticalAlignment="Top" Width="522" FontSize="48"/>
+        <Grid Background="White" Margin="258,109,591,569">
+            <Label Content="Región" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="10,10,0,0"/>
+            <ComboBox HorizontalAlignment="Left" Margin="108,13,0,0" VerticalAlignment="Top" Width="250" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <Label Content="Provincias" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <ComboBox HorizontalAlignment="Left" Margin="108,51,0,0" VerticalAlignment="Top" Width="250" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <Label Content="Comuna" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <ComboBox HorizontalAlignment="Left" Margin="108,89,0,0" VerticalAlignment="Top" Width="250" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <Button x:Name="btnGuardar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"  HorizontalAlignment="Left" Margin="282,126,0,0" VerticalAlignment="Top" Width="76" Height="36" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                <iconPacks1:PackIconFontAwesome Kind="FilterSolid" Height="26" Width="22"  />
+            </Button>
 
-        <Button x:Name="btnGuardar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"  HorizontalAlignment="Left" Margin="650,236,0,0" VerticalAlignment="Top" Width="76" Height="36" mah:ControlsHelper.ContentCharacterCasing="Normal">
-            <iconPacks1:PackIconFontAwesome Kind="FilterSolid" Height="26" Width="22"  />
-        </Button>
+        </Grid>
         <Image HorizontalAlignment="Left" Height="100" Margin="900,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo.png"/>
 
     </Grid>

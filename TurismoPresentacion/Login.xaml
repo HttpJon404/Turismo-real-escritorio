@@ -8,13 +8,14 @@
         mc:Ignorable="d"
         Title="Login" Height="392" Width="290" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,1">
-        <iconPacks1:PackIconFontAwesome Kind="UserTieSolid" Height="68" Width="77" Margin="123,80,0,0" RenderTransformOrigin="0.437,0.182" />
-        <Label Content="Email" HorizontalAlignment="Left" Margin="17,163,0,0" VerticalAlignment="Top" Width="56"/>
-        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="71,265,0,0" VerticalAlignment="Top" Width="154" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="99,209,0,0" VerticalAlignment="Top" Width="147"/>
-        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="17,209,0,0" VerticalAlignment="Top" Width="77"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="99,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-        <Image HorizontalAlignment="Left" Height="52" Margin="99,0,0,0" VerticalAlignment="Top" Width="183" Source="images/logo_turismo.png"/>
+        <iconPacks1:PackIconFontAwesome Kind="UserTieSolid" Height="68" Width="77" Margin="107,66,0,0" RenderTransformOrigin="0.437,0.182" />
+        <Label Content="Email" HorizontalAlignment="Left" Margin="67,153,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="1.589,0.615"/>
+        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Iniciar sesión" Margin="97,300,100,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="67,236,0,0" VerticalAlignment="Top" Width="147"/>
+        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="67,210,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.636,0.577"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="67,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+        <Image HorizontalAlignment="Left" Height="52" Margin="55,0,0,0" VerticalAlignment="Top" Width="227" Source="images/logo_turismo.png"/>
+        <mah:ToggleSwitch  HorizontalAlignment="Left" Height="36" Margin="67,259,0,0" VerticalAlignment="Top" Width="135" Content="Recordar"  mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight"/>
 
     </Grid>
 </mah:MetroWindow>

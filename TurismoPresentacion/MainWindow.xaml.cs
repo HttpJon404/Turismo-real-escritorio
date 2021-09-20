@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TurismoPresentacion
 {
@@ -24,11 +26,7 @@ namespace TurismoPresentacion
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void LaunchGitHubSite(object sender, RoutedEventArgs e)
-        {
-            // Launch the GitHub site...
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,9 +39,22 @@ namespace TurismoPresentacion
             Main.Content = new AdmDepartamentos();
         }
 
+        private async void btnApagar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialogResult resultado = await this.ShowMessageAsync("Confirmación", "¿Estás seguro que deseas cerrar la aplicación? "
+                    , MessageDialogStyle.AffirmativeAndNegative);
+
+            if (resultado == MessageDialogResult.Affirmative)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
         private void btnListaDpto_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new ListadoDptos();
         }
+
+
     }
 }
