@@ -171,7 +171,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdmUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListadoDptos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListadoUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,12 +194,18 @@
     <Compile Include="AdmDepartamentos.xaml.cs">
       <DependentUpon>AdmDepartamentos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdmUsuarios.xaml.cs">
+      <DependentUpon>AdmUsuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ListadoDptos.xaml.cs">
       <DependentUpon>ListadoDptos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoUsers.xaml.cs">
+      <DependentUpon>ListadoUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -233,6 +247,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\logo_turismo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\logo_turismo-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\DptoLogin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ImagenLogin.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

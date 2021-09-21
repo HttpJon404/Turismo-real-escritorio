@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TurismoPresentacion" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Modern" xmlns:iconPacks1="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FontAwesome"
                  mc:Ignorable="d" 
-        Title="Turismo Real" Height="800" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+                 Background="#f2f2f2"
+        Title="Turismo Real" Height="860" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Button  ToolTip="Abrir página web">
@@ -17,7 +18,8 @@
 
 
     <Grid>
-        <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1095" Height="771" Margin="199,0,0,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
+        <Image HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill"/>
+        <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1096" Height="831" Margin="199,0,-1,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
         </Button>
@@ -30,13 +32,19 @@
                 <mah:Tile x:Name="btnListaDpto" Margin="0,140,0,494" Width="Auto" Title="Listado departamentos" Click="btnListaDpto_Click">
                     <iconPacks1:PackIconFontAwesome Kind="ClipboardListSolid" Height="68" Width="77" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,280,0,354" Width="Auto" Click="btnApagar_Click" >
+                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,554,0,80" Width="Auto" Click="btnApagar_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="PowerOffSolid" Height="68" Width="77" />
+                </mah:Tile>
+                <mah:Tile x:Name="btnUsuarios" Margin="0,274,0,360" Width="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
+                    <iconPacks1:PackIconFontAwesome Kind="UsersCogSolid" Height="68" Width="77" />
+                </mah:Tile>
+                <mah:Tile x:Name="btnListaUsuarios" Margin="0,414,0,220" Width="Auto" Title="Listado de usuarios" Click="btnListaUsuarios_Click" >
+                    <iconPacks1:PackIconFontAwesome Kind="ListUlSolid" Height="68" Width="77" />
                 </mah:Tile>
             </Grid>
 
         </mah:Flyout>
-        <Image HorizontalAlignment="Left" Height="100" Margin="944,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo.png"/>
+       
 
 
     </Grid>

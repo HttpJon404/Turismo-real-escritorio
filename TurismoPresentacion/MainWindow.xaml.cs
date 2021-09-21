@@ -26,6 +26,7 @@ namespace TurismoPresentacion
         public MainWindow()
         {
             InitializeComponent();
+            menu.IsOpen = true;
 
         }
 
@@ -55,6 +56,14 @@ namespace TurismoPresentacion
             Main.Content = new ListadoDptos();
         }
 
+        private void btnUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new AdmUsuarios();
+        }
 
+        private void btnListaUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ListadoUsers();
+        }
     }
 }

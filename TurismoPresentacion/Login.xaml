@@ -6,16 +6,17 @@
         xmlns:local="clr-namespace:TurismoPresentacion"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:iconPacks1="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Class="TurismoPresentacion.Login"
         mc:Ignorable="d"
-        Title="Login" Height="392" Width="290" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,0,1">
-        <iconPacks1:PackIconFontAwesome Kind="UserTieSolid" Height="68" Width="77" Margin="107,66,0,0" RenderTransformOrigin="0.437,0.182" />
-        <Label Content="Email" HorizontalAlignment="Left" Margin="67,153,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="1.589,0.615"/>
-        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Iniciar sesión" Margin="97,300,100,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="67,236,0,0" VerticalAlignment="Top" Width="147"/>
-        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="67,210,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.636,0.577"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="67,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-        <Image HorizontalAlignment="Left" Height="52" Margin="55,0,0,0" VerticalAlignment="Top" Width="227" Source="images/logo_turismo.png"/>
-        <mah:ToggleSwitch  HorizontalAlignment="Left" Height="36" Margin="67,259,0,0" VerticalAlignment="Top" Width="135" Content="Recordar"  mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight"/>
+    
+        Title="Login" Height="450" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#f2f2f2" Margin="0,0,0,1">
+        <iconPacks1:PackIconFontAwesome Kind="UserTieSolid" Height="68" Width="78" Margin="614,26,0,0" RenderTransformOrigin="0.437,0.182" />
+        <Label Content="Email" HorizontalAlignment="Left" Margin="502,110,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="1.589,0.615" FontSize="14"/>
+        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Iniciar sesión" Margin="573,283,107,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click" FontSize="14"/>
+        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="502,181,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.636,0.577" FontSize="14"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="32" Margin="502,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" FontSize="14"/>
+        <mah:ToggleSwitch  HorizontalAlignment="Left" Height="36" Margin="505,242,0,0" VerticalAlignment="Top" Width="135" Content="Recordar"  mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight" FontSize="14"/>
+        <Image HorizontalAlignment="Left" Height="422" Margin="0,-2,0,0" VerticalAlignment="Top" Width="474" Source="images/ImagenLogin.jpg" Stretch="Fill"/>
+        <TextBox x:Name="txtEmail_Copy" HorizontalAlignment="Left" Height="32" Margin="502,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" FontSize="14"/>
 
     </Grid>
 </mah:MetroWindow>
