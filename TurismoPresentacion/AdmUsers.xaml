@@ -56,7 +56,7 @@
         <Label Content="Usuarios" HorizontalAlignment="Left" Margin="28,356,0,0" VerticalAlignment="Top" Width="62" Foreground="#FF513E3E" FontWeight="Bold"/>
 
 
-        <mah:Flyout x:Name="FlyAddUser" Position="Bottom" Height="512" Background="#f2f2f2" CloseButtonVisibility="Hidden" Theme="Adapt" Margin="-632,0,631,187">
+        <mah:Flyout x:Name="FlyAddUser" Position="Bottom" Height="512" Background="#f2f2f2" CloseButtonVisibility="Hidden" Theme="Adapt" Margin="0,0,-1,0">
             <Grid Background="#f2f2f2" x:Name="GridAddUser"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
                 <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="368" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">
