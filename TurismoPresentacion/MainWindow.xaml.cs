@@ -37,7 +37,7 @@ namespace TurismoPresentacion
 
         private void btnGestionDpto_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AdmDepartamentos();
+            Main.Content = new AdmDeptos();
         }
 
         private async void btnApagar_Click(object sender, RoutedEventArgs e)
@@ -51,19 +51,15 @@ namespace TurismoPresentacion
             }
         }
 
-        private void btnListaDpto_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new ListadoDptos();
-        }
 
         private void btnUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AdmUsuarios();
+            Main.Content = new AdmUsers();
         }
 
         private void btnListaUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new ListadoUsers();
+            Main.Content = new AdmDepartamentos();
         }
     }
 }

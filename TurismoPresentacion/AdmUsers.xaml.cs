@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace TurismoPresentacion
 {
     /// <summary>
-    /// Lógica de interacción para ListadoDptos.xaml
+    /// Lógica de interacción para AdmUsers.xaml
     /// </summary>
-    public partial class ListadoDptos : Page
+    public partial class AdmUsers : Page
     {
-        public ListadoDptos()
+        public AdmUsers()
         {
             InitializeComponent();
+        }
+        private void btnAbrirFlyout_Click(object sender, RoutedEventArgs e)
+        {
+            FlyAddUser.IsOpen = true;
+
+        }
+
+        private void btnCerrarFlyUser_Click(object sender, RoutedEventArgs e)
+        {
+            FlyAddUser.IsOpen = false;
         }
     }
 }

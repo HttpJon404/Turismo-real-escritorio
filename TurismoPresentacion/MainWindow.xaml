@@ -27,19 +27,16 @@
             <Grid Height="774" Background="#CCFA6800">
 
                 <mah:Tile x:Name="btnGestionDpto" Margin="0,0,0,634" Width="Auto" Title="Gestión departamentos" Click="btnGestionDpto_Click">
-                    <iconPacks1:PackIconFontAwesome Kind="BuildingSolid" Height="68" Width="77" />
+                    <iconPacks1:PackIconFontAwesome Kind="CitySolid" Height="68" Width="77" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnListaDpto" Margin="0,140,0,494" Width="Auto" Title="Listado departamentos" Click="btnListaDpto_Click">
-                    <iconPacks1:PackIconFontAwesome Kind="ClipboardListSolid" Height="68" Width="77" />
-                </mah:Tile>
-                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,554,0,80" Width="Auto" Click="btnApagar_Click" >
+                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,420,0,214" Width="Auto" Click="btnApagar_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="PowerOffSolid" Height="68" Width="77" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnUsuarios" Margin="0,274,0,360" Width="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
+                <mah:Tile x:Name="btnUsuarios" Margin="0,140,0,494" Width="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="UsersCogSolid" Height="68" Width="77" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnListaUsuarios" Margin="0,414,0,220" Width="Auto" Title="Listado de usuarios" Click="btnListaUsuarios_Click" >
-                    <iconPacks1:PackIconFontAwesome Kind="ListUlSolid" Height="68" Width="77" />
+                <mah:Tile x:Name="btnListaUsuarios" Margin="0,280,0,354" Width="Auto" Title="Nuevo Departamento" Click="btnListaUsuarios_Click" >
+                    <iconPacks1:PackIconFontAwesome Kind="CitySolid" Height="68" Width="77" />
                 </mah:Tile>
             </Grid>
 

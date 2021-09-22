@@ -171,15 +171,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdmUsuarios.xaml">
+    <Page Include="AdmDeptos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListadoDptos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListadoUsers.xaml">
+    <Page Include="AdmUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,18 +190,15 @@
     <Compile Include="AdmDepartamentos.xaml.cs">
       <DependentUpon>AdmDepartamentos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdmUsuarios.xaml.cs">
-      <DependentUpon>AdmUsuarios.xaml</DependentUpon>
+    <Compile Include="AdmDeptos.xaml.cs">
+      <DependentUpon>AdmDeptos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdmUsers.xaml.cs">
+      <DependentUpon>AdmUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ListadoDptos.xaml.cs">
-      <DependentUpon>ListadoDptos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoUsers.xaml.cs">
-      <DependentUpon>ListadoUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

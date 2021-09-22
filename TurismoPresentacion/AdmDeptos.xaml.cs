@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace TurismoPresentacion
 {
     /// <summary>
-    /// Lógica de interacción para AdmUsuarios.xaml
+    /// Lógica de interacción para AdmDeptos.xaml
     /// </summary>
-    public partial class AdmUsuarios : Page
+    public partial class AdmDeptos : Page
     {
-        public AdmUsuarios()
+        public AdmDeptos()
         {
             InitializeComponent();
         }
-
-
     }
 }

@@ -24,5 +24,16 @@ namespace TurismoPresentacion
         {
             InitializeComponent();
         }
+
+        private void btnAbrirFlyout_Click(object sender, RoutedEventArgs e)
+        {
+            FlyAddUser.IsOpen = true;
+
+        }
+
+        private void btnCerrarFlyUser_Click(object sender, RoutedEventArgs e)
+        {
+            FlyAddUser.IsOpen = false;
+        }
     }
 }
