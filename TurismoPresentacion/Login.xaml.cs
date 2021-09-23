@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EntidadServicio;
 using MahApps.Metro.Controls;
-
-
+using TurismoNegocio;
 
 namespace TurismoPresentacion
 {
@@ -48,5 +48,6 @@ namespace TurismoPresentacion
                 return false;
             }
         }
+
     }
 }

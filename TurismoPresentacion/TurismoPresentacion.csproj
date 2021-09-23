@@ -250,5 +250,15 @@
   <ItemGroup>
     <Resource Include="images\ImagenLogin.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntidadServicio\EntidadServicio.csproj">
+      <Project>{22C2170B-FA2A-43E5-8586-329871236C34}</Project>
+      <Name>EntidadServicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurismoNegocio\TurismoNegocio.csproj">
+      <Project>{305f0c76-032c-4778-a82a-1ae3861f4336}</Project>
+      <Name>TurismoNegocio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

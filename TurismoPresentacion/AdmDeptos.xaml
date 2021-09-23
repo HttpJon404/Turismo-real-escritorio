@@ -15,7 +15,7 @@
 
 
         <DataGrid HorizontalAlignment="Left" Height="400" Margin="10,310,0,0" VerticalAlignment="Top" Width="982"/>
-        <Label Content="Listado departamentos" HorizontalAlignment="Left" Margin="264,14,0,0" VerticalAlignment="Top" Width="522" FontSize="48" FontFamily="Arial"/>
+        <Label Content="Gestión departamentos" HorizontalAlignment="Left" Margin="241,10,0,0" VerticalAlignment="Top" Width="522" FontSize="48" FontFamily="Arial"/>
 
         <ComboBox HorizontalAlignment="Left" Margin="599,180,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
             <ComboBoxItem Content="Quilicura"/>

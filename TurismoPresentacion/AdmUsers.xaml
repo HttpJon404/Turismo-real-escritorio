@@ -13,7 +13,7 @@
 
     <Grid>
 
-        <DataGrid HorizontalAlignment="Left" Height="400" Margin="28,377,0,0" VerticalAlignment="Top" Width="960"/>
+        <DataGrid x:Name="dgClientes" HorizontalAlignment="Left" Height="383" Margin="28,377,0,0" VerticalAlignment="Top" Width="960"/>
         <Label Content="Gestión de usuarios" HorizontalAlignment="Left" Margin="288,63,0,0" VerticalAlignment="Top" Width="522" FontSize="48" FontFamily="Arial"/>
 
         <GroupBox Header="Filtros" HorizontalAlignment="Left" Height="162" Margin="142,190,0,0" VerticalAlignment="Top" Width="758"/>
