@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
+using System.Text.RegularExpressions;
 
 namespace TurismoPresentacion
 {
@@ -27,6 +28,14 @@ namespace TurismoPresentacion
         public AdmDepartamentos()
         {
             InitializeComponent();
+            ValidacionesInput();
+        }
+
+        //Validacion Inputs
+        private void ValidacionesInput()
+        {
+            txtBaños.MaxLength = 2;
+            txtDormitorios.MaxLength = 3;
         }
 
         private void btnExaminar_Click(object sender, RoutedEventArgs e)
@@ -39,14 +48,33 @@ namespace TurismoPresentacion
                 //imgDynamic.Source = new BitmapImage(fileUri);
             }
         }
-
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        public void limpiarFormulario()
         {
-
-            
+            txtMetros.Text = string.Empty;
+            txtDormitorios.Text = string.Empty;
+            txtBaños.Text = string.Empty;
+            swEstacionamiento.IsOn = false;
+            txtDireccion.Text = string.Empty;
+            cboRegion.SelectedIndex = -1;
+            cboComuna.SelectedIndex = -1;
+            cboEstado.SelectedIndex = -1;
+            txtValorArriendo.Text = string.Empty;
+            txtCondiciones.Text = string.Empty;
+            txtValorAdm.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
 
         }
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            limpiarFormulario();
+        }
 
+        //Validacion input
 
-    }
+        private void OnlyNumbers(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+    } 
 }

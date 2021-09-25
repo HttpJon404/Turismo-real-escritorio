@@ -56,7 +56,7 @@
         <Button ToolTip="Editar departamento" x:Name="btnEliminar_Copy" HorizontalAlignment="Left" Margin="1010,380,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
             <iconpacks:PackIconFontAwesome Kind="EditSolid" Height="32" Width="32"  />
         </Button>
-        <Button ToolTip="Nuevo departamento" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" x:Name="btnAbrirFlyout" HorizontalAlignment="Left" Margin="1010,446,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" RenderTransformOrigin="0.122,0.543">
+        <Button ToolTip="Nuevo departamento" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" x:Name="btnDptoAdd" HorizontalAlignment="Left" Margin="1010,446,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" RenderTransformOrigin="0.122,0.543">
             <iconpacks:PackIconFontAwesome Kind="PlusSquareRegular" Height="32" Width="32"  />
         </Button>
 

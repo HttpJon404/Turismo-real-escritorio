@@ -14,67 +14,68 @@
     <Grid Background="#f2f2f2">
         <Label Content="Nuevo departamentos" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="725,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo-removebg-preview.png"/>
-        <Grid Background="White" Margin="29,84,27,26">
+        <Grid Background="White" Margin="29,84,27,70">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <mah:ToggleSwitch  HorizontalAlignment="Left" Height="35" Margin="18,166,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight" FontSize="16"/>
+            <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+            <TextBox x:Name="txtDormitorios"  HorizontalAlignment="Left" Height="31" Margin="126,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+            <TextBox x:Name="txtBaños"  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+            <mah:ToggleSwitch x:Name="swEstacionamiento"  HorizontalAlignment="Left" Height="35" Margin="18,166,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight" FontSize="16"/>
+            <TextBox x:Name="txtDireccion"  HorizontalAlignment="Left" Height="31" Margin="126,227,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+            <ComboBox x:Name="cboRegion" HorizontalAlignment="Left" Margin="126,275,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <ComboBox x:Name="cboComuna" HorizontalAlignment="Left" Margin="126,321,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <ComboBox x:Name="cboEstado" HorizontalAlignment="Left" Margin="126,366,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBoxItem Content="Quilicura"/>
+                <ComboBoxItem Content="Renca"/>
+                <ComboBoxItem Content="Santiago"/>
+                <ComboBoxItem Content="Viña del Mar"/>
+            </ComboBox>
+            <TextBox x:Name="txtValorArriendo"  HorizontalAlignment="Left" Height="31" Margin="126,415,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+            <TextBox x:Name="txtCondiciones"  HorizontalAlignment="Left" Height="112" Margin="126,466,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+            <TextBox x:Name="txtValorAdm"  HorizontalAlignment="Left" Height="31" Margin="625,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+            <TextBox x:Name="txtDescripcion"  HorizontalAlignment="Left" Height="103" Margin="625,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+            <Button x:Name="btnExaminar1" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,225,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
+            <Button x:Name="btnExaminar2" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,271,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
+
+
+
+
             <Label Content="Gastos administrativos" HorizontalAlignment="Left" Margin="504,4,0,0" VerticalAlignment="Top" Width="132" Foreground="#FF513E3E" FontWeight="Bold"/>
-            <Button x:Name="btnEliminar" Content="Cancela" HorizontalAlignment="Left" Margin="686,602,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnEliminar_Click"/>
-            <Image HorizontalAlignment="Left" Height="203" Margin="517,375,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
-            <Rectangle RadiusX="3" RadiusY="3" HorizontalAlignment="Left" Height="174" Margin="504,26,0,0" Stroke="#CC815D43" VerticalAlignment="Top" Width="453"/>
+            <Image x:Name="imgPortadaDpto" HorizontalAlignment="Left" Height="203" Margin="517,375,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
+            <Rectangle RadiusX="3" RadiusY="3" HorizontalAlignment="Left" Height="174" Margin="507,23,0,0" Stroke="#CC815D43" VerticalAlignment="Top" Width="453"/>
             <Label Content="Metros²" HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" FontSize="16"/>
             <Label Content="Dormitorios" HorizontalAlignment="Left" Margin="18,62,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Edad" HorizontalAlignment="Left" Margin="18,206,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="126,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="126,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="130,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="316" FontSize="16" FontFamily="Calibri"/>
-            <Label Content="Valor arriendo" HorizontalAlignment="Left" Margin="18,440,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="126,440,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <Label Content="Condiciones" HorizontalAlignment="Left" Margin="18,491,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="87" Margin="126,491,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+            <Label Content="Dirección" HorizontalAlignment="Left" Margin="18,227,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <Label Content="Valor arriendo" HorizontalAlignment="Left" Margin="16,415,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <Label Content="Condiciones" HorizontalAlignment="Left" Margin="16,466,0,0" VerticalAlignment="Top" FontSize="16"/>
             <Label Content="Valor" HorizontalAlignment="Left" Margin="516,30,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="625,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
             <Label Content="Baños" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <ComboBox HorizontalAlignment="Left" Margin="126,255,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-                <ComboBoxItem Content="Quilicura"/>
-                <ComboBoxItem Content="Renca"/>
-                <ComboBoxItem Content="Santiago"/>
-                <ComboBoxItem Content="Viña del Mar"/>
-            </ComboBox>
-            <Label Content="Región" HorizontalAlignment="Left" Margin="18,255,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Provincia" HorizontalAlignment="Left" Margin="18,306,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <ComboBox HorizontalAlignment="Left" Margin="126,307,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-                <ComboBoxItem Content="Quilicura"/>
-                <ComboBoxItem Content="Renca"/>
-                <ComboBoxItem Content="Santiago"/>
-                <ComboBoxItem Content="Viña del Mar"/>
-            </ComboBox>
-            <Label Content="Comuna" HorizontalAlignment="Left" Margin="18,350,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <ComboBox HorizontalAlignment="Left" Margin="126,351,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-                <ComboBoxItem Content="Quilicura"/>
-                <ComboBoxItem Content="Renca"/>
-                <ComboBoxItem Content="Santiago"/>
-                <ComboBoxItem Content="Viña del Mar"/>
-            </ComboBox>
-            <Label Content="Estado" HorizontalAlignment="Left" Margin="18,397,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <ComboBox HorizontalAlignment="Left" Margin="126,398,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-                <ComboBoxItem Content="Quilicura"/>
-                <ComboBoxItem Content="Renca"/>
-                <ComboBoxItem Content="Santiago"/>
-                <ComboBoxItem Content="Viña del Mar"/>
-            </ComboBox>
+
+            <Label Content="Región" HorizontalAlignment="Left" Margin="18,276,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+            <Label Content="Comuna" HorizontalAlignment="Left" Margin="16,320,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+            <Label Content="Estado" HorizontalAlignment="Left" Margin="18,365,0,0" VerticalAlignment="Top" FontSize="16"/>
+
             <Label Content="Descripción" HorizontalAlignment="Left" Margin="516,81,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox  HorizontalAlignment="Left" Height="103" Margin="625,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
             <Label Content="Imagen 1" HorizontalAlignment="Left" Margin="517,224,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Button x:Name="btnExaminar_Copy2" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,225,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
             <Label Content="Imagen 2" HorizontalAlignment="Left" Margin="517,270,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Button x:Name="btnExaminar_Copy3" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,271,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
             <Label Content="Imagen 3" HorizontalAlignment="Left" Margin="517,320,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Button x:Name="btnExaminar_Copy4" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,321,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
-            <Button x:Name="btnGuardar_Copy" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="818,602,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic"/>
+            <Button x:Name="btnExaminar3" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,321,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
+            <Button x:Name="btnGuardarDpto" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="818,602,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic"/>
+            <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="676,602,0,0" VerticalAlignment="Top" Width="126" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" Click="btnLimpiar_Click" />
 
 
         </Grid>

@@ -32,7 +32,13 @@ namespace TurismoNegocio
                 List<Usuario> jsonDes = JsonConvert.DeserializeObject<List<Usuario>>(resp);
                 Console.WriteLine(users);
                 Console.WriteLine("---------------------");
-                Console.WriteLine(jsonDes[0].id_comuna.ToString());
+                Console.WriteLine(jsonDes[0].id.ToString());
+
+                foreach(var usuario in jsonDes)
+                {
+                    usuario.id = (int)usuario.id;
+                    usuario.edad = (int)usuario.edad;
+                }
 
                 return jsonDes;
 
@@ -42,7 +48,31 @@ namespace TurismoNegocio
 
                 throw;
             }
+        }
 
+        public List<Usuario> GetUserId(decimal id)
+        {
+            try
+            {
+                DBApi dbapi = new DBApi();
+                dynamic users = dbapi.Get("https://localhost:44358/api/usuarios/"+id);
+                var resp = users.ToString();
+                var jsonDes = JsonConvert.DeserializeObject<List<Usuario>>(resp);
+
+                foreach (var usuario in jsonDes)
+                {
+                    usuario.id = (int)usuario.id;
+                    usuario.edad = (int)usuario.edad;
+                }
+
+                return jsonDes;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Respuesta<string> RegistrarUsuario(string nombre, string apellidos, decimal edad, string rut, string idGenero, decimal idComuna, decimal idRegion,
@@ -118,6 +148,33 @@ namespace TurismoNegocio
                 };
             }
         }
+
+
+        public bool EditarUsuario(string idLink, string newPass)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool EliminarUsuario(decimal id)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
 
     }
 }

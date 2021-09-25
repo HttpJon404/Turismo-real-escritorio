@@ -34,6 +34,7 @@ namespace TurismoPresentacion
                 MainWindow inicio = new MainWindow();
                 this.Close();
                 inicio.Show();
+
             }
         }
 

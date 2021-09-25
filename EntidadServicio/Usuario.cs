@@ -20,6 +20,7 @@ namespace EntidadServicio
         public decimal edad { get; set; }
         public string genero { get; set; }
         public string estado { get; set; }
+        public string contrasena { get; set; }
         public decimal id_rol { get; set; }
         public string descripcion { get; set; }
 
