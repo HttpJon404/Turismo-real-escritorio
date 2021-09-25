@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntidadServicio
 {
-    public class Usuario
+    public class UsuarioCreate
     {
         public decimal id { get; set; }
         public decimal id_comuna { get; set; }
@@ -19,9 +19,9 @@ namespace EntidadServicio
         public string celular { get; set; }
         public decimal edad { get; set; }
         public string genero { get; set; }
+        public string contrasena { get; set; }
         public string estado { get; set; }
         public decimal id_rol { get; set; }
-        public string descripcion { get; set; }
-
+        public string descripcion_rol { get; set; }
     }
 }

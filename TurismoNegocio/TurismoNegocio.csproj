@@ -61,6 +61,10 @@
       <Project>{22c2170b-fa2a-43e5-8586-329871236c34}</Project>
       <Name>EntidadServicio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilidad\Utilidad.csproj">
+      <Project>{d38e5cc0-6bcd-4e43-a721-4510ee4f62c1}</Project>
+      <Name>Utilidad</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

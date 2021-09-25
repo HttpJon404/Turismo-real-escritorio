@@ -40,7 +40,6 @@ namespace Contexto
             }
         }
 
-
         public dynamic Get(string url)
         {
             HttpWebRequest myWebRequest = (HttpWebRequest)WebRequest.Create(url);

@@ -58,61 +58,62 @@
 
         <mah:Flyout x:Name="FlyAddUser" Position="Bottom" Height="512" Background="#f2f2f2" CloseButtonVisibility="Hidden" Theme="Adapt" Margin="0,0,-1,0">
             <Grid Background="#f2f2f2" x:Name="GridAddUser"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
-                <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="368" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
+                <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="420" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">
                     <Label Content="Agregar usuario" HorizontalAlignment="Left" Margin="270,-10,0,0" VerticalAlignment="Top" Width="388" FontSize="48" Foreground="White" FontFamily="Segoe UI Semibold" Height="82"/>
                     <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="73" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979" Margin="0,0,0,-1"/>
                 </Grid>
-                <Label Content="Nombres" HorizontalAlignment="Left" Margin="19,107,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Black"/>
-                <Label Content="Apellidos" HorizontalAlignment="Left" Margin="508,107,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label Content="Dirección" HorizontalAlignment="Left" Margin="18,312,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label Content="Correo" HorizontalAlignment="Left" Margin="508,158,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Nombres" HorizontalAlignment="Left" Margin="511,107,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Black"/>
+                <Label Content="Apellidos" HorizontalAlignment="Left" Margin="22,161,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Dirección" HorizontalAlignment="Left" Margin="22,312,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Correo" HorizontalAlignment="Left" Margin="511,362,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <Label Content="Celular" HorizontalAlignment="Left" Margin="22,213,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label Content="Edad" HorizontalAlignment="Left" Margin="22,158,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label Content="Región" HorizontalAlignment="Left" Margin="19,263,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Edad" HorizontalAlignment="Left" Margin="511,161,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Región" HorizontalAlignment="Left" Margin="22,263,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <Label Content="Comuna" HorizontalAlignment="Left" Margin="511,262,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.507,1.194"/>
-                <ComboBox HorizontalAlignment="Left" Margin="128,264,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBox x:Name="cboRegion" HorizontalAlignment="Left" Margin="128,264,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
 
                     <ComboBoxItem Content="Santiago"/>
                     <ComboBoxItem Content="Viña del Mar"/>
                 </ComboBox>
-                <Label Content="Estado" HorizontalAlignment="Left" Margin="516,313,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Button x:Name="btnGuardar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="799,364,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" RenderTransformOrigin="0.516,0.239"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="128,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="128,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="606,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="606,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="128,312,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <ComboBox HorizontalAlignment="Left" Margin="609,262,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <Label Content="Estado" HorizontalAlignment="Left" Margin="511,312,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.596,0.548"/>
+                <Button x:Name="btnGuardarUsuario" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="802,411,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" RenderTransformOrigin="0.516,0.239" Click="btnGuardarUsuario_Click"/>
+                <TextBox x:Name="txtEdad"  HorizontalAlignment="Left" Height="31" Margin="609,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+                <TextBox x:Name="txtCelular"  HorizontalAlignment="Left" Height="31" Margin="128,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="Onlynumber"/>
+                <TextBox x:Name="txtApellidos"  HorizontalAlignment="Left" Height="31" Margin="128,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+                <TextBox x:Name="txtDireccion"  HorizontalAlignment="Left" Height="31" Margin="128,312,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+                <ComboBox x:Name="cboComuna" HorizontalAlignment="Left" Margin="609,262,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
                     <ComboBoxItem Content="Quilicura"/>
                     <ComboBoxItem Content="Renca"/>
                     <ComboBoxItem Content="Santiago"/>
                     <ComboBoxItem Content="Viña del Mar"/>
                 </ComboBox>
-                <ComboBox HorizontalAlignment="Left" Margin="606,313,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBox HorizontalAlignment="Left" Margin="609,313,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
                     <ComboBoxItem Content="Quilicura"/>
                     <ComboBoxItem Content="Renca"/>
                     <ComboBoxItem Content="Santiago"/>
                     <ComboBoxItem Content="Viña del Mar"/>
                 </ComboBox>
-                <Label Content="Género" HorizontalAlignment="Left" Margin="515,213,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <ComboBox HorizontalAlignment="Left" Margin="609,214,0,0" VerticalAlignment="Top" Width="317" FontSize="16" FontFamily="Calibri" >
+                <Label Content="Género" HorizontalAlignment="Left" Margin="511,213,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <ComboBox x:Name="cboGenero" HorizontalAlignment="Left" Margin="609,214,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
                     <ComboBoxItem Content="Masculino"/>
                     <ComboBoxItem Content="Femenino"/>
                     <ComboBoxItem Content="Otro"/>
 
                 </ComboBox>
-                <Button x:Name="btnCerrarFlyUser" Content="Cancelar" HorizontalAlignment="Left" Margin="667,364,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrarFlyUser_Click" />
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="606,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-                <TextBox  HorizontalAlignment="Left" Height="31" Margin="128,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+                <Button x:Name="btnCerrarFlyUser" Content="Cancelar" HorizontalAlignment="Left" Margin="670,411,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrarFlyUser_Click" FontSize="16" />
+                <TextBox x:Name="txtEmail"  HorizontalAlignment="Left" Height="31" Margin="609,362,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+                <TextBox x:Name="txtNombres"  HorizontalAlignment="Left" Height="31" Margin="609,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
                 <Label Content="Rol" HorizontalAlignment="Left" Margin="22,362,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-                <ComboBox HorizontalAlignment="Left" Margin="128,363,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
+                <ComboBox x:Name="cboRol" HorizontalAlignment="Left" Margin="128,363,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
                     <ComboBoxItem Content="Administrador"/>
                     <ComboBoxItem Content="Funcionario"/>
                     <ComboBoxItem Content="Cliente"/>
 
                 </ComboBox>
+                <TextBox x:Name="txtRut"  HorizontalAlignment="Left" Height="31" Margin="128,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumberRut"/>
+                <Label Content="Rut" HorizontalAlignment="Left" Margin="22,107,0,0" VerticalAlignment="Top" FontSize="16"/>
             </Grid>
 
         </mah:Flyout>
