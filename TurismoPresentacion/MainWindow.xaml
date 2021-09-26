@@ -38,10 +38,11 @@
                 <mah:Tile x:Name="btnListaUsuarios" Margin="0,280,0,354" Width="Auto" Title="Nuevo Departamento" Click="btnListaUsuarios_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="PlusSolid" Height="68" Width="77" />
                 </mah:Tile>
+
             </Grid>
 
         </mah:Flyout>
-       
+
 
 
     </Grid>

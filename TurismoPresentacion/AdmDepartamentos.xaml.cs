@@ -17,6 +17,7 @@ using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
+using EntidadServicio;
 
 namespace TurismoPresentacion
 {
@@ -70,11 +71,54 @@ namespace TurismoPresentacion
         }
 
         //Validacion input
+        public bool FormularioLleno()
+        {
+            if (txtMetros.Text != string.Empty && txtDormitorios.Text != string.Empty && txtBaños.Text != string.Empty &&
+            txtDireccion.Text != string.Empty && cboRegion.SelectedIndex != -1 && cboComuna.SelectedIndex != -1 &&
+            cboEstado.SelectedIndex != -1 && txtValorArriendo.Text != string.Empty && txtCondiciones.Text != string.Empty &&
+            txtValorAdm.Text != string.Empty && txtDescripcion.Text != string.Empty)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Para agregar un departamento debe llenar el formulario", "Completar formulario", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
 
         private void OnlyNumbers(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
+
+        private void btnGuardarDpto_Click(object sender, RoutedEventArgs e)
+        {
+            if (FormularioLleno())
+            {
+
+            }
+
+        }
+
+        private void btnAbrirInventario_Click(object sender, RoutedEventArgs e)
+        {
+            List<Inventario> inventario = new List<Inventario>();
+            Inventario i1 = new Inventario();
+            i1.descripcion = "TV 60'";
+            Inventario i2 = new Inventario();
+            i2.descripcion = "Kit baño";
+            inventario.Add(i1);
+            inventario.Add(i2);
+            dgInventario.ItemsSource = inventario;
+            FlyInventario.IsOpen = true;
+        }
+
+        private void btnCerrarInventario_Click(object sender, RoutedEventArgs e)
+        {
+            FlyInventario.IsOpen = false;
+        }
+
 
     } 
 }

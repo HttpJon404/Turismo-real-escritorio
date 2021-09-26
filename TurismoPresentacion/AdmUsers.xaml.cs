@@ -89,7 +89,7 @@ namespace TurismoPresentacion
             }
             else
             {
-                MessageBox.Show("Debe llenar el formulario", "Error en edad", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Debe llenar el formulario", "Completar formulario", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -190,16 +190,16 @@ namespace TurismoPresentacion
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UsuarioBl userBl = new UsuarioBl();
-            var usuario = userBl.GetUserId(45);
-            foreach(var u in usuario)
-            {
-                Console.WriteLine(u.nombres);
-            }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    UsuarioBl userBl = new UsuarioBl();
+        //    var usuario = userBl.GetUserId(45);
+        //    foreach(var u in usuario)
+        //    {
+        //        Console.WriteLine(u.nombres);
+        //    }
             
-        }
+        //}
 
         private void btnCerrarFlyEditUser_Click(object sender, RoutedEventArgs e)
         {
