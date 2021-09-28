@@ -33,6 +33,14 @@ namespace TurismoPresentacion
             dgClientes.IsReadOnly = true;
             ValidacionesInput();
         }
+        private void CargarRegiones()
+        {
+            UbicacionBl ubi = new UbicacionBl();
+            List<GetComunas> comunas = ubi.GetRegion();
+            cboRegion.ItemsSource = comunas;
+            cboRegion.SelectedValuePath = "id_region";
+            cboRegion.DisplayMemberPath = "nombre_region";
+        }
         private void ValidacionesInput()
         {
             txtCelular.MaxLength = 9;
@@ -45,13 +53,14 @@ namespace TurismoPresentacion
         private void CargarClientes()
         {
             UsuarioBl userBl = new UsuarioBl();
-            List<Usuario> usuarios = userBl.GetUsers();
+            List<UsuarioTabla> usuarios = userBl.UsuariosGrid();
             dgClientes.ItemsSource = usuarios;
         }
 
         private void btnAbrirFlyout_Click(object sender, RoutedEventArgs e)
         {
             FlyAddUser.IsOpen = true;
+            CargarRegiones();
 
         }
 
@@ -109,32 +118,77 @@ namespace TurismoPresentacion
             cboGenero.SelectedIndex = -1;
 
         }
+        private string CapturarEstado()
+        {
+            if (cboEstado.SelectedIndex==0)
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        private string CapturarGenero()
+        {
+            if (cboGenero.SelectedIndex==0)
+            {
+                //Masculino
+                return "1";
+            }
+            else
+            {
+                return "2";
+            }
+        }
+        private int CapturarRol()
+        {
+            if (cboRol.SelectedIndex ==0)
+            {
+                //Administrador
+                return 1;
+            }
+            else
+            {
+                //Funcionario
+                return 3;
+            }
+        }
         private void btnGuardarUsuario_Click(object sender, RoutedEventArgs e)
         {
             if (FormularioValido())
             {
-                //UsuarioBl userBl = new UsuarioBl();
-                //string nombres = "Jonatan Levi";
-                //string apellidos = "Pérez Jerez";
-                //decimal edad = 23;
-                //string rut = "19782890-0";
-                //string id_genero = "1";
-                //decimal id_comuna = 2;
-                //decimal id_region = 1;
-                //string direccion = "Calle falsa 14";
-                //string email = "jo.perezj@duocuc.cl";
-                //string celular = "94743765";
-                //string contrasena = "123123";
-                //int id_rol = 1;
+                UsuarioBl userBl = new UsuarioBl();
+                string nombres = txtNombres.Text;
+                string apellidos = txtApellidos.Text;
+                decimal edad = decimal.Parse(txtEdad.Text);
+                string rut = txtRut.Text;
+                string id_genero = CapturarGenero();
+                decimal id_comuna = decimal.Parse(cboComuna.SelectedValue.ToString());
+                decimal id_region = decimal.Parse(cboRegion.SelectedValue.ToString());
+                string direccion = txtDireccion.Text;
+                string email = txtEmail.Text;
+                string celular = txtCelular.Text;
+                string contrasena = "TurismoRealPass";
+                int id_rol = CapturarRol();
+                string estado = CapturarEstado();
 
-                //var resp = UsuarioBl.GetInstance().RegistrarUsuario(nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol);
-                //CerrarRegistro();
+
+                var resp = UsuarioBl.GetInstance().RegistrarUsuario(nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
+                if (resp.EsPositiva)
+                {
+                    MessageBox.Show(resp.Mensaje, "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CerrarRegistro();
+                    CargarClientes();
+                    
+                }
+                else
+                {
+                    MessageBox.Show(resp.Mensaje, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+
             }
-
-
-
-
-
         }
 
         //Validacion inputs
@@ -166,6 +220,8 @@ namespace TurismoPresentacion
                 
                 if (i >= 0)
                 {
+                    txtRutEdit.IsEnabled = false;
+                    txtEdadEdit.IsEnabled = false;
                     decimal idUsuario;
                     idUsuario = usuarios[i].id;
                     FlyEditUser.IsOpen = true;
@@ -215,5 +271,58 @@ namespace TurismoPresentacion
         }
 
 
+
+
+
+        private void cargarComunas(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                UbicacionBl ubi = new UbicacionBl();
+
+                int idRegion = cboRegion.SelectedIndex+1;
+
+                Console.WriteLine(idRegion);
+                List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                cboComuna.ItemsSource = comunas;
+                cboComuna.SelectedValuePath = "id_comuna";
+                cboComuna.DisplayMemberPath = "nombre_comuna";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void dgClientes_AutoGeneratedColumns(object sender, EventArgs e)
+        {
+            dgClientes.Columns[0].Header = "Id";
+            dgClientes.Columns[0].DisplayIndex = 0;
+            dgClientes.Columns[1].Header = "Región";
+            dgClientes.Columns[1].DisplayIndex = 1;
+            dgClientes.Columns[2].Header = "Comuna";
+            dgClientes.Columns[2].DisplayIndex = 2;
+            dgClientes.Columns[3].Header = "Rut";
+            dgClientes.Columns[3].DisplayIndex = 3;
+            dgClientes.Columns[4].Header = "Nombres";
+            dgClientes.Columns[4].DisplayIndex = 4;
+            dgClientes.Columns[5].Header = "Apellidos";
+            dgClientes.Columns[5].DisplayIndex = 5;
+            dgClientes.Columns[6].Header = "Dirección";
+            dgClientes.Columns[6].DisplayIndex = 6;
+            dgClientes.Columns[7].Header = "Email";
+            dgClientes.Columns[7].DisplayIndex = 7;
+            dgClientes.Columns[8].Header = "Telefono";
+            dgClientes.Columns[8].DisplayIndex = 8;
+            dgClientes.Columns[9].Header = "Edad";
+            dgClientes.Columns[9].DisplayIndex = 9;
+            dgClientes.Columns[10].Header = "Genero";
+            dgClientes.Columns[10].DisplayIndex = 10;
+            dgClientes.Columns[11].Header = "Estado";
+            dgClientes.Columns[11].DisplayIndex = 11;
+            dgClientes.Columns[12].Header = "Tipo usuario";
+            dgClientes.Columns[12].DisplayIndex = 12;
+        }
     }
 }

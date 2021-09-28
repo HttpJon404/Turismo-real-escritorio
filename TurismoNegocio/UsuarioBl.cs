@@ -8,6 +8,7 @@ using Contexto;
 using EntidadServicio;
 using Utilidad;
 
+
 namespace TurismoNegocio
 {
     public class UsuarioBl
@@ -76,7 +77,7 @@ namespace TurismoNegocio
         }
 
         public Respuesta<string> RegistrarUsuario(string nombre, string apellidos, decimal edad, string rut, string idGenero, decimal idComuna, decimal idRegion,
-                           string direccion, string correo, string celular, string contrasena, decimal idRol)
+                           string direccion, string correo, string celular, string contrasena, decimal idRol, string estado)
         {
             try
             {
@@ -104,7 +105,7 @@ namespace TurismoNegocio
                     celular = celular,
                     genero = idGenero,
                     contrasena = contrasena,
-                    estado = "1",
+                    estado = estado,
                     id_rol = idRol
                 };
 
@@ -173,6 +174,69 @@ namespace TurismoNegocio
 
                 return false;
             }
+        }
+
+
+
+
+        public List<UsuarioTabla> UsuariosGrid()
+        {
+            UsuarioBl usuariobl = new UsuarioBl();
+            List<UsuarioTabla> userListTabla = new List<UsuarioTabla>();
+
+            List<Usuario> userList = new List<Usuario>();
+
+            userList = usuariobl.GetUsers();
+
+            UbicacionBl ubi = new UbicacionBl();
+            List<GetComunas> regiones = ubi.GetComunas();
+
+            foreach (var user in userList)
+            {
+                UsuarioTabla usuario = new UsuarioTabla();
+                usuario.id = (int)user.id;
+                usuario.rut = user.rut;
+                usuario.nombres = user.nombres;
+                usuario.apellidos = user.apellidos;
+                usuario.direccion = user.direccion;
+                usuario.correo = user.correo;
+                usuario.celular = user.celular;
+                usuario.edad = (int)user.edad;
+                usuario.genero = user.genero;
+                usuario.descripcion = user.descripcion;
+                Console.WriteLine(user.estado);
+
+                if (user.estado == "1.0")
+                {
+                    usuario.estado = "Habilitado";
+                }
+                else
+                {
+                    usuario.estado = "Inhabilitado";
+                }
+                //nombre region
+                foreach (var region in regiones)
+                {
+                    if (user.id_region == region.id_region)
+                    {
+                        usuario.nombre_region = region.nombre_region;
+                    }
+                }
+
+                //nombre comuna
+                foreach (var region in regiones)
+                {
+                    if (user.id_comuna == region.id_comuna)
+                    {
+                        usuario.nombre_comuna = region.nombre_comuna;
+                    }
+                }
+
+                userListTabla.Add(usuario);
+
+            }
+            return userListTabla;
+
         }
 
 
