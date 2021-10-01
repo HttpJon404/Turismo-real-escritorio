@@ -18,6 +18,7 @@ using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
 using EntidadServicio;
+using TurismoNegocio;
 
 namespace TurismoPresentacion
 {
@@ -28,8 +29,10 @@ namespace TurismoPresentacion
     {
         public AdmDepartamentos()
         {
+            
             InitializeComponent();
             ValidacionesInput();
+            CargarRegiones();
         }
 
         //Validacion Inputs
@@ -38,7 +41,14 @@ namespace TurismoPresentacion
             txtBaños.MaxLength = 2;
             txtDormitorios.MaxLength = 3;
         }
-
+        private void CargarRegiones()
+        {
+            UbicacionBl ubi = new UbicacionBl();
+            List<GetComunas> comunas = ubi.GetRegion();
+            cboRegion.ItemsSource = comunas;
+            cboRegion.SelectedValuePath = "id_region";
+            cboRegion.DisplayMemberPath = "nombre_region";
+        }
         private void btnExaminar_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -103,6 +113,7 @@ namespace TurismoPresentacion
 
         private void btnAbrirInventario_Click(object sender, RoutedEventArgs e)
         {
+            FlyInventario.IsOpen = true;
             List<Inventario> inventario = new List<Inventario>();
             Inventario i1 = new Inventario();
             i1.descripcion = "TV 60'";
@@ -111,7 +122,6 @@ namespace TurismoPresentacion
             inventario.Add(i1);
             inventario.Add(i2);
             dgInventario.ItemsSource = inventario;
-            FlyInventario.IsOpen = true;
         }
 
         private void btnCerrarInventario_Click(object sender, RoutedEventArgs e)
@@ -119,6 +129,26 @@ namespace TurismoPresentacion
             FlyInventario.IsOpen = false;
         }
 
+        private void cboRegion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Cargar combobox con comunas dependiendo de la región.
+            try
+            {
+                UbicacionBl ubi = new UbicacionBl();
 
+                int idRegion = cboRegion.SelectedIndex + 1;
+
+                Console.WriteLine(idRegion);
+                List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                cboComuna.ItemsSource = comunas;
+                cboComuna.SelectedValuePath = "id_comuna";
+                cboComuna.DisplayMemberPath = "nombre_comuna";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     } 
 }

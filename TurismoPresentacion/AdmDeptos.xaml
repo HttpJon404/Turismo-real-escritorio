@@ -7,7 +7,7 @@
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Class="TurismoPresentacion.AdmDeptos"
       Width="1085" Height="850"
       mc:Ignorable="d" 
-      Background="#f2f2f2"
+
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdmDeptos">
 

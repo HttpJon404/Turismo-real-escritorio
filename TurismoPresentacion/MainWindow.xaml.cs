@@ -27,6 +27,7 @@ namespace TurismoPresentacion
         {
             InitializeComponent();
             menu.IsOpen = true;
+            swTema.Content = "Oscuro";
 
         }
 
@@ -38,6 +39,7 @@ namespace TurismoPresentacion
         private void btnGestionDpto_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new AdmDeptos();
+            imgFondo.Visibility = Visibility.Hidden;
         }
 
         private async void btnApagar_Click(object sender, RoutedEventArgs e)
@@ -55,11 +57,31 @@ namespace TurismoPresentacion
         private void btnUsuarios_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new AdmUsers();
+            imgFondo.Visibility = Visibility.Hidden;
         }
 
         private void btnListaUsuarios_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new AdmDepartamentos();
+            imgFondo.Visibility = Visibility.Hidden;
+        }
+
+
+
+        private void swTema_Toggled(object sender, RoutedEventArgs e)
+        {
+            //Cambiar tema
+            if (swTema.IsOn == true)
+            {
+                ThemeManager.Current.ChangeTheme(Application.Current, "Dark.Orange");
+                swTema.Content = "Normal";
+
+            }
+            else
+            {
+                ThemeManager.Current.ChangeTheme(Application.Current, "Light.Orange");
+                swTema.Content = "Oscuro";
+            }
         }
     }
 }

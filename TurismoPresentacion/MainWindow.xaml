@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TurismoPresentacion" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Modern" xmlns:iconPacks1="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FontAwesome"
                  mc:Ignorable="d" 
-                 Background="#f2f2f2"
+                 
         Title="Turismo Real" Height="860" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
@@ -18,7 +18,7 @@
 
 
     <Grid>
-        <Image HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill"/>
+        <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill"/>
         <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1096" Height="831" Margin="199,0,-1,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
@@ -38,7 +38,7 @@
                 <mah:Tile x:Name="btnListaUsuarios" Margin="0,280,0,354" Width="Auto" Title="Nuevo Departamento" Click="btnListaUsuarios_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="PlusSolid" Height="68" Width="77" />
                 </mah:Tile>
-
+                <mah:ToggleSwitch x:Name="swTema"  HorizontalAlignment="Left" Height="106" Margin="56,580,0,0" VerticalAlignment="Top" Width="162" Content="On" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Left" ContentDirection="RightToLeft" FontSize="22" Foreground="White" Toggled="swTema_Toggled" Header="Tema" mah:HeaderedControlHelper.HeaderFontSize="25" OffContent="Claro" OnContent="Oscuro" mah:HeaderedControlHelper.HeaderFontFamily="Calibri"/>
             </Grid>
 
         </mah:Flyout>

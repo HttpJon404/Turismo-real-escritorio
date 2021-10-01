@@ -33,6 +33,24 @@ namespace TurismoPresentacion
             dgClientes.IsReadOnly = true;
             ValidacionesInput();
         }
+
+        //Validacion inputs
+        private void SoloNumeros(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void OnlyNumberRut(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9-K-]+").IsMatch(e.Text);
+        }
+
+        private void Onlynumber(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+
         private void CargarRegiones()
         {
             UbicacionBl ubi = new UbicacionBl();
@@ -75,10 +93,10 @@ namespace TurismoPresentacion
         }
         public bool FormularioValido()
         {
-            if (txtNombres.Text != string.Empty && txtRut.Text != string.Empty&& txtApellidos.Text != string.Empty &&
+            if (txtNombres.Text != string.Empty && txtRut.Text != string.Empty && txtApellidos.Text != string.Empty &&
             txtEdad.Text != string.Empty && txtDireccion.Text != string.Empty &&
-            txtEmail.Text != string.Empty && txtCelular.Text != string.Empty && cboComuna.SelectedIndex !=-1 && cboRegion.SelectedIndex !=-1 &&
-            cboGenero.SelectedIndex !=-1 && cboRol.SelectedIndex !=-1)
+            txtEmail.Text != string.Empty && txtCelular.Text != string.Empty && cboComuna.SelectedIndex != -1 && cboRegion.SelectedIndex != -1 &&
+            cboGenero.SelectedIndex != -1 && cboRol.SelectedIndex != -1)
             {
 
                 int edadV = int.Parse(txtEdad.Text);
@@ -120,7 +138,7 @@ namespace TurismoPresentacion
         }
         private string CapturarEstado()
         {
-            if (cboEstado.SelectedIndex==0)
+            if (cboEstado.SelectedIndex == 0)
             {
                 return "1";
             }
@@ -131,7 +149,7 @@ namespace TurismoPresentacion
         }
         private string CapturarGenero()
         {
-            if (cboGenero.SelectedIndex==0)
+            if (cboGenero.SelectedIndex == 0)
             {
                 //Masculino
                 return "1";
@@ -143,7 +161,44 @@ namespace TurismoPresentacion
         }
         private int CapturarRol()
         {
-            if (cboRol.SelectedIndex ==0)
+            if (cboRol.SelectedIndex == 0)
+            {
+                //Administrador
+                return 1;
+            }
+            else
+            {
+                //Funcionario
+                return 3;
+            }
+        }
+
+        private string CapturarEstadoEdit()
+        {
+            if (cboEstado1.SelectedIndex == 0)
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        private string CapturarGeneroEdit()
+        {
+            if (cboGenero1.SelectedIndex == 0)
+            {
+                //Masculino
+                return "1";
+            }
+            else
+            {
+                return "2";
+            }
+        }
+        private int CapturarRolEdit()
+        {
+            if (cboRol1.SelectedIndex == 0)
             {
                 //Administrador
                 return 1;
@@ -170,17 +225,17 @@ namespace TurismoPresentacion
                 string email = txtEmail.Text;
                 string celular = txtCelular.Text;
                 string contrasena = "TurismoRealPass";
-                int id_rol = CapturarRol();
-                string estado = CapturarEstado();
+                int id_rol = CapturarRolEdit();
+                string estado = CapturarEstadoEdit();
 
 
-                var resp = UsuarioBl.GetInstance().RegistrarUsuario(nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
+                var resp = UsuarioBl.GetInstance().RegistrarUsuario (nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
                 if (resp.EsPositiva)
                 {
                     MessageBox.Show(resp.Mensaje, "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     CerrarRegistro();
                     CargarClientes();
-                    
+
                 }
                 else
                 {
@@ -191,23 +246,6 @@ namespace TurismoPresentacion
             }
         }
 
-        //Validacion inputs
-        private void SoloNumeros(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
-        }
-
-        private void OnlyNumberRut(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9-K-]+").IsMatch(e.Text);
-        }
-
-        private void Onlynumber(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
-        }
-
-
 
         private void btnEditarUsuario_Click(object sender, RoutedEventArgs e)
         {
@@ -217,7 +255,7 @@ namespace TurismoPresentacion
             if (dgClientes.SelectedIndex != -1)
             {
                 i = dgClientes.SelectedIndex;
-                
+
                 if (i >= 0)
                 {
                     txtRutEdit.IsEnabled = false;
@@ -225,37 +263,82 @@ namespace TurismoPresentacion
                     decimal idUsuario;
                     idUsuario = usuarios[i].id;
                     FlyEditUser.IsOpen = true;
+                    //Cargar regiones
+                    UbicacionBl ubi = new UbicacionBl();
+                    List<GetComunas> regiones = ubi.GetRegion();
+                    cboRegion1.ItemsSource = regiones;
+                    cboRegion1.SelectedValuePath = "id_region";
+                    cboRegion1.DisplayMemberPath = "nombre_region";
+                    //var alo = cboRegion1.SelectedValue;
+                    //MessageBox.Show(alo.ToString());
+
                     var usuario = userBl.GetUserId(idUsuario);
+
                     foreach (var u in usuario)
                     {
+                        //Traer datos al formulario.
                         txtRutEdit.Text = u.rut;
                         txtNombresEdit.Text = u.nombres;
                         txtApellidosEdit.Text = u.apellidos;
                         txtEdadEdit.Text = u.edad.ToString();
                         txtCelularEdit.Text = u.celular;
                         txtDireccionEdit.Text = u.direccion;
+                        string contrasena = u.contrasena;
                         txtEmailEdit.Text = u.correo;
+                        decimal idregion = u.id_region;
+                        cboRegion1.SelectedValue = idregion;
+
+                        int idRegion = cboRegion1.SelectedIndex + 1;
+
+                        Console.WriteLine("id region: ", idRegion);
+                        List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                        cboComuna1.ItemsSource = comunas;
+                        cboComuna1.SelectedValuePath = "id_comuna";
+                        cboComuna1.DisplayMemberPath = "nombre_comuna";
+                        cboComuna1.SelectedValue = u.id_comuna;
+                        //Cargar combobox de género.
+                        string genero = u.genero;
+                        if (genero == "M")
+                        {
+                            cboGenero1.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cboGenero1.SelectedIndex = 1;
+                        }
+                        //Cargar rol
+                        int rol = (int)u.id_rol;
+                        if (rol == 1)
+                        {
+                            cboRol1.SelectedIndex = 0;
+
+                        }
+                        else
+                        {
+                            cboRol1.SelectedIndex = 1;
+                        }
+                        //Cargar estado
+                        string estado = u.estado;
+                        if (estado =="1.0")
+                        {
+                            cboEstado1.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cboEstado1.SelectedIndex = 1;
+                        }
+
                     }
+
                 }
             }
             else
             {
                 MessageBox.Show("Debe seleccionar un usuario en la tabla para editarlo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                
+
             }
 
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    UsuarioBl userBl = new UsuarioBl();
-        //    var usuario = userBl.GetUserId(45);
-        //    foreach(var u in usuario)
-        //    {
-        //        Console.WriteLine(u.nombres);
-        //    }
-            
-        //}
 
         private void btnCerrarFlyEditUser_Click(object sender, RoutedEventArgs e)
         {
@@ -267,20 +350,17 @@ namespace TurismoPresentacion
             txtDireccionEdit.Text = string.Empty;
             txtEmailEdit.Text = string.Empty;
             txtCelularEdit.Text = string.Empty;
-            
+
         }
 
-
-
-
-
+        //Cargar comunas para Agregar
         private void cargarComunas(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 UbicacionBl ubi = new UbicacionBl();
 
-                int idRegion = cboRegion.SelectedIndex+1;
+                int idRegion = cboRegion.SelectedIndex + 1;
 
                 Console.WriteLine(idRegion);
                 List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
@@ -294,7 +374,28 @@ namespace TurismoPresentacion
                 throw;
             }
         }
+        //Cargar comunas para editar
+        private void cboRegion1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                UbicacionBl ubi = new UbicacionBl();
 
+                int idRegion = cboRegion1.SelectedIndex + 1;
+
+                Console.WriteLine(idRegion);
+                List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                cboComuna1.ItemsSource = comunas;
+                cboComuna1.SelectedValuePath = "id_comuna";
+                cboComuna1.DisplayMemberPath = "nombre_comuna";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //Cargar tabla con headers e informacion correcta.
         private void dgClientes_AutoGeneratedColumns(object sender, EventArgs e)
         {
             dgClientes.Columns[0].Header = "Id";
@@ -323,6 +424,99 @@ namespace TurismoPresentacion
             dgClientes.Columns[11].DisplayIndex = 11;
             dgClientes.Columns[12].Header = "Tipo usuario";
             dgClientes.Columns[12].DisplayIndex = 12;
+        }
+
+        private void btnGuardarUsuarioEdit_Click(object sender, RoutedEventArgs e)
+        {
+            //PUT
+            try
+            {
+
+                UsuarioBl userBl = new UsuarioBl();
+                string nombres = txtNombresEdit.Text;
+                string apellidos = txtApellidosEdit.Text;
+                decimal edad = decimal.Parse(txtEdadEdit.Text);
+                string rut = txtRutEdit.Text;
+                string id_genero = CapturarGeneroEdit();
+                decimal id_comuna = decimal.Parse(cboComuna1.SelectedValue.ToString());
+                decimal id_region = decimal.Parse(cboRegion1.SelectedValue.ToString());
+                string direccion = txtDireccionEdit.Text;
+                string email = txtEmailEdit.Text;
+                string celular = txtCelularEdit.Text;
+                string contrasena = "TurismoRealPass";
+                int id_rol = CapturarRolEdit();
+                string estado = CapturarEstadoEdit();
+                decimal id = 102;
+
+                var resp = UsuarioBl.GetInstance().EditarUsuario(id, nombres, apellidos,  id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
+                if (resp.EsPositiva)
+                {
+                    MessageBox.Show("Usuario editado.");
+                    FlyEditUser.IsOpen = false;
+                    CargarClientes();
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            UsuarioBl userBl = new UsuarioBl();
+            List<Usuario> usuarios = userBl.GetUsers();
+            int i = 0;
+
+            if (dgClientes.SelectedIndex != -1)
+            {
+                i = dgClientes.SelectedIndex;
+
+                if (i >= 0)
+                {
+                    decimal idUsuario;
+                    idUsuario = usuarios[i].id;
+
+
+                    var usuario = userBl.GetUserId(idUsuario);
+
+                    foreach (var u in usuario)
+                    {
+                        if (u.estado == "1.0")
+                        {
+                            MessageBoxResult result = MessageBox.Show("Este usuario esta habilitado. ¿Deseas inhabilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                            if (result==MessageBoxResult.Yes)
+                            {
+                                //Deshabilitar usuario
+                                Console.WriteLine("Aceptaste deshabilitar");
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBoxResult result = MessageBox.Show("Este usuario esta inhabilitado. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                //habilitar usuario
+                                Console.WriteLine("Aceptaste habilitar");
+                            }
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un usuario en la tabla para deshabilitarlo.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

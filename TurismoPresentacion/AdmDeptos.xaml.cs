@@ -25,6 +25,9 @@ namespace TurismoPresentacion
             InitializeComponent();
         }
 
+        public void Test()
+        {
 
+        }
     }
 }

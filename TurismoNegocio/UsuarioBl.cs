@@ -31,9 +31,7 @@ namespace TurismoNegocio
                 dynamic users = dbapi.Get("https://localhost:44358/api/usuarios/");
                 var resp = users.ToString();
                 List<Usuario> jsonDes = JsonConvert.DeserializeObject<List<Usuario>>(resp);
-                Console.WriteLine(users);
-                Console.WriteLine("---------------------");
-                Console.WriteLine(jsonDes[0].id.ToString());
+
 
                 foreach(var usuario in jsonDes)
                 {
@@ -151,17 +149,84 @@ namespace TurismoNegocio
         }
 
 
-        public bool EditarUsuario(string idLink, string newPass)
+        //Editar usuario PUT
+        public Respuesta<string> EditarUsuario(decimal id, string nombre, string apellidos, string idGenero, decimal idComuna, decimal idRegion,
+                           string direccion, string correo, string celular, string contrasena, decimal idRol, string estado)
         {
             try
             {
-                return true;
+                DBApi dbApi = new DBApi();
+
+                if (idGenero == "1")
+                {
+                    idGenero = "M";
+                }
+                else
+                {
+                    idGenero = "F";
+                }
+                contrasena = CripSha1.Encriptar(contrasena);
+                UsuarioEdit usuario = new UsuarioEdit
+                {
+                    id = id,
+                    id_comuna = idComuna,
+                    id_region = idRegion,
+                    nombres = nombre,
+                    apellidos = apellidos,
+                    direccion = direccion,
+                    correo = correo,
+                    celular = celular,
+                    contrasena = contrasena,
+                    estado = estado,
+                    genero = idGenero,
+                    id_rol = idRol
+                };
+
+                string json = JsonConvert.SerializeObject(usuario);
+                Console.WriteLine(json);
+                dynamic respuesta = dbApi.Put("https://localhost:44358/api/usuarios", json);
+                //Console.WriteLine(respuesta);
+                //var resp = respuesta.ToString();
+
+                //List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+                var resp = respuesta.ToString();
+
+                List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+
+                if (jsonDes[0] == "DATOS INGRESADOS CORRECTAMENTE")
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = true,
+                        Elemento = jsonDes[1],
+                        Mensaje = "Usuario registrado correctamente."
+                    };
+                }
+                else
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = false,
+                        Elemento = jsonDes[1],
+                        Mensaje = jsonDes[0] + "En nuestra base de datos, intente recuperando su contraseña"
+                    };
+                }
+
+
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                Log.Business().Error(e.Message, e);
+                return new Respuesta<string>
+                {
+                    EsPositiva = false,
+                    Elemento = null,
+                    Mensaje = "Ha ocurrido un error al registrarse, por favor reintentelo nuevamente."
+                };
             }
         }
+
 
         public bool EliminarUsuario(decimal id)
         {

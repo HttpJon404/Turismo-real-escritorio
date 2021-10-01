@@ -47,6 +47,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioCreate.cs" />
+    <Compile Include="UsuarioEdit.cs" />
     <Compile Include="UsuarioTabla.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
