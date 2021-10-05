@@ -166,9 +166,10 @@ namespace TurismoNegocio
                     idGenero = "F";
                 }
                 contrasena = CripSha1.Encriptar(contrasena);
+                int idUsuario = (int)id;
                 UsuarioEdit usuario = new UsuarioEdit
                 {
-                    id = id,
+                    id = idUsuario,
                     id_comuna = idComuna,
                     id_region = idRegion,
                     nombres = nombre,
@@ -193,13 +194,13 @@ namespace TurismoNegocio
 
                 List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
 
-                if (jsonDes[0] == "DATOS INGRESADOS CORRECTAMENTE")
+                if (jsonDes[0] == "DATOS ACTUALIZADOS CORRECTAMENTE")
                 {
                     return new Respuesta<string>
                     {
                         EsPositiva = true,
                         Elemento = jsonDes[1],
-                        Mensaje = "Usuario registrado correctamente."
+                        Mensaje = "Usuario modificado correctamente."
                     };
                 }
                 else

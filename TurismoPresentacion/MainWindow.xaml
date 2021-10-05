@@ -29,7 +29,7 @@
                 <mah:Tile x:Name="btnGestionDpto" Margin="0,0,0,634" Width="Auto" Title="Gestión departamentos" Click="btnGestionDpto_Click">
                     <iconPacks1:PackIconFontAwesome Kind="CitySolid" Height="68" Width="77" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,420,0,214" Width="Auto" Click="btnApagar_Click" >
+                <mah:Tile x:Name="btnApagar" Title="Cerrar aplicación" Height="Auto" Margin="0,420,0,214" Width="Auto" Click="btnApagar_Click"  >
                     <iconPacks1:PackIconFontAwesome Kind="PowerOffSolid" Height="68" Width="77" />
                 </mah:Tile>
                 <mah:Tile x:Name="btnUsuarios" Margin="0,140,0,494" Width="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
