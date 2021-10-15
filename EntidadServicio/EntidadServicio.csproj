@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditEstadoUsuario.cs" />
     <Compile Include="GetComunas.cs" />
     <Compile Include="Inventario.cs" />
     <Compile Include="Respuesta.cs" />

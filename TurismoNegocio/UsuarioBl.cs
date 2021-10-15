@@ -229,21 +229,64 @@ namespace TurismoNegocio
         }
 
 
-        public bool EliminarUsuario(decimal id)
+        public Respuesta<string> ActivarUsuario(decimal id, string estado)
         {
             try
             {
-                return true;
-            }
-            catch (Exception)
-            {
+                DBApi dbApi = new DBApi();
 
-                return false;
+                int idUsuario = (int)id;
+
+                EditEstadoUsuario usuario = new EditEstadoUsuario
+                {
+                    id = idUsuario,
+                    estado = estado,
+                };
+
+                string json = JsonConvert.SerializeObject(usuario);
+                Console.WriteLine(json);
+                dynamic respuesta = dbApi.Deactive("https://localhost:44358/api/usuarios", json);
+                //Console.WriteLine(respuesta);
+                //var resp = respuesta.ToString();
+
+                //List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+                var resp = respuesta.ToString();
+
+                List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+
+                if (jsonDes[0] == "ESTADO ACTUALIZADO CORRECTAMENTE")
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = true,
+                        Elemento = jsonDes[1],
+                        Mensaje = "Estado del usuario  correctamente."
+                    };
+                }
+                else
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = false,
+                        Elemento = jsonDes[1],
+                        Mensaje = jsonDes[0] + "En nuestra base de datos, intente recuperando su contraseña"
+                    };
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Business().Error(e.Message, e);
+                return new Respuesta<string>
+                {
+                    EsPositiva = false,
+                    Elemento = null,
+                    Mensaje = "Ha ocurrido un error al "
+                };
             }
         }
-
-
-
 
         public List<UsuarioTabla> UsuariosGrid()
         {

@@ -285,6 +285,7 @@ namespace TurismoPresentacion
                     cboRegion1.ItemsSource = regiones;
                     cboRegion1.SelectedValuePath = "id_region";
                     cboRegion1.DisplayMemberPath = "nombre_region";
+
                     //var alo = cboRegion1.SelectedValue;
                     //MessageBox.Show(alo.ToString());
 
@@ -344,15 +345,12 @@ namespace TurismoPresentacion
                         {
                             cboEstado1.SelectedIndex = 1;
                         }
-
                     }
-
                 }
             }
             else
             {
                 MessageBox.Show("Debe seleccionar un usuario en la tabla para editarlo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-
             }
 
         }
@@ -517,7 +515,9 @@ namespace TurismoPresentacion
                             if (result==MessageBoxResult.Yes)
                             {
                                 //Deshabilitar usuario
-                                Console.WriteLine("Aceptaste deshabilitar");
+                                userBl.ActivarUsuario(idUsuario, "0");
+
+                                CargarClientes();
                             }
 
                         }
@@ -528,7 +528,8 @@ namespace TurismoPresentacion
                             if (result == MessageBoxResult.Yes)
                             {
                                 //habilitar usuario
-                                Console.WriteLine("Aceptaste habilitar");
+                                userBl.ActivarUsuario(idUsuario, "1.0");
+                                CargarClientes();
                             }
                         }
                     }
