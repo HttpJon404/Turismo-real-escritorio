@@ -8,6 +8,10 @@ namespace EntidadServicio
 {
     public class Inventario
     {
-        public string descripcion { get; set; }
+        public decimal Id { get; set; }
+        public string Descripcion{ get; set; }
+        public decimal Cantidad { get; set; }
+        public decimal Precio { get; set; }
+
     }
 }

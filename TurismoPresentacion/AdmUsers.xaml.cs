@@ -70,6 +70,7 @@ namespace TurismoPresentacion
         }
         private void CargarClientes()
         {
+            dgClientes.Items.Refresh();
             UsuarioBl userBl = new UsuarioBl();
             List<UsuarioTabla> usuarios = userBl.UsuariosGrid();
             dgClientes.ItemsSource = usuarios;
@@ -541,6 +542,25 @@ namespace TurismoPresentacion
                 MessageBox.Show("Debe seleccionar un usuario en la tabla para deshabilitarlo.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void btnReestablecerFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            CargarClientes();
+        }
+
+        private void btnFiltrarUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            dgClientes.Items.Refresh();
+            UsuarioBl user = new UsuarioBl();
+            string rut = txtRutFilter.Text;
+            List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
+            dgClientes.ItemsSource = null;
+            dgClientes.ItemsSource = usuarios;
+
+            Console.WriteLine(dgClientes.SelectedItem);
+            user.FiltrarUsuarios(rut);
+        }
+
 
     }
 }

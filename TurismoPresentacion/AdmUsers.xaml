@@ -18,22 +18,22 @@
 
         <GroupBox Header="Filtros" HorizontalAlignment="Left" Height="162" Margin="142,128,0,0" VerticalAlignment="Top" Width="758"/>
         <Label Content="Rut" HorizontalAlignment="Left" Margin="157,170,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox  HorizontalAlignment="Left" Height="30" Margin="225,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri"/>
-        <ComboBox HorizontalAlignment="Left" Margin="225,206,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
+        <TextBox x:Name="txtRutFilter"  HorizontalAlignment="Left" Height="30" Margin="225,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri"/>
+        <ComboBox x:Name="cboRegion2" HorizontalAlignment="Left" Margin="225,206,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
             <ComboBoxItem Content="Quilicura"/>
             <ComboBoxItem Content="Renca"/>
             <ComboBoxItem Content="Santiago"/>
             <ComboBoxItem Content="Viña del Mar"/>
         </ComboBox>
         <Label Content="Región" HorizontalAlignment="Left" Margin="156,206,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <ComboBox HorizontalAlignment="Left" Margin="599,204,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
+        <ComboBox x:Name="cboComuna2" HorizontalAlignment="Left" Margin="599,204,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
             <ComboBoxItem Content="Quilicura"/>
             <ComboBoxItem Content="Renca"/>
             <ComboBoxItem Content="Santiago"/>
             <ComboBoxItem Content="Viña del Mar"/>
         </ComboBox>
         <Label Content="Comuna" HorizontalAlignment="Left" Margin="525,204,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <ComboBox HorizontalAlignment="Left" Margin="599,168,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
+        <ComboBox x:Name="cboEstado2" HorizontalAlignment="Left" Margin="599,168,0,0" VerticalAlignment="Top" Width="278" FontSize="16" FontFamily="Calibri" >
             <ComboBoxItem Content="Quilicura"/>
             <ComboBoxItem Content="Renca"/>
             <ComboBoxItem Content="Santiago"/>
@@ -41,7 +41,7 @@
         </ComboBox>
         <Label Content="Estado" HorizontalAlignment="Left" Margin="529,168,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-        <Button ToolTip="Filtrar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"  HorizontalAlignment="Left" Margin="785,239,0,0" VerticalAlignment="Top" Width="89" Height="42" mah:ControlsHelper.ContentCharacterCasing="Normal">
+        <Button x:Name="btnFiltrarUsuarios" ToolTip="Filtrar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"  HorizontalAlignment="Left" Margin="785,239,0,0" VerticalAlignment="Top" Width="89" Height="42" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnFiltrarUsuarios_Click">
             <iconpacks:PackIconFontAwesome Kind="FilterSolid" Height="26" Width="22"  />
         </Button>
         <Button ToolTip="Deshabilitar o habilitar usuario" x:Name="btnEliminar" HorizontalAlignment="Left" Margin="1004,323,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnEliminar_Click">
@@ -56,7 +56,7 @@
         <Label Content="Usuarios" HorizontalAlignment="Left" Margin="30,304,0,0" VerticalAlignment="Top" Width="62" Foreground="#FF513E3E" FontWeight="Bold"/>
 
 
-        <mah:Flyout x:Name="FlyAddUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="-1285,0,1284,27"  >
+        <mah:Flyout x:Name="FlyAddUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="0,0,-1,3"  >
             <Grid x:Name="GridAddUser"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
                 <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="420" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">
@@ -117,10 +117,10 @@
             </Grid>
 
         </mah:Flyout>
-        <Button ToolTip="Reestablecer filtros" HorizontalAlignment="Left" Margin="691,240,0,0" VerticalAlignment="Top" Width="89" Height="42" mah:ControlsHelper.ContentCharacterCasing="Normal">
+        <Button x:Name="btnReestablecerFiltros" ToolTip="Reestablecer filtros" HorizontalAlignment="Left" Margin="691,240,0,0" VerticalAlignment="Top" Width="89" Height="42" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnReestablecerFiltros_Click">
             <iconpacks:PackIconFontAwesome Kind="RedoAltSolid" Height="26" Width="22"  />
         </Button>
-        <mah:Flyout x:Name="FlyEditUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="-274,0,273,-544"  >
+        <mah:Flyout x:Name="FlyEditUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="-1,0,0,3"  >
             <Grid  x:Name="GridAddUser1"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
                 <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="420" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">

@@ -348,6 +348,89 @@ namespace TurismoNegocio
 
         }
 
+        public bool LoginUsuario(string correo, string clave)
+        {
+            List<Usuario> users = this.GetUsers();
+            foreach (var flash in users)
+            {
+                if (flash.correo ==correo)
+                {
+                    return true;
+
+                }
+            }
+            return false; ;
+        }
+
+        public List<UsuarioTabla> FiltrarUsuarios(string rut)
+        {
+            List<UsuarioTabla> users = this.UsuariosGrid();
+
+            var filterUsers = users.Where(u => u.rut == rut).ToList();
+
+
+            return filterUsers;
+        }
+
+        //Login
+
+        public Respuesta<string> Login(string correo, string contrasena)
+        {
+            try
+            {
+                DBApi dbApi = new DBApi();
+
+                contrasena = CripSha1.Encriptar(contrasena);
+
+                Login login = new Login()
+                {
+                    correo = correo,
+                    contrasena = contrasena
+                };
+
+                string json = JsonConvert.SerializeObject(login);
+
+                dynamic respuesta = dbApi.Post("https://localhost:44358/api/login", json);
+
+                var resp = respuesta.ToString();
+
+                List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+
+                if (jsonDes[0] == "OK")
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = true,
+                        Elemento = jsonDes[1],
+                        Mensaje = "Inicio de sesión correctamente."
+                    };
+                }
+                else
+                {
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = false,
+                        Elemento = null,
+                        Mensaje = jsonDes[0]
+                    };
+                }
+
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Business().Error(e.Message, e);
+                return new Respuesta<string>
+                {
+                    EsPositiva = false,
+                    Elemento = null,
+                    Mensaje = "Ha ocurrido un error al ingresar, por favor reintentelo nuevamente."
+                };
+            }
+        }
 
     }
 }

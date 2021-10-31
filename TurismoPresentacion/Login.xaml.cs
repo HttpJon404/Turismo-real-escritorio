@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EntidadServicio;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using TurismoNegocio;
 
 namespace TurismoPresentacion
@@ -27,28 +28,85 @@ namespace TurismoPresentacion
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public bool ValidarCampos()
         {
-            if (txtEmail.Text=="admin")
-            {
-                MainWindow inicio = new MainWindow();
-                this.Close();
-                inicio.Show();
-
-            }
-        }
-
-        private bool ValidarCampos()
-        {
-            if (txtEmail.Text!= string.Empty )
+            if (txtEmail.Text!= string.Empty && txtPassword.Password!=string.Empty)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidarCampos())
+            {
+                await this.ShowMessageAsync("Error", "Debe llenar todos los datos del formulario");
+            }
+            else
+            {
+                //Formulario lleno
+                UsuarioBl user = new UsuarioBl();
+                string email = txtEmail.Text;
+                string password = txtPassword.Password;
+                if (user.LoginUsuario(email, "askjdkasdj"))
+                {
+                    MainWindow main = new MainWindow();
+                    this.Close();
+                    main.Show();
+                }
+                else
+                {
+                    await this.ShowMessageAsync("Error", "Las credenciales ingresadas no son validas, intente nuevamente.");
+                }
+
+            }
+
+
+           
+            
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            if (!ValidarCampos())
+            {
+                await this.ShowMessageAsync("Error", "Debe llenar todos los datos del formulario");
+            }
+            else
+            {
+
+                try
+                {
+                    string email = txtEmail.Text;
+                    string contrasena = txtPassword.Password;
+
+                    UsuarioBl user = new UsuarioBl();
+
+                    var resp = UsuarioBl.GetInstance().Login(email, contrasena);
+
+                    if (resp.EsPositiva)
+                    {
+                        //Login correcto
+                        MainWindow main = new MainWindow();
+                        this.Close();
+                        main.Show();
+
+                    }
+                    else
+                    {
+                        await this.ShowMessageAsync("Error", "Las credenciales ingresadas no son válidas, intente nuevamente.");
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
+        }
     }
 }

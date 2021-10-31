@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Departamento.cs" />
     <Compile Include="EditEstadoUsuario.cs" />
     <Compile Include="GetComunas.cs" />
     <Compile Include="Inventario.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Respuesta.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
