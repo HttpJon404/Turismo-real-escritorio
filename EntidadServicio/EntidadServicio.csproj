@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Departamento.cs" />
+    <Compile Include="DepartamentoTabla.cs" />
     <Compile Include="EditEstadoUsuario.cs" />
     <Compile Include="GetComunas.cs" />
     <Compile Include="Inventario.cs" />
+    <Compile Include="InventarioTabla.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Respuesta.cs" />
     <Compile Include="Usuario.cs" />

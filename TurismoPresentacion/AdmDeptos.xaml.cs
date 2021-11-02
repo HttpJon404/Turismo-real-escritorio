@@ -31,7 +31,7 @@ namespace TurismoPresentacion
         private void CargarDeptos()
         {
             DepartamentoBl deptos = new DepartamentoBl();
-            List<Departamento> dptos = deptos.GetDeptos();
+            List<DepartamentoTabla> dptos = deptos.GetDeptos();
             dgDeptos.ItemsSource = dptos;
             
         }

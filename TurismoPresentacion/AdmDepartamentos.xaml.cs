@@ -27,7 +27,7 @@ namespace TurismoPresentacion
     /// </summary>
     public partial class AdmDepartamentos : Page
     {
-        List<Inventario> lInventario = new List<Inventario>();
+        List<InventarioTabla> lInventario = new List<InventarioTabla>();
         //Lista de ids de inventario para enviar al web service.
         List<decimal> idsInventarioAdd = new List<decimal>();
         string[] listaLinks = new string[2];
@@ -69,6 +69,8 @@ namespace TurismoPresentacion
             cboRegion.SelectedValuePath = "id_region";
             cboRegion.DisplayMemberPath = "nombre_region";
         }
+
+
 
 
 
@@ -135,14 +137,53 @@ namespace TurismoPresentacion
 
         private void btnGuardarDpto_Click(object sender, RoutedEventArgs e)
         {
-
+            DepartamentoBl deptoBl = new DepartamentoBl();
             if (FormularioLleno())
             {
-                int metros2 = int.Parse(txtMetros.Text);
-                int dormitorios = int.Parse(txtDormitorios.Text);
-                int banos = int.Parse(txtBanos.Text);
-                string direccion = txtDireccion.Text;
-                int valorArriendo = int.Parse(txtValorArriendo.Text);
+                try
+                {
+                    int metros2 = int.Parse(txtMetros.Text);
+                    int dormitorios = int.Parse(txtDormitorios.Text);
+                    int banos = int.Parse(txtBanos.Text);
+                    int metrosm2 = int.Parse(txtMetros.Text);
+                    //Estacionamiento
+                    int estacionamiento = 0;
+                    if (swEstacionamiento.IsEnabled)
+                    {
+                        estacionamiento = 1;
+                    }
+                    string direccion = txtDireccion.Text;
+                    decimal id_comuna = decimal.Parse(cboComuna.SelectedValue.ToString());
+                    int comuna = (int)id_comuna;
+                    decimal id_region = decimal.Parse(cboRegion.SelectedValue.ToString());
+                    //Estado
+                    int valorArriendo = int.Parse(txtValorArriendo.Text);
+                    string condiciones = txtCondiciones.Text;
+                    int estado = 1;
+                    //lista imagenes
+
+                    //portada
+                    string portadaFile = portada;
+                    //lista inventarios
+                    decimal[] inventarios = new decimal[idsInventarioAdd.Count];
+
+                    for (int i = 0; i < idsInventarioAdd.Count; i++)
+                    {
+                        inventarios[i] = idsInventarioAdd[i];
+                    }
+
+
+
+                    var rep = deptoBl.RegistrarDepartamento(dormitorios, banos, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks);
+
+
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
 
             }
 
@@ -203,15 +244,31 @@ namespace TurismoPresentacion
 
         private void btnAgregarInventario_Click(object sender, RoutedEventArgs e)
         {
-            Inventario inventario = new Inventario();
+            InventarioTabla inventario = new InventarioTabla();
             decimal idInventario = (decimal)cboInventario.SelectedValue;
-            inventario.Id = idInventario;
+            inventario.Id = (int)idInventario;
             inventario.Descripcion = cboInventario.Text;
             lInventario.Add(inventario);
             idsInventarioAdd.Add(idInventario);
             CargarInventarioActual();
 
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            decimal[] iventarios = new decimal[idsInventarioAdd.Count];
+
+            for (int i = 0; i < idsInventarioAdd.Count; i++)
+            {
+                iventarios[i] = idsInventarioAdd[i];
+            }
+
+
+            foreach (var f in iventarios)
+            {
+                Console.WriteLine(f);
+            }
         }
     } 
 }
