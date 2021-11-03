@@ -83,5 +83,11 @@ namespace TurismoPresentacion
                 swTema.Content = "Oscuro";
             }
         }
+
+        private void btnAbrirInventarios_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new AdmInventario();
+            imgFondo.Visibility = Visibility.Hidden;
+        }
     }
 }

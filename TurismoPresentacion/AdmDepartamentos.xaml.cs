@@ -174,7 +174,7 @@ namespace TurismoPresentacion
 
 
 
-                    var rep = deptoBl.RegistrarDepartamento(dormitorios, banos, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks);
+                    var resp = deptoBl.RegistrarDepartamento(dormitorios, banos, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks, portadaFile);
 
 
 

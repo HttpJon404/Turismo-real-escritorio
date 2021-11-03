@@ -57,7 +57,7 @@ namespace TurismoNegocio
         }
 
         public Respuesta<string> RegistrarDepartamento(int dormitorios, int baños, decimal metrosm2, int estacionamiento, string direccion, int comuna, int id_estado,
-            decimal valor_arriendo, string condiciones, decimal[] id_tipo_inventario, string[] rutaArchivo)
+            decimal valor_arriendo, string condiciones, decimal[] id_tipo_inventario, string[] rutaArchivo, string portada)
         {
             try
             {
@@ -76,7 +76,8 @@ namespace TurismoNegocio
                     valor_arriendo = valor_arriendo,
                     condiciones = condiciones,
                     tipo_inventario = id_tipo_inventario,
-                    ruta_archivo = rutaArchivo
+                    ruta_archivo = rutaArchivo,
+                    portada = portada,
                 };
 
                 string json = JsonConvert.SerializeObject(depto);

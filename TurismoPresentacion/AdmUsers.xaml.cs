@@ -484,11 +484,8 @@ namespace TurismoPresentacion
                     throw;
                 }
             }
-            //PUT
-            
-           
+              
         }
-
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             UsuarioBl userBl = new UsuarioBl();
@@ -554,12 +551,13 @@ namespace TurismoPresentacion
             UsuarioBl user = new UsuarioBl();
             string rut = txtRutFilter.Text;
             List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
-            dgClientes.Items.Clear();
+
             dgClientes.ItemsSource = null;
             dgClientes.ItemsSource = usuarios;
 
             Console.WriteLine(dgClientes.SelectedItem);
             user.FiltrarUsuarios(rut);
+
         }
 
     }

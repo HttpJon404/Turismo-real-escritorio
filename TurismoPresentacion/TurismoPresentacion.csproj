@@ -175,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdmInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdmUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +196,9 @@
     </Compile>
     <Compile Include="AdmDeptos.xaml.cs">
       <DependentUpon>AdmDeptos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdmInventario.xaml.cs">
+      <DependentUpon>AdmInventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdmUsers.xaml.cs">
       <DependentUpon>AdmUsers.xaml</DependentUpon>
