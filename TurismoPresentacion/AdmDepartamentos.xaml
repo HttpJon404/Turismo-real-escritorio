@@ -12,14 +12,14 @@
       Title="AdmDepartamentos">
 
     <Grid >
-        <Label Content="Nuevo departamento" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48"/>
+        <Label Content="Nuevo departamento" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48" FontFamily="Candara"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="725,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo-removebg-preview.png"/>
         <Grid x:Name="btnExaminar1" Margin="29,84,27,70">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" Foreground="#FFEE1515"/>
+            <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" Foreground="Black"/>
             <TextBox x:Name="txtDormitorios"  HorizontalAlignment="Left" Height="31" Margin="126,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
             <TextBox x:Name="txtBanos"  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
             <mah:ToggleSwitch x:Name="swEstacionamiento"  HorizontalAlignment="Left" Height="35" Margin="18,166,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight" FontSize="16"/>
@@ -87,10 +87,12 @@
         </Grid>
 
         <!--Inventario-->
-        <mah:Flyout Theme="Adapt" x:Name="FlyInventario" Width="390"  Header="Inventario actual" Position="Right" Margin="0,105,10,10" >
+        <mah:Flyout Theme="Adapt" x:Name="FlyInventario" Width="390"  Header="Inventario actual" Position="Right" Margin="0,105,10,10" CloseButtonVisibility="Hidden" FontFamily="Corbel" FontSize="14" >
             <Grid >
                 <DataGrid x:Name="dgInventario" HorizontalAlignment="Left" Height="337" Margin="30,86,0,0" VerticalAlignment="Top" Width="334" Cursor="Cross" GridLinesVisibility="All" IsReadOnly="True"/>
-                <Button Margin="213,448,96,180" Content="Quitar" mah:ControlsHelper.ContentCharacterCasing="Normal"></Button>
+                <Button x:Name="btnCerrar" Margin="308,-72,0,672" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrar_Click" Foreground="#FFF90202" Background="White">
+                    <iconpacks:FontAwesome Kind="TimesSolid" Height="25" Width="25"  />
+                </Button>
 
             </Grid>
 

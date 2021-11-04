@@ -29,9 +29,10 @@ namespace TurismoPresentacion
     {
         List<InventarioTabla> lInventario = new List<InventarioTabla>();
         //Lista de ids de inventario para enviar al web service.
-        List<decimal> idsInventarioAdd = new List<decimal>();
+        List<int> idsInventarioAdd = new List<int>();
         string[] listaLinks = new string[2];
         string portada;
+        bool open = false;
 
         public AdmDepartamentos()
         {
@@ -40,7 +41,6 @@ namespace TurismoPresentacion
             ValidacionesInput();
             CargarRegiones();
             CargarInventarios();
-
         }
 
         private void CargarInventarios()
@@ -144,11 +144,11 @@ namespace TurismoPresentacion
                 {
                     int metros2 = int.Parse(txtMetros.Text);
                     int dormitorios = int.Parse(txtDormitorios.Text);
-                    int banos = int.Parse(txtBanos.Text);
+                    int baños = int.Parse(txtBanos.Text);
                     int metrosm2 = int.Parse(txtMetros.Text);
                     //Estacionamiento
                     int estacionamiento = 0;
-                    if (swEstacionamiento.IsEnabled)
+                    if (swEstacionamiento.IsOn)
                     {
                         estacionamiento = 1;
                     }
@@ -165,7 +165,7 @@ namespace TurismoPresentacion
                     //portada
                     string portadaFile = portada;
                     //lista inventarios
-                    decimal[] inventarios = new decimal[idsInventarioAdd.Count];
+                    int[] inventarios = new int[idsInventarioAdd.Count];
 
                     for (int i = 0; i < idsInventarioAdd.Count; i++)
                     {
@@ -173,10 +173,15 @@ namespace TurismoPresentacion
                     }
 
 
-
-                    var resp = deptoBl.RegistrarDepartamento(dormitorios, banos, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks, portadaFile);
-
-
+                    try
+                    {
+                        var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks, portadaFile);
+                        MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("No se pudo agregar el departamento, verifique el formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
 
                 }
                 catch (Exception)
@@ -192,11 +197,21 @@ namespace TurismoPresentacion
         {
             dgInventario.Items.Refresh();
             FlyInventario.IsOpen = true;
+            open = true; 
             dgInventario.ItemsSource = lInventario;
         }
         private void btnAbrirInventario_Click(object sender, RoutedEventArgs e)
         {
-            CargarInventarioActual();
+            if (open)
+            {
+                FlyInventario.IsOpen = false;
+                open = false;
+            }
+            else
+            {
+                FlyInventario.IsOpen = true;
+                open = true;
+            }
         }
 
         private void btnCerrarInventario_Click(object sender, RoutedEventArgs e)
@@ -245,7 +260,8 @@ namespace TurismoPresentacion
         private void btnAgregarInventario_Click(object sender, RoutedEventArgs e)
         {
             InventarioTabla inventario = new InventarioTabla();
-            decimal idInventario = (decimal)cboInventario.SelectedValue;
+            decimal id = (decimal)cboInventario.SelectedValue;
+            int idInventario = (int)id;
             inventario.Id = (int)idInventario;
             inventario.Descripcion = cboInventario.Text;
             lInventario.Add(inventario);
@@ -269,6 +285,12 @@ namespace TurismoPresentacion
             {
                 Console.WriteLine(f);
             }
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            FlyInventario.IsOpen = false;
+            open = false;
         }
     } 
 }

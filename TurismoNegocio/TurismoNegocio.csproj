@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DepartamentoBl.cs" />
     <Compile Include="InventarioBl.cs" />
+    <Compile Include="ServicioBl.cs" />
     <Compile Include="UbicacionBl.cs" />
     <Compile Include="UsuarioBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

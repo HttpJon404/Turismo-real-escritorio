@@ -56,8 +56,8 @@ namespace TurismoNegocio
             }
         }
 
-        public Respuesta<string> RegistrarDepartamento(int dormitorios, int baños, decimal metrosm2, int estacionamiento, string direccion, int comuna, int id_estado,
-            decimal valor_arriendo, string condiciones, decimal[] id_tipo_inventario, string[] rutaArchivo, string portada)
+        public Respuesta<string> RegistrarDepartamento(int dormitorios, int baños, decimal metrosm2, int estacionamiento, string direccion, int id_comuna, int id_estado,
+            decimal valor_arriendo, string condiciones, int[] tipo_inventario, string[] rutaArchivo, string portada)
         {
             try
             {
@@ -71,11 +71,11 @@ namespace TurismoNegocio
                     metrosm2 = metrosm2,
                     estacionamiento = estacionamiento,
                     direccion = direccion,
-                    comuna = comuna,
+                    id_comuna = id_comuna,
                     id_estado = 1,
                     valor_arriendo = valor_arriendo,
                     condiciones = condiciones,
-                    tipo_inventario = id_tipo_inventario,
+                    tipo_inventario = tipo_inventario,
                     ruta_archivo = rutaArchivo,
                     portada = portada,
                 };

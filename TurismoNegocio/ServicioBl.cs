@@ -9,35 +9,37 @@ using System.Threading.Tasks;
 
 namespace TurismoNegocio
 {
-    public class InventarioBl
+    public class ServicioBl
     {
-        private static InventarioBl instance;
-        public static InventarioBl GetInstance()
+
+        private static ServicioBl instance;
+        public static ServicioBl GetInstance()
         {
             if (instance == null)
             {
-                instance = new InventarioBl();
+                instance = new ServicioBl();
             }
             return instance;
         }
 
 
 
-        public List<Inventario> Getinventario()
+        public List<Servicios> GetServicios()
         {
             try
             {
                 DBApi dbapi = new DBApi();
-                dynamic users = dbapi.Get("https://localhost:44358/api/TipoInventario/");
+                dynamic users = dbapi.Get("https://localhost:44358/api/Servicio/");
                 var resp = users.ToString();
-                List<Inventario> jsonDes = JsonConvert.DeserializeObject<List<Inventario>>(resp);
 
+                List<Servicios> jsonDes = JsonConvert.DeserializeObject<List<Servicios>>(resp);
                 foreach (var item in jsonDes)
                 {
                     item.Id = (int)item.Id;
-                    item.Cantidad = (int)item.Cantidad;
-                    item.Precio = (int)item.Precio;
+                    item.Valor = (int)item.Valor;
+
                 }
+               
                 return jsonDes;
 
             }

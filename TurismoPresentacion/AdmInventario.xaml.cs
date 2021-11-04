@@ -27,6 +27,7 @@ namespace TurismoPresentacion
         {
             InitializeComponent();
             CargarInventarios();
+            CargarServicios();
         }
 
         private void CargarInventarios()
@@ -37,6 +38,13 @@ namespace TurismoPresentacion
             dgInventarios.ItemsSource = listaInventario;
 
         }
+        private void CargarServicios()
+        {
+            ServicioBl servicioBl = new ServicioBl();
+            List<Servicios> listaInventario = servicioBl.GetServicios();
+            dgServicios.ItemsSource = listaInventario;
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -44,5 +52,7 @@ namespace TurismoPresentacion
             List<Inventario> listaInventario = inventarioBl.Getinventario();
             dgInventarios.ItemsSource = listaInventario;
         }
+
+
     }
 }
