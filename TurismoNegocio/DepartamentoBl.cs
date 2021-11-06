@@ -56,6 +56,27 @@ namespace TurismoNegocio
             }
         }
 
+        public List<DepartamentoEdit> GetDeptoId(decimal id)
+        {
+            try
+            {
+                DBApi dbapi = new DBApi();
+                dynamic users = dbapi.Get("https://localhost:44358/api/departamento/" + id);
+                var resp = users.ToString();
+                var jsonDes = JsonConvert.DeserializeObject<List<DepartamentoEdit>>(resp);
+
+
+                return jsonDes;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public Respuesta<string> RegistrarDepartamento(int dormitorios, int baños, decimal metrosm2, int estacionamiento, string direccion, int id_comuna, int id_estado,
             decimal valor_arriendo, string condiciones, int[] tipo_inventario, string[] rutaArchivo, string portada)
         {

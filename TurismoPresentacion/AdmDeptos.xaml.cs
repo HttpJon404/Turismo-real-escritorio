@@ -33,7 +33,7 @@ namespace TurismoPresentacion
             DepartamentoBl deptos = new DepartamentoBl();
             List<DepartamentoTabla> dptos = deptos.GetDeptos();
             dgDeptos.ItemsSource = dptos;
-            
+
         }
 
         public void Test()
@@ -71,6 +71,37 @@ namespace TurismoPresentacion
             dgDeptos.Columns[12].DisplayIndex = 13;
             dgDeptos.Columns[13].Header = "Fecha creación";
             dgDeptos.Columns[13].DisplayIndex = 13;
+        }
+
+        private void btnEditarDepto_Click(object sender, RoutedEventArgs e)
+        {
+            DepartamentoBl deptoBl = new DepartamentoBl();
+            List<DepartamentoTabla> dptos = deptoBl.GetDeptos();
+            int i = 0;
+            if (dgDeptos.SelectedIndex != -1)
+            {
+                i = dgDeptos.SelectedIndex;
+
+                if (i >= 0)
+                {
+
+                    int idDepto;
+                    idDepto = (int)dptos[i].id;
+
+                    //Cargar regiones
+                    //UbicacionBl ubi = new UbicacionBl();
+                    //List<GetComunas> regiones = ubi.GetRegion();
+                    //cboRegion1.ItemsSource = regiones;
+                    //cboRegion1.SelectedValuePath = "id_region";
+                    //cboRegion1.DisplayMemberPath = "nombre_region";
+
+                    //var alo = cboRegion1.SelectedValue;
+                    //MessageBox.Show(alo.ToString());
+
+                    var depto = deptoBl.GetDeptoId(idDepto);
+
+                }
+            }
         }
     }
 }

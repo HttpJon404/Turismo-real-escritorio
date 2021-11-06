@@ -30,8 +30,11 @@ namespace TurismoPresentacion
         List<InventarioTabla> lInventario = new List<InventarioTabla>();
         //Lista de ids de inventario para enviar al web service.
         List<int> idsInventarioAdd = new List<int>();
-        string[] listaLinks = new string[2];
-        string portada;
+        string[] listaOrigen = new string[2];
+        string[] nombreImagenes = new string[2];
+        string portadaOrigen;
+        string archivoPortada;
+        string[] rutaImagenesSave = new string[2];
         bool open = false;
 
         public AdmDepartamentos()
@@ -73,25 +76,41 @@ namespace TurismoPresentacion
 
 
 
-
+        //Imagen 1
         private void btnExaminar_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "jpg(*.jpg)|*.jpg|png(*.png)|*.png|gif(*.gif)|*.gif|bmp(*.bmp)|*.bmp|All Files(*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                var rutaOrigen = openFileDialog.FileName;
+
+                    listaOrigen[0] = rutaOrigen;
+                    nombreImagenes[0] = openFileDialog.SafeFileName;
+
+
+            }
+        }
+
+        //Imagen 2
+        private void btnExaminar3_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "jpg(*.jpg)|*.jpg|png(*.png)|*.png|gif(*.gif)|*.gif|bmp(*.bmp)|*.bmp|All Files(*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
-                var ruta = openFileDialog.FileName;
-                for (int i = 0; i < listaLinks.Length; i++)
-                {
-                    listaLinks[i] = ruta;
-                    
-                }
-                
+                var rutaOrigen = openFileDialog.FileName;
 
-                //imgDynamic.Source = new BitmapImage(fileUri);
+                listaOrigen[1] = rutaOrigen;
+                nombreImagenes[1] = openFileDialog.SafeFileName;
+
+
             }
         }
+
         public void limpiarFormulario()
         {
             txtMetros.Text = string.Empty;
@@ -161,9 +180,38 @@ namespace TurismoPresentacion
                     string condiciones = txtCondiciones.Text;
                     int estado = 1;
                     //lista imagenes
+                    string rutaDestino = @"C:\Turismo";
+
+                    string[] rutaImagenesSave = new string[2];
+
+                    for (int i = 0; i < listaOrigen.Length; i++)
+                    {
+                        string imagenDptoOrigen = listaOrigen[i];
+                        string archivoImagen = nombreImagenes[i];
+                        //Destino de la imagen c/turismo/nombreimagen
+                        string imagenDestino = System.IO.Path.Combine(rutaDestino, archivoImagen);
+                        //Guardar imagen de departamento
+                        System.IO.File.Copy(imagenDptoOrigen, imagenDestino, true);
+
+                        //Guardar rutas listas en la lista
+                        rutaImagenesSave[i] = imagenDestino;
+
+
+
+                    }
+                    //Guardar rutas en donde se guardaron las imagenes/c/turismo/imagenX
+
 
                     //portada
-                    string portadaFile = portada;
+                    string portada = portadaOrigen;
+
+                    //Destino de la imagen
+                    string portadaDestino = System.IO.Path.Combine(rutaDestino, archivoPortada);
+                    //Guardar imagen
+                    System.IO.File.Copy(portadaOrigen, portadaDestino, true);
+
+
+
                     //lista inventarios
                     int[] inventarios = new int[idsInventarioAdd.Count];
 
@@ -175,7 +223,7 @@ namespace TurismoPresentacion
 
                     try
                     {
-                        var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, listaLinks, portadaFile);
+                        var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
                         MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception)
@@ -252,7 +300,9 @@ namespace TurismoPresentacion
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
-                portada = openFileDialog.FileName;
+                portadaOrigen = openFileDialog.FileName;
+                imgPortadaDpto.Source = new BitmapImage(fileUri);
+                archivoPortada = openFileDialog.SafeFileName;
             }
 
         }
@@ -271,26 +321,14 @@ namespace TurismoPresentacion
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            decimal[] iventarios = new decimal[idsInventarioAdd.Count];
 
-            for (int i = 0; i < idsInventarioAdd.Count; i++)
-            {
-                iventarios[i] = idsInventarioAdd[i];
-            }
-
-
-            foreach (var f in iventarios)
-            {
-                Console.WriteLine(f);
-            }
-        }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
             FlyInventario.IsOpen = false;
             open = false;
         }
+
+
     } 
 }

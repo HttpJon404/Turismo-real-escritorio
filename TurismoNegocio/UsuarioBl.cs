@@ -348,19 +348,6 @@ namespace TurismoNegocio
 
         }
 
-        public bool LoginUsuario(string correo, string clave)
-        {
-            List<Usuario> users = this.GetUsers();
-            foreach (var flash in users)
-            {
-                if (flash.correo ==correo)
-                {
-                    return true;
-
-                }
-            }
-            return false; ;
-        }
 
         public List<UsuarioTabla> FiltrarUsuarios(string rut)
         {

@@ -53,6 +53,5 @@ namespace TurismoPresentacion
             dgInventarios.ItemsSource = listaInventario;
         }
 
-
     }
 }

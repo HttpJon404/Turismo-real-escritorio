@@ -11,7 +11,6 @@
       Title="AdmInventario">
 
     <Grid>
-        <Label Content="Gestión inventarios" HorizontalAlignment="Left" Margin="277,26,0,0" VerticalAlignment="Top" Width="522" FontSize="48" FontFamily="Candara"/>
 
         <Grid Margin="1180,-313,-783,499">
 
@@ -22,7 +21,7 @@
 
                 <Border BorderBrush="Black" BorderThickness="1">
                     <Grid Margin="0,0,145,105" >
-                        <DataGrid x:Name="dgInventarios" HorizontalAlignment="Left" Height="386" Margin="38,229,0,0" VerticalAlignment="Top" Width="450" GridLinesVisibility="All" IsReadOnly="True"/>
+                        <DataGrid x:Name="dgInventarios" HorizontalAlignment="Left" Height="311" Margin="38,229,0,0" VerticalAlignment="Top" Width="450" GridLinesVisibility="All" IsReadOnly="True"/>
                         <TextBox x:Name="txtDescripcionI"  HorizontalAlignment="Left" Height="31" Margin="38,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
                         <Label Content="Descripción" HorizontalAlignment="Left" Margin="38,49,0,0" VerticalAlignment="Top" FontSize="16"/>
                         <TextBox x:Name="txtCantidadI"  HorizontalAlignment="Left" Height="31" Margin="380,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" FontSize="16" FontFamily="Calibri"/>
@@ -32,10 +31,10 @@
 
                         <Button x:Name="btnGuardarInvt" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="381,147,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic"/>
 
-                        <Button ToolTip="Editar inventario" x:Name="btnEditar" HorizontalAlignment="Left" Margin="505,308,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                        <Button ToolTip="Editar inventario" x:Name="btnEditarInv" HorizontalAlignment="Left" Margin="505,308,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
                             <iconpacks:PackIconFontAwesome Kind="EditRegular" Height="32" Width="32"  />
                         </Button>
-                        <Button ToolTip="Eliminar elemento" x:Name="btnEliminar" HorizontalAlignment="Left" Margin="505,257,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                        <Button ToolTip="Eliminar elemento" x:Name="btnEliminarInvt" HorizontalAlignment="Left" Margin="505,257,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
                             <iconpacks:PackIconFontAwesome Kind="TrashAltRegular" Height="32" Width="32"  />
                         </Button>
                         <Label Content="Gestión inventarios" HorizontalAlignment="Left" Margin="239,2,0,0" VerticalAlignment="Top" Width="199" FontSize="22" FontFamily="Candara"/>
@@ -45,28 +44,29 @@
             </TabItem>
             <TabItem Header="Servicios">
                 <Border BorderBrush="Black" BorderThickness="1">
-                <Grid >
-                    <Label Content="Gestión de servicios" HorizontalAlignment="Left" Margin="239,10,0,0" VerticalAlignment="Top" Width="199" FontSize="22" FontFamily="Candara"/>
+                    <Grid >
+                        <Label Content="Gestión de servicios" HorizontalAlignment="Left" Margin="239,10,0,0" VerticalAlignment="Top" Width="199" FontSize="22" FontFamily="Candara"/>
 
-                    <Label Content="Nombre" HorizontalAlignment="Left" Margin="81,68,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtValorServicio"  HorizontalAlignment="Left" Height="32" Margin="81,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" FontSize="16" FontFamily="Calibri"/>
-                    <Label Content="Valor" HorizontalAlignment="Left" Margin="81,126,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtNombreServicio"  HorizontalAlignment="Left" Height="30" Margin="81,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" FontSize="16" FontFamily="Calibri"/>
+                        <Label Content="Nombre" HorizontalAlignment="Left" Margin="81,68,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <TextBox x:Name="txtValorServicio"  HorizontalAlignment="Left" Height="32" Margin="81,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" FontSize="16" FontFamily="Calibri"/>
+                        <Label Content="Valor" HorizontalAlignment="Left" Margin="81,126,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <TextBox x:Name="txtNombreServicio"  HorizontalAlignment="Left" Height="30" Margin="81,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="274" FontSize="16" FontFamily="Calibri"/>
 
 
-                    <DataGrid x:Name="dgServicios" Margin="81,216,261,75" IsReadOnly="True"/>
-                    <Button ToolTip="Editar inventario" x:Name="btnEditarServicio" HorizontalAlignment="Left" Margin="505,296,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
-                        <iconpacks:PackIconFontAwesome Kind="EditRegular" Height="32" Width="32"  />
-                    </Button>
-                    <Button ToolTip="Eliminar elemento" x:Name="btnEliminarServicio" HorizontalAlignment="Left" Margin="505,245,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
-                        <iconpacks:PackIconFontAwesome Kind="TrashAltRegular" Height="32" Width="32"  />
-                    </Button>
-                    <Button x:Name="btnGuardarServicio" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="382,158,0,0" VerticalAlignment="Top" Width="94" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic"/>
-                </Grid>
+                        <DataGrid x:Name="dgServicios" Margin="81,216,261,75" IsReadOnly="True"/>
+                        <Button ToolTip="Editar inventario" x:Name="btnEditarServicio" HorizontalAlignment="Left" Margin="505,296,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                            <iconpacks:PackIconFontAwesome Kind="EditRegular" Height="32" Width="32"  />
+                        </Button>
+                        <Button ToolTip="Eliminar elemento" x:Name="btnEliminarServicio" HorizontalAlignment="Left" Margin="505,245,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                            <iconpacks:PackIconFontAwesome Kind="TrashAltRegular" Height="32" Width="32"  />
+                        </Button>
+                        <Button x:Name="btnGuardarServicio" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="382,158,0,0" VerticalAlignment="Top" Width="94" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic"/>
+                    </Grid>
                 </Border>
             </TabItem>
         </TabControl>
         <Image HorizontalAlignment="Left" Height="100" Margin="756,10,0,0" VerticalAlignment="Top" Width="319" Source="images/logo_turismo-removebg-preview.png"/>
+        <Label Content="Mantenedores" HorizontalAlignment="Left" Margin="388,41,0,0" VerticalAlignment="Top" Width="335" FontSize="48" FontFamily="Candara"/>
 
 
 

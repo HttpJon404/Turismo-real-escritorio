@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Departamento.cs" />
+    <Compile Include="DepartamentoEdit.cs" />
     <Compile Include="DepartamentoTabla.cs" />
     <Compile Include="EditEstadoUsuario.cs" />
     <Compile Include="GetComunas.cs" />

@@ -45,37 +45,6 @@ namespace TurismoPresentacion
             }
             else
             {
-                //Formulario lleno
-                UsuarioBl user = new UsuarioBl();
-                string email = txtEmail.Text;
-                string password = txtPassword.Password;
-                if (user.LoginUsuario(email, "askjdkasdj"))
-                {
-                    MainWindow main = new MainWindow();
-                    this.Close();
-                    main.Show();
-                }
-                else
-                {
-                    await this.ShowMessageAsync("Error", "Las credenciales ingresadas no son validas, intente nuevamente.");
-                }
-
-            }
-
-
-           
-            
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-            if (!ValidarCampos())
-            {
-                await this.ShowMessageAsync("Error", "Debe llenar todos los datos del formulario");
-            }
-            else
-            {
 
                 try
                 {
@@ -106,6 +75,14 @@ namespace TurismoPresentacion
                     throw;
                 }
             }
+
+
+
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
     }
