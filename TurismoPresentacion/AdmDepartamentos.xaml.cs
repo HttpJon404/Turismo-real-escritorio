@@ -37,13 +37,24 @@ namespace TurismoPresentacion
         string[] rutaImagenesSave = new string[2];
         bool open = false;
 
-        public AdmDepartamentos()
+        public AdmDepartamentos(int id)
         {
             
             InitializeComponent();
             ValidacionesInput();
             CargarRegiones();
             CargarInventarios();
+            if (id!=0)
+            {
+                //Modo editar departamento
+                modoEditarDepto();
+            }
+
+        }
+
+        private void modoEditarDepto()
+        {
+            lblTitulo.Content = "Modificar departamento";
         }
 
         private void CargarInventarios()

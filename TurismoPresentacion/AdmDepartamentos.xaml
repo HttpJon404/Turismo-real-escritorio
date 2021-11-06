@@ -12,7 +12,7 @@
       Title="AdmDepartamentos">
 
     <Grid >
-        <Label Content="Nuevo departamento" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48" FontFamily="Constantia"/>
+        <Label x:Name="lblTitulo" Content="Nuevo departamento" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48" FontFamily="Constantia"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="725,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo-removebg-preview.png"/>
         <Grid x:Name="btnExaminar1" Margin="29,84,27,70">
             <Grid.ColumnDefinitions>

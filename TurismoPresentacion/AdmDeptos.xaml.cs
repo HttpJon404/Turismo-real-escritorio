@@ -98,7 +98,10 @@ namespace TurismoPresentacion
                     //var alo = cboRegion1.SelectedValue;
                     //MessageBox.Show(alo.ToString());
 
-                    var depto = deptoBl.GetDeptoId(idDepto);
+                    //var depto = deptoBl.GetDeptoId(idDepto);
+                    
+                    
+
 
                 }
             }

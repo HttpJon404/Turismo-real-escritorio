@@ -62,7 +62,7 @@ namespace TurismoPresentacion
 
         private void btnListaUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AdmDepartamentos();
+            Main.Content = new AdmDepartamentos(0);
             imgFondo.Visibility = Visibility.Hidden;
         }
 
