@@ -56,7 +56,7 @@
         <Label Content="Usuarios" HorizontalAlignment="Left" Margin="30,304,0,0" VerticalAlignment="Top" Width="62" Foreground="#FF513E3E" FontWeight="Bold"/>
 
 
-        <mah:Flyout Theme="Adapt" x:Name="FlyAddUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="0,0,-1,3"  >
+        <mah:Flyout Theme="Adapt" x:Name="FlyAddUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="10,0,-11.2,162.6"  >
             <Grid x:Name="GridAddUser"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
                 <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="420" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">
@@ -120,7 +120,7 @@
         <Button x:Name="btnReestablecerFiltros" ToolTip="Reestablecer filtros" HorizontalAlignment="Left" Margin="691,240,0,0" VerticalAlignment="Top" Width="89" Height="42" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnReestablecerFiltros_Click">
             <iconpacks:PackIconFontAwesome Kind="RedoAltSolid" Height="26" Width="22"  />
         </Button>
-        <mah:Flyout Theme="Adapt" x:Name="FlyEditUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="-1,0,0,3"  >
+        <mah:Flyout Theme="Adapt" x:Name="FlyEditUser" Position="Bottom" Height="512"  CloseButtonVisibility="Hidden" Margin="10,0,-11.2,160.6"  >
             <Grid  x:Name="GridAddUser1"  HorizontalAlignment="Left" Margin="0,10,0,0" Width="979">
                 <Rectangle Fill="#00000000" HorizontalAlignment="Left" Height="420" Margin="0,72,0,0" Stroke="#FF688DB9" VerticalAlignment="Top" Width="979"/>
                 <Grid Margin="0,0,0,430" Background="#CCFA6800">

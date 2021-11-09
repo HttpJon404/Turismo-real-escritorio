@@ -72,7 +72,7 @@ namespace TurismoPresentacion
         {
             dgClientes.Items.Refresh();
             UsuarioBl userBl = new UsuarioBl();
-            List<UsuarioTabla> usuarios = userBl.UsuariosGrid();
+            List<UsuarioTabla> usuarios = userBl.UsuariosGrid().GroupBy(u => u.id).Select(g => g.First()).OrderBy(c => c.id).ToList();
             dgClientes.ItemsSource = usuarios;
         }
 
@@ -502,11 +502,11 @@ namespace TurismoPresentacion
                     idUsuario = usuarios[i].id;
 
 
-                    var usuario = userBl.GetUserId(idUsuario);
+                    var usuario = userBl.GetUserId(idUsuario).FirstOrDefault();
 
-                    foreach (var u in usuario)
-                    {
-                        if (u.estado == "1.0")
+                    //foreach (var u in usuario)
+                    //{
+                        if (usuario.estado == "1.0")
                         {
                             MessageBoxResult result = MessageBox.Show("Este usuario esta habilitado. ¿Deseas inhabilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -530,7 +530,7 @@ namespace TurismoPresentacion
                                 CargarClientes();
                             }
                         }
-                    }
+                    //}
 
                 }
             }
