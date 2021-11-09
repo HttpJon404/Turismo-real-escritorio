@@ -94,6 +94,9 @@
             <Button ToolTip="CheckOut" x:Name="btnCheckout" HorizontalAlignment="Left" Margin="1010,521,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCheckout_Click">
                 <iconpacks:PackIconFontAwesome Kind="OutdentSolid" Height="32" Width="32"  />
             </Button>
+            <Button ToolTip="Inhabilitar " x:Name="btnDeactive" HorizontalAlignment="Left" Margin="1010,334,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnDeactive_Click">
+                <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
+            </Button>
 
             <mah:Flyout Header="Ingresar check in" Theme="Adapt" x:Name="FlyCheckIn" Position="Right" Margin="0,128,0,10" Width="453"  >
                 <Grid  x:Name="GridAddUser1"  HorizontalAlignment="Left" Width="453">

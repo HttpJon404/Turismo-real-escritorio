@@ -33,7 +33,7 @@ namespace TurismoPresentacion
             dgClientes.IsReadOnly = true;
             ValidacionesInput();
         }
-
+        decimal idUsuario = 0;
         //Validacion inputs
         private void SoloNumeros(object sender, TextCompositionEventArgs e)
         {
@@ -70,7 +70,7 @@ namespace TurismoPresentacion
         }
         private void CargarClientes()
         {
-            dgClientes.Items.Refresh();
+            dgClientes.ItemsSource = null;
             UsuarioBl userBl = new UsuarioBl();
             List<UsuarioTabla> usuarios = userBl.UsuariosGrid().GroupBy(u => u.id).Select(g => g.First()).OrderBy(c => c.id).ToList();
             dgClientes.ItemsSource = usuarios;
@@ -246,7 +246,7 @@ namespace TurismoPresentacion
                 string estado = CapturarEstadoEdit();
 
 
-                var resp = UsuarioBl.GetInstance().RegistrarUsuario (nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
+                var resp = UsuarioBl.GetInstance().RegistrarUsuario(nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
                 if (resp.EsPositiva)
                 {
                     MessageBox.Show(resp.Mensaje, "Información", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -314,7 +314,7 @@ namespace TurismoPresentacion
                         cboComuna1.SelectedValuePath = "id_comuna";
                         cboComuna1.DisplayMemberPath = "nombre_comuna";
                         cboComuna1.SelectedValue = u.id_comuna;
-                        
+
                         //Cargar combobox de género.
                         string genero = u.genero;
                         if (genero == "M")
@@ -338,7 +338,7 @@ namespace TurismoPresentacion
                         }
                         //Cargar estado
                         string estado = u.estado;
-                        if (estado =="1.0")
+                        if (estado == "1.0")
                         {
                             cboEstado1.SelectedIndex = 0;
                         }
@@ -484,60 +484,72 @@ namespace TurismoPresentacion
                     throw;
                 }
             }
-              
+
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+
             UsuarioBl userBl = new UsuarioBl();
-            List<Usuario> usuarios = userBl.GetUsers();
-            int i = 0;
 
-            if (dgClientes.SelectedIndex != -1)
+            var selected = dgClientes.SelectedItem;
+            var usuarioTabla = new UsuarioTabla();
+
+            usuarioTabla = (UsuarioTabla)selected;
+
+
+            if (selected != null)
             {
-                i = dgClientes.SelectedIndex;
+                MessageBox.Show(usuarioTabla.id.ToString());
 
-                if (i >= 0)
+                if (usuarioTabla.estado == "Habilitado")
                 {
-                    decimal idUsuario;
-                    idUsuario = usuarios[i].id;
+                    MessageBoxResult result = MessageBox.Show("Este usuario esta habilitado. ¿Deseas inhabilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-
-                    var usuario = userBl.GetUserId(idUsuario).FirstOrDefault();
-
-                    //foreach (var u in usuario)
-                    //{
-                        if (usuario.estado == "1.0")
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
                         {
-                            MessageBoxResult result = MessageBox.Show("Este usuario esta habilitado. ¿Deseas inhabilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                            //Deshabilitar usuario
+                            idUsuario = usuarioTabla.id;
+                            userBl.ActivarUsuario(idUsuario, "0");
 
-                            if (result==MessageBoxResult.Yes)
-                            {
-                                //Deshabilitar usuario
-                                userBl.ActivarUsuario(idUsuario, "0");
-
-                                CargarClientes();
-                            }
-
+                            CargarClientes();
                         }
-                        else
+                        catch (Exception)
                         {
-                            MessageBoxResult result = MessageBox.Show("Este usuario esta inhabilitado. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                //habilitar usuario
-                                userBl.ActivarUsuario(idUsuario, "1.0");
-                                CargarClientes();
-                            }
+                            throw;
                         }
-                    //}
+                    }
 
                 }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Este usuario esta inhabilitado. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            //habilitar usuario
+                            idUsuario = usuarioTabla.id;
+                            userBl.ActivarUsuario(idUsuario, "1.0");
+                            CargarClientes();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+                }
+
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un usuario en la tabla para deshabilitarlo.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Debe seleccionar un departamento en la tabla para cambiar su estado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
         }
 
         private void btnReestablecerFiltros_Click(object sender, RoutedEventArgs e)

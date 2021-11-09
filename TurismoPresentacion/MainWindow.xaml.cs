@@ -253,23 +253,67 @@ namespace TurismoPresentacion
             var clase = new DepartamentoTabla();
 
             clase = (DepartamentoTabla)selected;
-            decimal Id = clase.id;
+            
 
-
-            try
+            if (selected !=null)
             {
-                depa.ActivarDepto(91, 3);
-            }
-            catch (Exception)
-            {
+                if (clase.nombre_estado == "Disponible")
+                {
+                    MessageBoxResult result = MessageBox.Show("Este departamento está Disponible. ¿Deseas inhabilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-                throw;
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        //Deshabilitar depa estado 1
+                        idDpto = (int)clase.id;
+                        try
+                        {
+                            depa.ActivarDepto(idDpto, 4);
+                            CargarDeptos();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+
+                }
+                else if(clase.nombre_estado == "No disponible")
+                {
+                    MessageBoxResult result = MessageBox.Show("Este departamento no está disponible. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        //habilitar depa estado 4
+                        
+                        idDpto = (int)clase.id;
+                        try
+                        {
+                            depa.ActivarDepto(idDpto, 1);
+                            CargarDeptos();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Solo se puede cambiar el estado de los departamento disponibles o no disponibles, intente con otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
             }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un departamento en la tabla para cambiar su estado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+
         }
 
-        private void btnDeactive_Click_1(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
