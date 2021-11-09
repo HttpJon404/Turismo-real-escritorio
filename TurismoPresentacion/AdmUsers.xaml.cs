@@ -576,6 +576,7 @@ namespace TurismoPresentacion
 
         }
 
+
         private void btnReestablecerFiltros_Click(object sender, RoutedEventArgs e)
         {
             CargarClientes();

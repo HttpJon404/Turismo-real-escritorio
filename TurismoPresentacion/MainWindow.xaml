@@ -18,7 +18,7 @@
 
 
     <Grid>
-        <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill"/>
+        <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill" d:IsHidden="True"/>
         <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1096" Height="831" Margin="199,0,-1,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
@@ -88,46 +88,54 @@
                 <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
             </Button>
 
-            <mah:Flyout Header="Ingresar check in" Theme="Adapt" x:Name="FlyCheckIn" Position="Right" Margin="0,109,-454,29" Width="453"  >
+            <mah:Flyout Header="Ingresar check in" Theme="Adapt" x:Name="FlyCheckIn" Position="Right" Margin="0,128,0,10" Width="453" d:IsHidden="True"  >
                 <Grid  x:Name="GridAddUser1"  HorizontalAlignment="Left" Width="453">
                     <Label Content="Rut cliente" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtrutCliente"  HorizontalAlignment="Left" Height="31" Margin="57,41,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
-                    <DataGrid HorizontalAlignment="Left" Height="291" Margin="57,248,0,0" VerticalAlignment="Top" Width="320"/>
+                    <TextBlock x:Name="txtrutCliente"  HorizontalAlignment="Left" Height="31" Margin="57,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <DataGrid x:Name="dgCheckin" HorizontalAlignment="Left" Height="249" Margin="57,248,0,0" VerticalAlignment="Top" Width="320"/>
                     <Label Content="Lista de inventario" HorizontalAlignment="Left" Margin="57,223,0,0" VerticalAlignment="Top" FontFamily="Candara"/>
                     <Label Content="Departamento" HorizontalAlignment="Left" Margin="57,138,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtDepartamento"  HorizontalAlignment="Left" Height="31" Margin="57,169,0,0" TextWrapping="Wrap" Text="Belisario prats 1840" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
-                    <Button Content="Cancelar" HorizontalAlignment="Left" Margin="173,554,0,0" VerticalAlignment="Top" Width="92" Height="33" FontSize="16" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click_1"/>
-                    <Button ToolTip="Realizar Check In a este departamento" x:Name="btnCheckOut1" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Check In" HorizontalAlignment="Left" Margin="270,554,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" />
+                    <TextBlock x:Name="txtDepartamento"  HorizontalAlignment="Left" Height="31" Margin="57,187,0,0" TextWrapping="Wrap" Text="Belisario prats 1840" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Button x:Name="btnCancelarCheckin" Content="Cancelar" HorizontalAlignment="Left" Margin="173,554,0,0" VerticalAlignment="Top" Width="92" Height="33" FontSize="16" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCancelarCheckin"/>
+                    <Button ToolTip="Realizar Check In a este departamento" x:Name="btnCheckIn1" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Check In" HorizontalAlignment="Left" Margin="270,554,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" Click="BtnCheckIn" />
                     <Label Content="Cliente" HorizontalAlignment="Left" Margin="57,74,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtNombreCliente"  HorizontalAlignment="Left" Height="31" Margin="57,105,0,0" TextWrapping="Wrap" Text="Juan Perez" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <TextBlock x:Name="txtNombreCliente"  HorizontalAlignment="Left" Height="31" Margin="57,111,0,0" TextWrapping="Wrap" Text="Juan Perez" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Label Content="Total Valorizado" HorizontalAlignment="Left" Margin="143,502,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBlock x:Name="txtTotalCheckin"  HorizontalAlignment="Left" Height="31" Margin="289,509,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="88" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+
 
                 </Grid>
 
             </mah:Flyout>
-            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,109,-492,29" Width="454"  >
+            <!--<Button ToolTip="Inhabilitar " x:Name="btnDeactive" HorizontalAlignment="Left" Margin="1010,334,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnDeactive_Click_1">
+                <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
+            </Button>-->
+            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,128,0,10" Width="454"  >
                 <Grid  x:Name="GridAddUser2"  HorizontalAlignment="Left" Width="453">
-                    <Label Content="Rut cliente" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtrutCliente1"  HorizontalAlignment="Left" Height="31" Margin="57,41,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Label Content="Rut cliente:" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBlock x:Name="txtrutCliente1"  HorizontalAlignment="Left" Height="31" Margin="60,46,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
                     <Label Content="Lista de inventario" HorizontalAlignment="Left" Margin="57,223,0,0" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontStyle="Italic"/>
-                    <Label Content="Departamento" HorizontalAlignment="Left" Margin="57,138,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtDepartamento1"  HorizontalAlignment="Left" Height="31" Margin="57,169,0,0" TextWrapping="Wrap" Text="Belisario prats 1840" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Label Content="Departamento:" HorizontalAlignment="Left" Margin="57,138,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBlock x:Name="txtDepartamento1"  HorizontalAlignment="Left" Height="31" Margin="60,174,0,0" TextWrapping="Wrap" Text="Belisario prats 1840" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
                     <Button x:Name="btnCerrarCheckOut" Content="Cancelar" HorizontalAlignment="Left" Margin="173,554,0,0" VerticalAlignment="Top" Width="92" Height="33" FontSize="16" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrarCheckOut_Click"/>
-                    <Button ToolTip="Realizar Check In a este departamento" x:Name="btnCheckOut" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Check In" HorizontalAlignment="Left" Margin="270,554,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" />
-                    <Label Content="Cliente" HorizontalAlignment="Left" Margin="57,74,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <TextBox x:Name="txtNombreCliente1"  HorizontalAlignment="Left" Height="31" Margin="57,105,0,0" TextWrapping="Wrap" Text="Juan Perez" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Button ToolTip="Realizar Check In a este departamento" x:Name="btnCheckOut" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Check Out" HorizontalAlignment="Left" Margin="270,554,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" Click="btnCheckOut_Click_1" />
+                    <Label Content="Cliente:" HorizontalAlignment="Left" Margin="57,74,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBlock x:Name="txtNombreCliente1"  HorizontalAlignment="Left" Height="31" Margin="60,110,0,0" TextWrapping="Wrap" Text="Juan Perez" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
 
 
 
-                    <ListBox x:Name="listBoxCheckout" HorizontalAlignment="Left" Height="289" Margin="60,248,0,0" VerticalAlignment="Top" Width="248" SelectionMode="Multiple">
-                        <ListBoxItem Content="Tele 23 pulgadas"/>
+                    <DataGrid x:Name="listBoxCheckout" HorizontalAlignment="Left" Height="289" Margin="60,248,0,0" VerticalAlignment="Top" Width="248" SelectionChanged="listBoxCheckout_SelectionChanged" >
+                        <!--<ListBoxItem Content="Tele 23 pulgadas"/>
                         <ListBoxItem Content="Cama king"/>
-                        <ListBoxItem Content="Refrigerador"/>
+                        <ListBoxItem Content="Refrigerador"/>-->
 
 
-                    </ListBox>
+                    </DataGrid>
 
-                    <Button Content="Seleccionar todo" HorizontalAlignment="Left" Margin="313,254,0,0" VerticalAlignment="Top" Width="102" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click_2"/>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="289" Margin="60,248,0,0" VerticalAlignment="Top" Width="248"/>
+                    <!--<Button x:Name="btnCalcular" Content="Calcular Multa" HorizontalAlignment="Left" Margin="313,254,0,0" VerticalAlignment="Top" Width="102" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCalcularMulta"/>-->
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="209" Margin="60,248,0,0" VerticalAlignment="Top" Width="248"/>
+                    <TextBlock x:Name="txtTotalMulta"  HorizontalAlignment="Left" Height="31" Margin="173,462,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
+                    <Label Content="Multa:" HorizontalAlignment="Left" Margin="105,457,0,0" VerticalAlignment="Top" FontSize="16"/>
 
                 </Grid>
 
