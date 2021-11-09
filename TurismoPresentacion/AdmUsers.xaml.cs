@@ -246,7 +246,7 @@ namespace TurismoPresentacion
                 string estado = CapturarEstadoEdit();
 
 
-                var resp = UsuarioBl.GetInstance().RegistrarUsuario (nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
+                var resp = UsuarioBl.GetInstance().RegistrarUsuario(nombres, apellidos, edad, rut, id_genero, id_comuna, id_region, direccion, email, celular, contrasena, id_rol, estado);
                 if (resp.EsPositiva)
                 {
                     MessageBox.Show(resp.Mensaje, "Información", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -314,7 +314,7 @@ namespace TurismoPresentacion
                         cboComuna1.SelectedValuePath = "id_comuna";
                         cboComuna1.DisplayMemberPath = "nombre_comuna";
                         cboComuna1.SelectedValue = u.id_comuna;
-                        
+
                         //Cargar combobox de género.
                         string genero = u.genero;
                         if (genero == "M")
@@ -338,7 +338,7 @@ namespace TurismoPresentacion
                         }
                         //Cargar estado
                         string estado = u.estado;
-                        if (estado =="1.0")
+                        if (estado == "1.0")
                         {
                             cboEstado1.SelectedIndex = 0;
                         }
@@ -484,7 +484,7 @@ namespace TurismoPresentacion
                     throw;
                 }
             }
-              
+
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -521,9 +521,9 @@ namespace TurismoPresentacion
                             throw;
                         }
                     }
-                    
+
                 }
-                else 
+                else
                 {
                     MessageBoxResult result = MessageBox.Show("Este usuario esta inhabilitado. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -542,21 +542,14 @@ namespace TurismoPresentacion
                             throw;
                         }
                     }
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        //habilitar depa estado 4
-
-                        
-
-                    }
                 }
-               
+
             }
             else
             {
                 MessageBox.Show("Debe seleccionar un departamento en la tabla para cambiar su estado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-          
+
         }
 
         private void btnReestablecerFiltros_Click(object sender, RoutedEventArgs e)
