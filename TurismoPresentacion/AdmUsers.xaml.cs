@@ -34,6 +34,7 @@ namespace TurismoPresentacion
             ValidacionesInput();
         }
         decimal idUsuario = 0;
+        List<UsuarioTabla> usuarios = new List<UsuarioTabla>();
         //Validacion inputs
         private void SoloNumeros(object sender, TextCompositionEventArgs e)
         {
@@ -55,9 +56,19 @@ namespace TurismoPresentacion
         {
             UbicacionBl ubi = new UbicacionBl();
             List<GetComunas> comunas = ubi.GetRegion();
-            cboRegion.ItemsSource = comunas;
-            cboRegion.SelectedValuePath = "id_region";
-            cboRegion.DisplayMemberPath = "nombre_region";
+            if (comunas.Count>=1)
+            {
+                cboRegion.ItemsSource = null;
+                cboRegion.ItemsSource = comunas;
+                cboRegion.SelectedValuePath = "id_region";
+                cboRegion.DisplayMemberPath = "nombre_region";
+            }
+            else
+            {
+                cboRegion.ItemsSource = null;
+                MessageBox.Show("Ha ocurrido un error de red al cargar los datos, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
         private void ValidacionesInput()
         {
@@ -72,13 +83,23 @@ namespace TurismoPresentacion
         {
             dgClientes.ItemsSource = null;
             UsuarioBl userBl = new UsuarioBl();
-            List<UsuarioTabla> usuarios = userBl.UsuariosGrid().GroupBy(u => u.id).Select(g => g.First()).OrderBy(c => c.id).ToList();
-            dgClientes.ItemsSource = usuarios;
+            usuarios = userBl.UsuariosGrid().GroupBy(u => u.id).Select(g => g.First()).OrderBy(c => c.id).ToList();
+            if (usuarios.Count <= 0)
+            {
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                dgClientes.ItemsSource = null;
+                dgClientes.ItemsSource = usuarios;
+            }
+
         }
 
         private void btnAbrirFlyout_Click(object sender, RoutedEventArgs e)
         {
             FlyAddUser.IsOpen = true;
+
             CargarRegiones();
 
         }
@@ -268,85 +289,87 @@ namespace TurismoPresentacion
         {
             UsuarioBl userBl = new UsuarioBl();
             List<Usuario> usuarios = userBl.GetUsers();
-            int i = 0;
-            if (dgClientes.SelectedIndex != -1)
+
+
+            var selected = dgClientes.SelectedItem;
+            var usuarioTabla = new UsuarioTabla();
+
+            usuarioTabla = (UsuarioTabla)selected;
+
+            if (selected != null)
             {
-                i = dgClientes.SelectedIndex;
+                idUsuario = usuarioTabla.id;
+                //MessageBox.Show(usuarioTabla.id.ToString());
+                txtRutEdit.IsEnabled = false;
+                txtEdadEdit.IsEnabled = false;
+                FlyEditUser.IsOpen = true;
+                //Cargar regiones
+                UbicacionBl ubi = new UbicacionBl();
+                List<GetComunas> regiones = ubi.GetRegion();
+                cboRegion1.ItemsSource = regiones;
+                cboRegion1.SelectedValuePath = "id_region";
+                cboRegion1.DisplayMemberPath = "nombre_region";
 
-                if (i >= 0)
+                //var alo = cboRegion1.SelectedValue;
+                //MessageBox.Show(alo.ToString());
+
+                var usuario = userBl.GetUserId(idUsuario);
+                lblId.Content = idUsuario.ToString();
+                foreach (var u in usuario)
                 {
-                    txtRutEdit.IsEnabled = false;
-                    txtEdadEdit.IsEnabled = false;
-                    decimal idUsuario;
-                    idUsuario = usuarios[i].id;
-                    FlyEditUser.IsOpen = true;
-                    //Cargar regiones
-                    UbicacionBl ubi = new UbicacionBl();
-                    List<GetComunas> regiones = ubi.GetRegion();
-                    cboRegion1.ItemsSource = regiones;
-                    cboRegion1.SelectedValuePath = "id_region";
-                    cboRegion1.DisplayMemberPath = "nombre_region";
+                    //Traer datos al formulario.
+                    txtRutEdit.Text = u.rut;
+                    txtNombresEdit.Text = u.nombres;
+                    txtApellidosEdit.Text = u.apellidos;
+                    txtEdadEdit.Text = u.edad.ToString();
+                    txtCelularEdit.Text = u.celular;
+                    txtDireccionEdit.Text = u.direccion;
+                    string contrasena = u.contrasena;
+                    txtEmailEdit.Text = u.correo;
+                    decimal idregion = u.id_region;
+                    cboRegion1.SelectedValue = idregion;
 
-                    //var alo = cboRegion1.SelectedValue;
-                    //MessageBox.Show(alo.ToString());
+                    int idRegion = cboRegion1.SelectedIndex + 1;
 
-                    var usuario = userBl.GetUserId(idUsuario);
-                    lblId.Content = idUsuario.ToString();
-                    foreach (var u in usuario)
+                    //Console.WriteLine("id region: ", idRegion);
+                    List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                    cboComuna1.ItemsSource = comunas;
+                    cboComuna1.SelectedValuePath = "id_comuna";
+                    cboComuna1.DisplayMemberPath = "nombre_comuna";
+                    cboComuna1.SelectedValue = u.id_comuna;
+
+                    //Cargar combobox de género.
+                    string genero = u.genero;
+                    if (genero == "M")
                     {
-                        //Traer datos al formulario.
-                        txtRutEdit.Text = u.rut;
-                        txtNombresEdit.Text = u.nombres;
-                        txtApellidosEdit.Text = u.apellidos;
-                        txtEdadEdit.Text = u.edad.ToString();
-                        txtCelularEdit.Text = u.celular;
-                        txtDireccionEdit.Text = u.direccion;
-                        string contrasena = u.contrasena;
-                        txtEmailEdit.Text = u.correo;
-                        decimal idregion = u.id_region;
-                        cboRegion1.SelectedValue = idregion;
-
-                        int idRegion = cboRegion1.SelectedIndex + 1;
-
-                        Console.WriteLine("id region: ", idRegion);
-                        List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
-                        cboComuna1.ItemsSource = comunas;
-                        cboComuna1.SelectedValuePath = "id_comuna";
-                        cboComuna1.DisplayMemberPath = "nombre_comuna";
-                        cboComuna1.SelectedValue = u.id_comuna;
-
-                        //Cargar combobox de género.
-                        string genero = u.genero;
-                        if (genero == "M")
-                        {
-                            cboGenero1.SelectedIndex = 0;
-                        }
-                        else
-                        {
-                            cboGenero1.SelectedIndex = 1;
-                        }
-                        //Cargar rol
-                        int rol = (int)u.id_rol;
-                        if (rol == 1)
-                        {
-                            cboRol1.SelectedIndex = 0;
-
-                        }
-                        else
-                        {
-                            cboRol1.SelectedIndex = 1;
-                        }
-                        //Cargar estado
-                        string estado = u.estado;
-                        if (estado == "1.0")
-                        {
-                            cboEstado1.SelectedIndex = 0;
-                        }
-                        else
-                        {
-                            cboEstado1.SelectedIndex = 1;
-                        }
+                        cboGenero1.SelectedIndex = 0;
                     }
+                    else
+                    {
+                        cboGenero1.SelectedIndex = 1;
+                    }
+                    //Cargar rol
+                    int rol = (int)u.id_rol;
+                    if (rol == 1)
+                    {
+                        cboRol1.SelectedIndex = 0;
+
+                    }
+                    else
+                    {
+                        cboRol1.SelectedIndex = 1;
+                    }
+                    //Cargar estado
+                    string estado = u.estado;
+                    if (estado == "1.0")
+                    {
+                        cboEstado1.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        cboEstado1.SelectedIndex = 1;
+                    }
+
                 }
             }
             else
@@ -378,7 +401,7 @@ namespace TurismoPresentacion
 
                 int idRegion = cboRegion.SelectedIndex + 1;
 
-                Console.WriteLine(idRegion);
+                //Console.WriteLine(idRegion);
                 List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
                 cboComuna.ItemsSource = comunas;
                 cboComuna.SelectedValuePath = "id_comuna";
@@ -399,7 +422,7 @@ namespace TurismoPresentacion
 
                 int idRegion = cboRegion1.SelectedIndex + 1;
 
-                Console.WriteLine(idRegion);
+                //Console.WriteLine(idRegion);
                 List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
                 cboComuna1.ItemsSource = comunas;
                 cboComuna1.SelectedValuePath = "id_comuna";
@@ -499,7 +522,8 @@ namespace TurismoPresentacion
 
             if (selected != null)
             {
-                MessageBox.Show(usuarioTabla.id.ToString());
+                idUsuario = usuarioTabla.id;
+
 
                 if (usuarioTabla.estado == "Habilitado")
                 {
@@ -510,7 +534,7 @@ namespace TurismoPresentacion
                         try
                         {
                             //Deshabilitar usuario
-                            idUsuario = usuarioTabla.id;
+
                             userBl.ActivarUsuario(idUsuario, "0");
 
                             CargarClientes();
@@ -559,7 +583,6 @@ namespace TurismoPresentacion
 
         private void btnFiltrarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            dgClientes.Items.Refresh();
             UsuarioBl user = new UsuarioBl();
             string rut = txtRutFilter.Text;
             List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
@@ -567,10 +590,30 @@ namespace TurismoPresentacion
             dgClientes.ItemsSource = null;
             dgClientes.ItemsSource = usuarios;
 
-            Console.WriteLine(dgClientes.SelectedItem);
-            user.FiltrarUsuarios(rut);
+
+        }
+        private void filtrarPorRut()
+        {
+            UsuarioBl user = new UsuarioBl();
+            string rut = txtRutFilter.Text;
+            List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
+
+            dgClientes.ItemsSource = null;
+            dgClientes.ItemsSource = usuarios;
 
         }
 
+        private void txtRutFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtRutFilter.Text == string.Empty)
+            {
+                CargarClientes();
+            }
+            else
+            {
+                string rut = txtRutFilter.Text;
+                dgClientes.ItemsSource = usuarios.Where(u => u.rut.Contains(rut));
+            }
+        }
     }
 }

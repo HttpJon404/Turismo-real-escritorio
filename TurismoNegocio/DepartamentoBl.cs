@@ -23,6 +23,33 @@ namespace TurismoNegocio
         }
 
 
+        public List<TipoInventario> GetinventarioPorDepto(int id)
+        {
+            try
+            {
+                DBApi dbapi = new DBApi();
+                dynamic inventarios = dbapi.Get("https://localhost:44358/api/inventario/"+id);
+                var resp = inventarios.ToString();
+                List<TipoInventario> jsonDes = JsonConvert.DeserializeObject<List<TipoInventario>>(resp);
+
+
+                foreach (var item in jsonDes)
+                {
+                    item.id_inventario = (int)item.id_inventario;
+                    //item.Cantidad = (int)item.Cantidad;
+                    item.precio_inventario = (int)item.precio_inventario;
+                }
+                return jsonDes;
+
+            }
+            catch (Exception)
+            {
+
+                return new List<TipoInventario>();
+            }
+        }
+
+
         public List<EstadoDepto> GetEstadoDepto()
         {
             try
@@ -30,10 +57,7 @@ namespace TurismoNegocio
                 DBApi dbapi = new DBApi();
                 dynamic users = dbapi.Get("https://localhost:44358/api/EstadoDepto/");
                 var resp = users.ToString();
-                decimal[] lista = new decimal[3];
-                lista[0] = 3;
-                lista[1] = 4;
-                lista[2] = 5;
+
                 List<EstadoDepto> jsonDes = JsonConvert.DeserializeObject<List<EstadoDepto>>(resp);
                 List<EstadoDepto> jsonReturn = jsonDes.Where(e => e.Id  !=1 && e.Id!=2).ToList();
 
@@ -42,7 +66,7 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-                throw;
+                return new List<EstadoDepto>();
             }
         }
 
@@ -79,7 +103,7 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-                throw;
+                return new List<DepartamentoTabla>();
             }
         }
 
@@ -88,9 +112,44 @@ namespace TurismoNegocio
             try
             {
                 DBApi dbapi = new DBApi();
-                dynamic users = dbapi.Get("https://localhost:44358/api/departamento/" + id);
-                var resp = users.ToString();
+                dynamic deptos = dbapi.Get("https://localhost:44358/api/departamento/" + id);
+                var resp = deptos.ToString();
+
+                dynamic images = dbapi.Get("https://localhost:44358/api/imagenes/" + id);
+                var respImages = images.ToString();
+
+                dynamic inventario = dbapi.Get("https://localhost:44358/api/inventario/" + id);
+                var respInventario = inventario.ToString();
+
+
                 var jsonDes = JsonConvert.DeserializeObject<List<DepartamentoEdit>>(resp);
+                var imagesDes= JsonConvert.DeserializeObject<List<ImagesDepto>>(respImages);
+                var inventarioDes = JsonConvert.DeserializeObject<List<TipoInventario>>(respInventario);
+
+
+
+                decimal[] inventarioDepto = new decimal[inventarioDes.Count];
+
+                for (int i = 0; i < inventarioDepto.Length; i++)
+                {
+                    inventarioDepto[i] = inventarioDes[i].id_inventario;
+                }
+
+
+                string[] imagenes = new string[2];
+
+                for (int i = 0; i < 2; i++)
+                {
+                    imagenes[i] = imagesDes[i].ruta_archivo;
+                }
+
+
+                foreach (var depto in jsonDes)
+                {
+                    depto.ruta_archivo = imagenes;
+                    depto.tipo_inventario = inventarioDepto;
+                }
+
 
 
                 return jsonDes;

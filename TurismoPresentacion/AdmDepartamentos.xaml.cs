@@ -37,6 +37,7 @@ namespace TurismoPresentacion
         string[] rutaImagenesSave = new string[2];
         bool open = false;
 
+
         public AdmDepartamentos(int id)
         {
             
@@ -51,6 +52,7 @@ namespace TurismoPresentacion
             {
                 //Modo editar departamento
                 modoEditarDepto(id);
+
             }
 
         }
@@ -59,14 +61,21 @@ namespace TurismoPresentacion
         {
             DepartamentoBl dpto = new DepartamentoBl();
 
-            
-
-
             List<EstadoDepto> comunas = dpto.GetEstadoDepto();
-            cboEstado.ItemsSource = null;
-            cboEstado.ItemsSource = comunas;
-            cboEstado.SelectedValuePath = "Id";
-            cboEstado.DisplayMemberPath = "Descripcion";
+
+            if (comunas.Count <= 0)
+            {
+                cboEstado.ItemsSource = null;
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, revise su conexión a internet e intente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                cboEstado.ItemsSource = null;
+                cboEstado.ItemsSource = comunas;
+                cboEstado.SelectedValuePath = "Id";
+                cboEstado.DisplayMemberPath = "Descripcion";
+            }
+            
         }
 
         private void modoEditarDepto(int id)
@@ -93,6 +102,7 @@ namespace TurismoPresentacion
                 int metros = (int)dpto.metrosm2;
                 int dormitorios = (int)dpto.dormitorios;
                 int baños = (int)dpto.baños;
+                int valor = (int)dpto.valor_arriendo;
                 int estacionamiento = (int)dpto.estacionamiento;
                 if (estacionamiento == 1)
                 {
@@ -105,7 +115,7 @@ namespace TurismoPresentacion
                 cboRegion.SelectedValue = dpto.id_region;
                 cboComuna.SelectedValue = dpto.id_comuna;
                 cboEstado.SelectedValue = dpto.id_estado;
-                txtValorArriendo.Text = dpto.valor_arriendo.ToString();
+                txtValorArriendo.Text = valor.ToString();
                 txtCondiciones.Text = dpto.condiciones;
 
                 // Crear BitmapSource  
@@ -117,6 +127,28 @@ namespace TurismoPresentacion
                 imgPortadaDpto.Source = bitmap;
 
                 var links = dpto.ruta_archivo;
+
+                //Inventario
+                List<TipoInventario> listaInventario = new List<TipoInventario>();
+                listaInventario = new DepartamentoBl().GetinventarioPorDepto(id);
+
+                foreach (var invt in listaInventario)
+                {
+                    InventarioTabla inventario = new InventarioTabla()
+                    {
+                        Id = Convert.ToInt32(invt.id_inventario),
+                        Descripcion =invt.nombre_inventario,
+                        Precio = Convert.ToInt32(invt.precio_inventario)
+                    };
+
+                    lInventario.Add(inventario);
+                    dgInventario.ItemsSource = null;
+                    dgInventario.ItemsSource = lInventario;
+
+                }
+
+
+
 
 
 
@@ -148,6 +180,21 @@ namespace TurismoPresentacion
         {
             UbicacionBl ubi = new UbicacionBl();
             List<GetComunas> comunas = ubi.GetRegion();
+
+            if (comunas.Count <= 0)
+            {
+                cboRegion.ItemsSource = null;
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, revise su conexión a internet e intente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                cboRegion.ItemsSource = null;
+                cboRegion.ItemsSource = comunas;
+                cboRegion.SelectedValuePath = "id_region";
+                cboRegion.DisplayMemberPath = "nombre_region";
+            }
+
+
             cboRegion.ItemsSource = comunas;
             cboRegion.SelectedValuePath = "id_region";
             cboRegion.DisplayMemberPath = "nombre_region";
@@ -359,7 +406,7 @@ namespace TurismoPresentacion
 
                 int idRegion = cboRegion.SelectedIndex + 1;
 
-                Console.WriteLine(idRegion);
+                //Console.WriteLine(idRegion);
                 List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
                 cboComuna.ItemsSource = comunas;
                 cboComuna.SelectedValuePath = "id_comuna";
@@ -392,11 +439,13 @@ namespace TurismoPresentacion
 
         private void btnAgregarInventario_Click(object sender, RoutedEventArgs e)
         {
+
             InventarioTabla inventario = new InventarioTabla();
             decimal id = (decimal)cboInventario.SelectedValue;
             int idInventario = (int)id;
             inventario.Id = (int)idInventario;
             inventario.Descripcion = cboInventario.Text;
+            inventario.Precio = 50000;
             lInventario.Add(inventario);
             idsInventarioAdd.Add(idInventario);
             CargarInventarioActual();
@@ -412,6 +461,25 @@ namespace TurismoPresentacion
             open = false;
         }
 
+        private void dgInventario_AutoGeneratedColumns(object sender, EventArgs e)
+        {
+            //if (modoEditInventarios)
+            //{
 
+            //    dgInventario.Columns[0].Header = "Id";
+            //    dgInventario.Columns[0].DisplayIndex = 0;
+            //    dgInventario.Columns[0].Visibility = Visibility.Hidden;
+            //    dgInventario.Columns[1].Header = "Id";
+            //    dgInventario.Columns[1].DisplayIndex = 1;
+            //    dgInventario.Columns[2].Header = "Descripcion";
+            //    dgInventario.Columns[2].DisplayIndex = 2;
+            //    dgInventario.Columns[3].Header = "Precio";
+            //    dgInventario.Columns[3].DisplayIndex = 3;
+
+            //    modoEditInventarios = false;
+            //    //dgInventario.Columns[3].Visibility = Visibility.Hidden;
+
+            //}
+        }
     } 
 }

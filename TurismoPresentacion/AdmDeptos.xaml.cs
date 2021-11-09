@@ -32,8 +32,15 @@ namespace TurismoPresentacion
         {
             DepartamentoBl deptos = new DepartamentoBl();
             List<DepartamentoTabla> dptos = deptos.GetDeptos().OrderBy(d => d.id).ToList();
-            dgDeptos.ItemsSource = dptos;
-
+            if (dptos.Count <= 0)
+            {
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                dgDeptos.ItemsSource = null;
+                dgDeptos.ItemsSource = dptos;
+            }
         }
 
 

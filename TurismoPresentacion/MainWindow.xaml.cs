@@ -30,11 +30,12 @@ namespace TurismoPresentacion
             InitializeComponent();
             menu.IsOpen = true;
             swTema.Content = "Oscuro";
-            CargarDeptos();
+
             gridListaDpto.Visibility = Visibility.Hidden;
 
         }
         private int idDpto = 0;
+        List<DepartamentoTabla> dptos = new List<DepartamentoTabla>();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,9 +44,53 @@ namespace TurismoPresentacion
 
         private void btnGestionDpto_Click(object sender, RoutedEventArgs e)
         {
+            CargarDeptos();
+            CargarEstadosFilter();
+            CargarRegiones();
             Main.Content = null;
             gridListaDpto.Visibility = Visibility.Visible;
             imgFondo.Visibility = Visibility.Hidden;
+        }
+
+
+        private void CargarRegiones()
+        {
+            UbicacionBl ubi = new UbicacionBl();
+            List<GetComunas> comunas = ubi.GetRegion();
+            if (comunas.Count >= 1)
+            {
+                cboRegionFilter.ItemsSource = null;
+                cboRegionFilter.ItemsSource = comunas;
+                cboRegionFilter.SelectedValuePath = "id_region";
+                cboRegionFilter.DisplayMemberPath = "nombre_region";
+            }
+            else
+            {
+                cboRegionFilter.ItemsSource = null;
+                MessageBox.Show("Ha ocurrido un error de red al cargar los datos, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+
+        private void CargarEstadosFilter()
+        {
+            DepartamentoBl dpto = new DepartamentoBl();
+
+            List<EstadoDepto> estadosDepto = dpto.GetEstadoDepto();
+
+            if (estadosDepto.Count <= 0)
+            {
+                cboEstadoFilter.ItemsSource = null;
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, revise su conexión a internet e intente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                cboEstadoFilter.ItemsSource = null;
+                cboEstadoFilter.ItemsSource = estadosDepto;
+                cboEstadoFilter.SelectedValuePath = "Id";
+                cboEstadoFilter.DisplayMemberPath = "Descripcion";
+            }
         }
 
         private async void btnApagar_Click(object sender, RoutedEventArgs e)
@@ -102,9 +147,18 @@ namespace TurismoPresentacion
 
         private void CargarDeptos()
         {
+
             DepartamentoBl deptos = new DepartamentoBl();
-            List<DepartamentoTabla> dptos = deptos.GetDeptos();
-            dgDeptos.ItemsSource = dptos;
+            dptos = deptos.GetDeptos().OrderBy(d => d.id).ToList();
+            if (dptos.Count <= 0)
+            {
+                MessageBox.Show("Ha ocurrido un error de red al cargar el listado, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                dgDeptos.ItemsSource = null;
+                dgDeptos.ItemsSource = dptos;
+            }
 
         }
 
@@ -138,8 +192,10 @@ namespace TurismoPresentacion
             dgDeptos.Columns[11].DisplayIndex = 11;
             dgDeptos.Columns[12].Header = "Portada";
             dgDeptos.Columns[12].DisplayIndex = 12;
+            dgDeptos.Columns[12].Visibility = Visibility.Hidden;
             dgDeptos.Columns[13].Header = "Content portada";
             dgDeptos.Columns[13].DisplayIndex = 13;
+            dgDeptos.Columns[13].Visibility = Visibility.Hidden;
             dgDeptos.Columns[14].Header = "Fecha creación";
             dgDeptos.Columns[14].DisplayIndex = 14;
 
@@ -155,34 +211,31 @@ namespace TurismoPresentacion
 
             DepartamentoBl deptoBl = new DepartamentoBl();
             List<DepartamentoTabla> dptos = deptoBl.GetDeptos();
-            int i = 0;
-            if (dgDeptos.SelectedIndex != -1)
+
+            UsuarioBl userBl = new UsuarioBl();
+
+            var selected = dgDeptos.SelectedItem;
+            var deptoTabla = new DepartamentoTabla();
+
+            deptoTabla = (DepartamentoTabla)selected;
+
+
+            if (selected != null)
             {
-                i = dgDeptos.SelectedIndex;
+                idDpto = (int)deptoTabla.id;
+                //MessageBox.Show(deptoTabla.id.ToString());
 
-                if (i >= 0)
-                {
 
-                    int idDepto;
-                    idDepto = (int)dptos[i].id;
 
-                    //Cargar regiones
-                    //UbicacionBl ubi = new UbicacionBl();
-                    //List<GetComunas> regiones = ubi.GetRegion();
-                    //cboRegion1.ItemsSource = regiones;
-                    //cboRegion1.SelectedValuePath = "id_region";
-                    //cboRegion1.DisplayMemberPath = "nombre_region";
+                Main.Content = new AdmDepartamentos(idDpto);
+                imgFondo.Visibility = Visibility.Hidden;
+                gridListaDpto.Visibility = Visibility.Hidden;
 
-                    //var alo = cboRegion1.SelectedValue;
-                    //MessageBox.Show(alo.ToString());
 
-                    //var depto = deptoBl.GetDeptoId(idDepto);
-
-                    Main.Content = new AdmDepartamentos(idDepto);
-                    imgFondo.Visibility = Visibility.Hidden;
-                    gridListaDpto.Visibility = Visibility.Hidden;
-
-                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un departamento en la tabla para poder modificarlo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -222,9 +275,9 @@ namespace TurismoPresentacion
             var clase = new DepartamentoTabla();
 
             clase = (DepartamentoTabla)selected;
-            
 
-            if (selected !=null)
+
+            if (selected != null)
             {
                 if (clase.nombre_estado == "Disponible")
                 {
@@ -247,14 +300,14 @@ namespace TurismoPresentacion
                     }
 
                 }
-                else if(clase.nombre_estado == "No disponible")
+                else if (clase.nombre_estado == "No disponible")
                 {
                     MessageBoxResult result = MessageBox.Show("Este departamento no está disponible. ¿Deseas habilitarlo?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                     if (result == MessageBoxResult.Yes)
                     {
                         //habilitar depa estado 4
-                        
+
                         idDpto = (int)clase.id;
                         try
                         {
@@ -283,6 +336,53 @@ namespace TurismoPresentacion
 
         }
 
+        private void btnFiltrarDptos_Click(object sender, RoutedEventArgs e)
+        {
+            string nombreEstado = cboEstadoFilter.Text;
 
+            string region = cboRegionFilter.Text;
+            dgDeptos.ItemsSource = dptos.Where(d => d.nombre_estado.Contains(nombreEstado));
+            //dgDeptos.ItemsSource = dptos.Where(d => d.nombre_region.Contains(region));
+        }
+
+        private void txtComunaFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (btnDireccionFilter.Text == string.Empty)
+            {
+                CargarDeptos();
+            }
+            else
+            {
+                string direccion = btnDireccionFilter.Text;
+                dgDeptos.ItemsSource = dptos.Where(d => d.direccion.Contains(direccion));
+            }
+        }
+
+        private void cboRegionFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //MessageBox.Show("here");
+            try
+            {
+                UbicacionBl ubi = new UbicacionBl();
+
+                int idRegion = cboRegionFilter.SelectedIndex + 1;
+
+                //Console.WriteLine(idRegion);
+                List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
+                cboComunaFilter.ItemsSource = comunas;
+                cboComunaFilter.SelectedValuePath = "id_comuna";
+                cboComunaFilter.DisplayMemberPath = "nombre_comuna";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            CargarDeptos();
+        }
     }
 }

@@ -44,8 +44,7 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-
-                throw;
+                return new List<Usuario>();
             }
         }
 
@@ -110,7 +109,7 @@ namespace TurismoNegocio
                 string json = JsonConvert.SerializeObject(usuario);
 
                 dynamic respuesta = dbApi.Post("https://localhost:44358/api/usuarios", json);
-                Console.WriteLine(respuesta);
+                //Console.WriteLine(respuesta);
                 var resp = respuesta.ToString();
 
                 List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
@@ -184,7 +183,7 @@ namespace TurismoNegocio
                 };
 
                 string json = JsonConvert.SerializeObject(usuario);
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
                 dynamic respuesta = dbApi.Put("https://localhost:44358/api/usuarios", json);
                 //Console.WriteLine(respuesta);
                 //var resp = respuesta.ToString();
@@ -244,7 +243,7 @@ namespace TurismoNegocio
                 };
 
                 string json = JsonConvert.SerializeObject(usuario);
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
                 dynamic respuesta = dbApi.Deactive("https://localhost:44358/api/usuarios", json);
                 //Console.WriteLine(respuesta);
                 //var resp = respuesta.ToString();
@@ -313,7 +312,7 @@ namespace TurismoNegocio
                 usuario.edad = (int)user.edad;
                 usuario.genero = user.genero;
                 usuario.descripcion = user.descripcion;
-                Console.WriteLine(user.estado);
+                //Console.WriteLine(user.estado);
 
                 if (user.estado == "1.0")
                 {
