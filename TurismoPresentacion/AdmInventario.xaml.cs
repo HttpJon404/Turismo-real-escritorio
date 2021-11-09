@@ -363,8 +363,5 @@ namespace TurismoPresentacion
                     MessageBox.Show(resp.Mensaje, "Error");
                 }
 
-
-            }
-        }
     }
 }

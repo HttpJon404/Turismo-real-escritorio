@@ -42,19 +42,88 @@ namespace TurismoPresentacion
             
             InitializeComponent();
             ValidacionesInput();
+            CargarEstadoDeptos();
             CargarRegiones();
+            lblEstado.Visibility = Visibility.Hidden;
+            cboEstado.Visibility = Visibility.Hidden;
             CargarInventarios();
             if (id!=0)
             {
                 //Modo editar departamento
-                modoEditarDepto();
+                modoEditarDepto(id);
             }
 
         }
 
-        private void modoEditarDepto()
+        private void CargarEstadoDeptos()
         {
+            DepartamentoBl dpto = new DepartamentoBl();
+
+            
+
+
+            List<EstadoDepto> comunas = dpto.GetEstadoDepto();
+            cboEstado.ItemsSource = null;
+            cboEstado.ItemsSource = comunas;
+            cboEstado.SelectedValuePath = "Id";
+            cboEstado.DisplayMemberPath = "Descripcion";
+        }
+
+        private void modoEditarDepto(int id)
+        {
+            btnGuardarDpto.Content = "Modificar";
             lblTitulo.Content = "Modificar departamento";
+            btnLimpiar.IsEnabled = false;
+            lblEstado.Visibility = Visibility.Visible;
+            cboEstado.Visibility = Visibility.Visible;
+
+
+
+            btnLimpiar.Visibility = Visibility.Hidden;
+            cargarDatosDepto(id);
+        }
+
+        private void cargarDatosDepto(int id)
+        {
+            DepartamentoBl deptoBl = new DepartamentoBl();
+            var depto = deptoBl.GetDeptoId(id);
+
+            foreach (var dpto in depto)
+            {
+                int metros = (int)dpto.metrosm2;
+                int dormitorios = (int)dpto.dormitorios;
+                int baños = (int)dpto.baños;
+                int estacionamiento = (int)dpto.estacionamiento;
+                if (estacionamiento == 1)
+                {
+                    swEstacionamiento.IsOn = true;
+                }
+                txtMetros.Text = metros.ToString();
+                txtDormitorios.Text = dormitorios.ToString();
+                txtBanos.Text = baños.ToString();
+                txtDireccion.Text = dpto.direccion;
+                cboRegion.SelectedValue = dpto.id_region;
+                cboComuna.SelectedValue = dpto.id_comuna;
+                cboEstado.SelectedValue = dpto.id_estado;
+                txtValorArriendo.Text = dpto.valor_arriendo.ToString();
+                txtCondiciones.Text = dpto.condiciones;
+
+                // Crear BitmapSource  
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(dpto.portada);
+                bitmap.EndInit();
+                //Poner portada en la interfaz
+                imgPortadaDpto.Source = bitmap;
+
+                var links = dpto.ruta_archivo;
+
+
+
+            }
+            
+
+
         }
 
         private void CargarInventarios()
@@ -84,9 +153,6 @@ namespace TurismoPresentacion
             cboRegion.DisplayMemberPath = "nombre_region";
         }
 
-
-
-
         //Imagen 1
         private void btnExaminar_Click(object sender, RoutedEventArgs e)
         {
@@ -98,9 +164,8 @@ namespace TurismoPresentacion
                 Uri fileUri = new Uri(openFileDialog.FileName);
                 var rutaOrigen = openFileDialog.FileName;
 
-                    listaOrigen[0] = rutaOrigen;
-                    nombreImagenes[0] = openFileDialog.SafeFileName;
-
+                listaOrigen[0] = rutaOrigen;
+                nombreImagenes[0] = openFileDialog.SafeFileName;
 
             }
         }
@@ -167,87 +232,94 @@ namespace TurismoPresentacion
 
         private void btnGuardarDpto_Click(object sender, RoutedEventArgs e)
         {
-            DepartamentoBl deptoBl = new DepartamentoBl();
-            if (FormularioLleno())
+            string accion = (string)btnGuardarDpto.Content;
+
+            if (accion=="Guardar")
             {
-                try
+                //Guardar nuevo departamento
+                DepartamentoBl deptoBl = new DepartamentoBl();
+                if (FormularioLleno())
                 {
-                    int metros2 = int.Parse(txtMetros.Text);
-                    int dormitorios = int.Parse(txtDormitorios.Text);
-                    int baños = int.Parse(txtBanos.Text);
-                    int metrosm2 = int.Parse(txtMetros.Text);
-                    //Estacionamiento
-                    int estacionamiento = 0;
-                    if (swEstacionamiento.IsOn)
-                    {
-                        estacionamiento = 1;
-                    }
-                    string direccion = txtDireccion.Text;
-                    decimal id_comuna = decimal.Parse(cboComuna.SelectedValue.ToString());
-                    int comuna = (int)id_comuna;
-                    decimal id_region = decimal.Parse(cboRegion.SelectedValue.ToString());
-                    //Estado
-                    int valorArriendo = int.Parse(txtValorArriendo.Text);
-                    string condiciones = txtCondiciones.Text;
-                    int estado = 1;
-                    //lista imagenes
-                    string rutaDestino = @"C:\Turismo";
-
-                    string[] rutaImagenesSave = new string[2];
-
-                    for (int i = 0; i < listaOrigen.Length; i++)
-                    {
-                        string imagenDptoOrigen = listaOrigen[i];
-                        string archivoImagen = nombreImagenes[i];
-                        //Destino de la imagen c/turismo/nombreimagen
-                        string imagenDestino = System.IO.Path.Combine(rutaDestino, archivoImagen);
-                        //Guardar imagen de departamento
-                        System.IO.File.Copy(imagenDptoOrigen, imagenDestino, true);
-
-                        //Guardar rutas listas en la lista
-                        rutaImagenesSave[i] = imagenDestino;
-
-
-
-                    }
-                    //Guardar rutas en donde se guardaron las imagenes/c/turismo/imagenX
-
-
-                    //portada
-                    string portada = portadaOrigen;
-
-                    //Destino de la imagen
-                    string portadaDestino = System.IO.Path.Combine(rutaDestino, archivoPortada);
-                    //Guardar imagen
-                    System.IO.File.Copy(portadaOrigen, portadaDestino, true);
-
-
-
-                    //lista inventarios
-                    int[] inventarios = new int[idsInventarioAdd.Count];
-
-                    for (int i = 0; i < idsInventarioAdd.Count; i++)
-                    {
-                        inventarios[i] = idsInventarioAdd[i];
-                    }
-
-
                     try
                     {
-                        var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
-                        MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        int metros2 = int.Parse(txtMetros.Text);
+                        int dormitorios = int.Parse(txtDormitorios.Text);
+                        int baños = int.Parse(txtBanos.Text);
+                        int metrosm2 = int.Parse(txtMetros.Text);
+                        //Estacionamiento
+                        int estacionamiento = 0;
+                        if (swEstacionamiento.IsOn)
+                        {
+                            estacionamiento = 1;
+                        }
+                        string direccion = txtDireccion.Text;
+                        decimal id_comuna = decimal.Parse(cboComuna.SelectedValue.ToString());
+                        int comuna = (int)id_comuna;
+                        decimal id_region = decimal.Parse(cboRegion.SelectedValue.ToString());
+                        //Estado
+                        int valorArriendo = int.Parse(txtValorArriendo.Text);
+                        string condiciones = txtCondiciones.Text;
+                        int estado = 1;
+                        //lista imagenes
+                        string rutaDestino = @"C:\Turismo";
+
+                        string[] rutaImagenesSave = new string[2];
+
+                        for (int i = 0; i < listaOrigen.Length; i++)
+                        {
+                            string imagenDptoOrigen = listaOrigen[i];
+                            string archivoImagen = nombreImagenes[i];
+                            //Destino de la imagen c/turismo/nombreimagen
+                            string imagenDestino = System.IO.Path.Combine(rutaDestino, archivoImagen);
+                            //Guardar imagen de departamento
+                            System.IO.File.Copy(imagenDptoOrigen, imagenDestino, true);
+
+                            //Guardar rutas listas en la lista
+                            rutaImagenesSave[i] = imagenDestino;
+                        }
+                        //Guardar rutas en donde se guardaron las imagenes/c/turismo/imagenX
+
+
+                        //portada
+                        string portada = portadaOrigen;
+
+                        //Destino de la imagen
+                        string portadaDestino = System.IO.Path.Combine(rutaDestino, archivoPortada);
+                        //Guardar imagen
+                        System.IO.File.Copy(portadaOrigen, portadaDestino, true);
+
+                        //lista inventarios
+                        int[] inventarios = new int[idsInventarioAdd.Count];
+
+                        for (int i = 0; i < idsInventarioAdd.Count; i++)
+                        {
+                            inventarios[i] = idsInventarioAdd[i];
+                        }
+
+
+                        try
+                        {
+                            var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
+                            MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("No se pudo agregar el departamento, verifique el formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("No se pudo agregar el departamento, verifique el formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        throw;
                     }
 
                 }
-                catch (Exception)
-                {
+            }
+            else
+            {
+                //Modificar departamento
 
-                    throw;
-                }
 
             }
 

@@ -18,6 +18,7 @@ namespace EntidadServicio
         public string estacionamiento { get; set; }
         public string condiciones { get; set; }
         public string nombre_comuna { get; set; }
+        public decimal region { get; set; }
         public string nombre_region { get; set; }
 
         public string nombre_estado { get; set; }
