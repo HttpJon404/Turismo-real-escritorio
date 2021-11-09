@@ -72,7 +72,7 @@ namespace TurismoPresentacion
         {
             dgClientes.ItemsSource = null;
             UsuarioBl userBl = new UsuarioBl();
-            List<UsuarioTabla> usuarios = userBl.UsuariosGrid();
+            List<UsuarioTabla> usuarios = userBl.UsuariosGrid().GroupBy(u => u.id).Select(g => g.First()).OrderBy(c => c.id).ToList();
             dgClientes.ItemsSource = usuarios;
         }
 

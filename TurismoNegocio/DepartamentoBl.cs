@@ -55,6 +55,7 @@ namespace TurismoNegocio
                 dynamic users = dbapi.Get("https://localhost:44358/api/departamento/");
                 var resp = users.ToString();
                 List<DepartamentoTabla> jsonDes = JsonConvert.DeserializeObject<List<DepartamentoTabla>>(resp);
+                
                 foreach (var depto in jsonDes)
                 {
                     depto.id = (int)depto.id;
