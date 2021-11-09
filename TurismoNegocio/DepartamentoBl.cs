@@ -42,7 +42,8 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-                throw;
+                return new List<EstadoDepto>();
+                
             }
         }
 
@@ -79,7 +80,8 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-                throw;
+                return new List<DepartamentoTabla>();
+                
             }
         }
 
@@ -98,8 +100,8 @@ namespace TurismoNegocio
             }
             catch (Exception)
             {
-
-                throw;
+                return new List<DepartamentoEdit>();
+                
             }
         }
 

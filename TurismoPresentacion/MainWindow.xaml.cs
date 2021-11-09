@@ -103,8 +103,17 @@ namespace TurismoPresentacion
         private void CargarDeptos()
         {
             DepartamentoBl deptos = new DepartamentoBl();
-            List<DepartamentoTabla> dptos = deptos.GetDeptos();
-            dgDeptos.ItemsSource = dptos;
+            List<DepartamentoTabla> dptos = deptos.GetDeptos().OrderBy(d => d.id).ToList();
+            if (dptos.Count<=0)
+            {
+                MessageBox.Show("Ha ocurrido un error de red, reintente nuevamente","Error");
+            }
+            else
+            {
+                dgDeptos.ItemsSource = null;
+                dgDeptos.ItemsSource = dptos;
+
+            }
 
         }
 
@@ -188,7 +197,29 @@ namespace TurismoPresentacion
 
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
-            FlyCheckIn.IsOpen = true;
+            var selected = dgDeptos.SelectedItem;
+            var depto = new DepartamentoTabla();
+            if (selected == null)
+            {
+                MessageBox.Show("Seleccione un departamento en Reserva","Error");
+            }
+            else
+            {
+                depto = (DepartamentoTabla)selected;
+                if (depto.nombre_estado == "Reserva")
+                {
+                    UsuarioBl userBl = new UsuarioBl();
+                    FlyCheckIn.IsOpen = true;
+                    var usuario = userBl.GetUserId(depto.id_usuario).FirstOrDefault();
+
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un departamento en Reserva", "Error");
+
+                }
+
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

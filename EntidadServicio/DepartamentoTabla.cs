@@ -10,6 +10,7 @@ namespace EntidadServicio
     {
 
         public decimal id { get; set; }
+        public decimal id_usuario { get; set; }
         public string direccion { get; set; }
         public decimal dormitorios { get; set; }
         public decimal valor_arriendo { get; set; }

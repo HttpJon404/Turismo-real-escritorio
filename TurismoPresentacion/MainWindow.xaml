@@ -18,7 +18,7 @@
 
 
     <Grid>
-        <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill"/>
+        <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill" d:IsHidden="True"/>
         <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1096" Height="831" Margin="199,0,-1,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
@@ -95,7 +95,7 @@
                 <iconpacks:PackIconFontAwesome Kind="OutdentSolid" Height="32" Width="32"  />
             </Button>
 
-            <mah:Flyout Header="Ingresar check in" Theme="Adapt" x:Name="FlyCheckIn" Position="Right" Margin="0,116,-621,22" Width="453"  >
+            <mah:Flyout Header="Ingresar check in" Theme="Adapt" x:Name="FlyCheckIn" Position="Right" Margin="0,128,0,10" Width="453"  >
                 <Grid  x:Name="GridAddUser1"  HorizontalAlignment="Left" Width="453">
                     <Label Content="Rut cliente" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
                     <TextBox x:Name="txtrutCliente"  HorizontalAlignment="Left" Height="31" Margin="57,41,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
@@ -111,7 +111,10 @@
                 </Grid>
 
             </mah:Flyout>
-            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,165,-677,-27" Width="454"  >
+            <Button ToolTip="Inhabilitar " x:Name="btnDeactive" HorizontalAlignment="Left" Margin="1010,334,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnDeactive_Click_1">
+                <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
+            </Button>
+            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,128,0,10" Width="454"  >
                 <Grid  x:Name="GridAddUser2"  HorizontalAlignment="Left" Width="453">
                     <Label Content="Rut cliente" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
                     <TextBox x:Name="txtrutCliente1"  HorizontalAlignment="Left" Height="31" Margin="57,41,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
@@ -139,9 +142,6 @@
                 </Grid>
 
             </mah:Flyout>
-            <Button ToolTip="Inhabilitar " x:Name="btnDeactive" HorizontalAlignment="Left" Margin="1010,334,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnDeactive_Click_1">
-                <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
-            </Button>
         </Grid>
 
 
