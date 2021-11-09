@@ -267,7 +267,7 @@ namespace TurismoNegocio
                     {
                         EsPositiva = true,
                         Elemento = jsonDes[1],
-                        Mensaje = "Estado del usuario  correctamente."
+                        Mensaje = "Estado del departamento actualizado correctamente."
                     };
                 }
                 else
