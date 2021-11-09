@@ -53,8 +53,9 @@ namespace TurismoNegocio
         {
             try
             {
+                int idusu = Convert.ToInt32(id);
                 DBApi dbapi = new DBApi();
-                dynamic users = dbapi.Get("https://localhost:44358/api/usuarios/"+id);
+                dynamic users = dbapi.Get("https://localhost:44358/api/usuarios/"+ idusu);
                 var resp = users.ToString();
                 var jsonDes = JsonConvert.DeserializeObject<List<Usuario>>(resp);
 
@@ -67,10 +68,10 @@ namespace TurismoNegocio
                 return jsonDes;
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                return new List<Usuario>();
+                //throw;
             }
         }
 
@@ -419,5 +420,26 @@ namespace TurismoNegocio
             }
         }
 
+        public UsuarioDpto GetUsuarioDpto(decimal id)
+        {
+            try
+            {
+                DBApi dbapi = new DBApi();
+                dynamic users = dbapi.Get("https://localhost:44358/api/usuariodpto/" + id);
+                var resp = users.ToString();
+                var jsonDes = JsonConvert.DeserializeObject<List<UsuarioDpto>>(resp);
+                var usu = jsonDes[0];
+
+                
+
+                return usu;
+
+            }
+            catch (Exception e)
+            {
+                return new UsuarioDpto();
+                //throw;
+            }
+        }
     }
 }

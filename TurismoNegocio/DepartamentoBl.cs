@@ -300,8 +300,130 @@ namespace TurismoNegocio
 
 
 
+        public List<Checkin> GetInventarioDpto(decimal id)
+        {
+            try
+            {
+                int idDpto = (int)id;
+                DBApi dbApi = new DBApi();
+                dynamic dpto = dbApi.Get("https://localhost:44358/api/checkin/" + idDpto);
+                var resp = dpto.ToString();
+                List<Checkin> jsonDes = JsonConvert.DeserializeObject<List<Checkin>>(resp);
+
+                var list = new List<Checkin>();
+                var check = new Checkin();
+                for (int i = 0; i < jsonDes.Count; i++)
+                {
+                    check.id = Convert.ToInt32(jsonDes[i].id);
+                    check.descripcion = jsonDes[i].descripcion;
+
+                    check.precio = Convert.ToInt32(jsonDes[i].precio);
+
+                    list.Add(check);
+                    check = new Checkin();
+                }
 
 
+
+                return list;
+
+            }
+            catch (Exception e)
+            {
+                return new List<Checkin>();
+               
+            }
+        }
+
+        public Respuesta<Departamento> GenerarCheckin(decimal id)
+        {
+            try
+            {
+                //int idDpto = (int)id;
+
+                DBApi dBApi = new DBApi();
+
+                Departamento dep = new Departamento()
+                {
+                    id = (int)id
+                };
+
+                var json = JsonConvert.SerializeObject(dep);
+
+                dynamic dpto = dBApi.Post("https://localhost:44358/api/checkin", json);
+                var resp = dpto.ToString();
+
+                if (resp == "CHECKIN GENERADO CON EXITO") 
+                {
+                    return new Respuesta<Departamento>()
+                    {
+                        EsPositiva = true,
+                        Elemento = null,
+                        Mensaje = "CHECKIN GENERADO CON EXITO"
+                    };
+                }
+                else
+                {
+                    return new Respuesta<Departamento>()
+                    {
+                        EsPositiva = false,
+                        Elemento = null,
+                        Mensaje = "OCURRIO UN ERROR INESPERADO, REINTENTE NUEVAMENTE"
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                return new Respuesta<Departamento>();
+                //throw;
+            }
+        }
+
+
+        public Respuesta<Checkout> GenerarCheckout(decimal id, int multa)
+        {
+            try
+            {
+                //int idDpto = (int)id;
+
+                DBApi dBApi = new DBApi();
+
+                Checkout check = new Checkout()
+                {
+                    id = (int)id,
+                    multa = multa
+                };
+
+                var json = JsonConvert.SerializeObject(check);
+
+                dynamic dpto = dBApi.Put("https://localhost:44358/api/checkin", json);
+                var resp = dpto.ToString();
+
+                if (resp == "CHECKOUT GENERADO CON EXITO")
+                {
+                    return new Respuesta<Checkout>()
+                    {
+                        EsPositiva = true,
+                        Elemento = null,
+                        Mensaje = "CHECKOUT GENERADO CON EXITO"
+                    };
+                }
+                else
+                {
+                    return new Respuesta<Checkout>()
+                    {
+                        EsPositiva = false,
+                        Elemento = null,
+                        Mensaje = "OCURRIO UN ERROR INESPERADO, REINTENTE NUEVAMENTE"
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                return new Respuesta<Checkout>();
+                //throw;
+            }
+        }
 
 
     }

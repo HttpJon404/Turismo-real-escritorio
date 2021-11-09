@@ -85,6 +85,7 @@ namespace TurismoPresentacion
 
         private void cargarDatosDepto(int id)
         {
+
             DepartamentoBl deptoBl = new DepartamentoBl();
             var depto = deptoBl.GetDeptoId(id);
 

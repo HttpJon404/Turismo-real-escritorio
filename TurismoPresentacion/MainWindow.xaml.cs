@@ -17,6 +17,7 @@ using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using TurismoNegocio;
 using EntidadServicio;
+using System.Data;
 
 namespace TurismoPresentacion
 {
@@ -30,11 +31,12 @@ namespace TurismoPresentacion
             InitializeComponent();
             menu.IsOpen = true;
             swTema.Content = "Oscuro";
-            CargarDeptos();
+            //CargarDeptos();
             gridListaDpto.Visibility = Visibility.Hidden;
 
         }
         private int idDpto = 0;
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +45,7 @@ namespace TurismoPresentacion
 
         private void btnGestionDpto_Click(object sender, RoutedEventArgs e)
         {
+            CargarDeptos();
             Main.Content = null;
             gridListaDpto.Visibility = Visibility.Visible;
             imgFondo.Visibility = Visibility.Hidden;
@@ -195,6 +198,7 @@ namespace TurismoPresentacion
             }
         }
 
+        
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
             var selected = dgDeptos.SelectedItem;
@@ -209,8 +213,44 @@ namespace TurismoPresentacion
                 if (depto.nombre_estado == "Reserva")
                 {
                     UsuarioBl userBl = new UsuarioBl();
-                    FlyCheckIn.IsOpen = true;
-                    var usuario = userBl.GetUserId(depto.id_usuario).FirstOrDefault();
+                    var idUsuario = userBl.GetUsuarioDpto(depto.id);
+                    if (idUsuario.ID_USUARIO != 0) 
+                    {
+                        var usuario = userBl.GetUserId(idUsuario.ID_USUARIO).FirstOrDefault();
+                        var inventario = DepartamentoBl.GetInstance().GetInventarioDpto(depto.id);
+                        if (usuario.id != 0 && inventario.Count > 0)
+                        {
+                            idDpto = (int)depto.id;
+                            FlyCheckIn.IsOpen = true;
+                            txtrutCliente.Text = usuario.rut;
+                            txtNombreCliente.Text = usuario.nombres + " " + usuario.apellidos;
+                            txtDepartamento.Text = depto.direccion;
+                            dgCheckin.ItemsSource = null;
+                            dgCheckin.ItemsSource = inventario;
+
+                            var total = 0;
+                            var totalSuma = 0;
+                            foreach (var item in inventario)
+                            {
+                                total = Convert.ToInt32(item.precio) + totalSuma;
+                                totalSuma = total;
+                            }
+                            txtTotalCheckin.Text = totalSuma.ToString();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrio un error inesperado, reintente nuevamente", "Error");
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocurrio un error inesperado, reintente nuevamente", "Error");
+
+                    }
 
                 }
                 else
@@ -222,26 +262,83 @@ namespace TurismoPresentacion
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            FlyCheckIn.IsOpen = false;
-        }
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    FlyCheckIn.IsOpen = false;
+        //}
 
         private void btnCerrarCheckOut_Click(object sender, RoutedEventArgs e)
         {
             FlyCheckOut.IsOpen = false;
+            idDpto = 0;
         }
 
         private void btnCheckout_Click(object sender, RoutedEventArgs e)
         {
-            FlyCheckOut.IsOpen = true;
+            var selected = dgDeptos.SelectedItem;
+            var depto = new DepartamentoTabla();
+            if (selected == null)
+            {
+                MessageBox.Show("Seleccione un departamento en Check-in", "Error");
+            }
+            else
+            {
+                depto = (DepartamentoTabla)selected;
+                if (depto.nombre_estado == "Check-in")
+                {
+                    UsuarioBl userBl = new UsuarioBl();
+                    var idUsuario = userBl.GetUsuarioDpto(depto.id);
+                    if (idUsuario.ID_USUARIO != 0)
+                    {
+                        var usuario = userBl.GetUserId(idUsuario.ID_USUARIO).FirstOrDefault();
+                        var inventario = DepartamentoBl.GetInstance().GetInventarioDpto(depto.id);
+                        if (usuario.id != 0 && inventario.Count > 0)
+                        {
+                            idDpto = (int)depto.id;
+                            FlyCheckOut.IsOpen = true;
+                            txtrutCliente1.Text = usuario.rut;
+                            txtNombreCliente1.Text = usuario.nombres + " " + usuario.apellidos;
+                            txtDepartamento1.Text = depto.direccion;
+
+
+                            listBoxCheckout.ItemsSource = null;
+                            
+                            listBoxCheckout.ItemsSource = inventario;
+
+
+
+
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrio un error inesperado, reintente nuevamente", "Error");
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocurrio un error inesperado, reintente nuevamente", "Error");
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un departamento en Check-in", "Error");
+
+                }
+            }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            foreach (object o in listBoxCheckout.Items)
-                listBoxCheckout.SelectedItems.Add(o);
-        }
+        //private void Button_Click_2(object sender, RoutedEventArgs e)
+        //{
+        //    foreach (object o in listBoxCheckout.Items)
+        //        listBoxCheckout.SelectedItems.Add(o);
+        //}
 
         private void btnDeactive_Click(object sender, RoutedEventArgs e)
         {
@@ -313,7 +410,83 @@ namespace TurismoPresentacion
 
 
         }
+ 
 
+        private void BtnCheckIn(object sender, RoutedEventArgs e)
+        {
+            if (idDpto != 0)
+            {
+                var resp = DepartamentoBl.GetInstance().GenerarCheckin(idDpto);
+                if (resp.EsPositiva)
+                {
+                    MessageBox.Show(resp.Mensaje,"Éxito");
+                    idDpto = 0;
+                    FlyCheckIn.IsOpen = false;
+                    CargarDeptos();
 
+                }
+                else
+                {
+                    MessageBox.Show(resp.Mensaje, "Error");
+
+                }
+            }
+        }
+
+        private void BtnCancelarCheckin(object sender, RoutedEventArgs e)
+        {
+            FlyCheckIn.IsOpen = false;
+            idDpto = 0;
+        }
+
+        private void listBoxCheckout_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = listBoxCheckout.SelectedItem;
+            var multa = new Checkin();
+            if (selected != null)
+            {
+                multa = (Checkin)selected;
+                var total = 0;
+                var totalSuma = 0;
+                //foreach (var item in multa)
+                //{
+                //    total = Convert.ToInt32(item.precio) + totalSuma;
+                //    totalSuma = total;
+                //}
+                txtTotalMulta.Text = multa.precio.ToString();
+            }
+            else
+            {
+                txtTotalMulta.Text = 0.ToString();
+
+            }
+        }
+
+        private void btnCheckOut_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (idDpto != 0)
+            {
+                var multa = 0;
+                if (txtTotalMulta.Text != "" && txtTotalMulta.Text != null)
+                {
+                    multa = Convert.ToInt32(txtTotalMulta.Text);
+                }
+                
+                var resp = DepartamentoBl.GetInstance().GenerarCheckout(idDpto,multa);
+                if (resp.EsPositiva)
+                {
+                    MessageBox.Show(resp.Mensaje, "Éxito");
+                    idDpto = 0;
+                    FlyCheckOut.IsOpen = false;
+                    CargarDeptos();
+
+                }
+                else
+                {
+                    MessageBox.Show(resp.Mensaje, "Error");
+
+                }
+            }
+        }
     }
 }
