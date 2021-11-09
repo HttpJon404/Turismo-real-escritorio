@@ -45,6 +45,7 @@
     <Compile Include="DepartamentoEdit.cs" />
     <Compile Include="DepartamentoTabla.cs" />
     <Compile Include="EditEstadoUsuario.cs" />
+    <Compile Include="EstadoDepto.cs" />
     <Compile Include="GetComunas.cs" />
     <Compile Include="Inventario.cs" />
     <Compile Include="InventarioTabla.cs" />

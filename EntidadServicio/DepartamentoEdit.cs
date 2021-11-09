@@ -16,7 +16,7 @@ namespace EntidadServicio
         public string direccion { get; set; }
         public decimal id_comuna { get; set; }
         public string nombre_comuna { get; set; }
-        public decimal region { get; set; }
+        public decimal id_region { get; set; }
         public string nombre_region { get; set; }
         public decimal id_estado { get; set; }
         public string nombre_estado { get; set; }

@@ -53,5 +53,44 @@ namespace TurismoPresentacion
             dgInventarios.ItemsSource = listaInventario;
         }
 
+        private void btnGuardarInvt_Click(object sender, RoutedEventArgs e)
+        {
+            if (ValidarFormInventario())
+            {
+                //Guardar inventario
+            }
+        }
+
+        private bool ValidarFormInventario()
+        {
+            if (txtDescripcionI.Text != string.Empty && txtCantidadI.Text != string.Empty &&
+                txtPrecioInv.Text!=string.Empty)
+            {
+                return true;
+                
+            }
+            MessageBox.Show("Complete el formulario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
+
+        private void btnGuardarServicio_Click(object sender, RoutedEventArgs e)
+        {
+            ServicioBl servicio = new ServicioBl();
+            if (ValidarFormServicio())
+            {
+              
+                //Guardar servicio
+            }
+        }
+
+        private bool ValidarFormServicio()
+        {
+            if (txtValorServicio.Text != string.Empty && txtNombreServicio.Text  != string.Empty)
+            {
+                return true;
+            }
+            MessageBox.Show("Complete el formulario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
     }
 }

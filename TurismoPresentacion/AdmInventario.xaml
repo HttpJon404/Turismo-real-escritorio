@@ -29,7 +29,7 @@
                         <TextBox x:Name="txtPrecioInv"  HorizontalAlignment="Left" Height="31" Margin="38,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
                         <Label Content="Precio" HorizontalAlignment="Left" Margin="38,119,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-                        <Button x:Name="btnGuardarInvt" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="381,147,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic"/>
+                        <Button x:Name="btnGuardarInvt" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="381,147,0,0" VerticalAlignment="Top" Width="107" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" Click="btnGuardarInvt_Click"/>
 
                         <Button ToolTip="Editar inventario" x:Name="btnEditarInv" HorizontalAlignment="Left" Margin="505,308,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
                             <iconpacks:PackIconFontAwesome Kind="EditRegular" Height="32" Width="32"  />
@@ -60,7 +60,7 @@
                         <Button ToolTip="Eliminar elemento" x:Name="btnEliminarServicio" HorizontalAlignment="Left" Margin="505,245,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
                             <iconpacks:PackIconFontAwesome Kind="TrashAltRegular" Height="32" Width="32"  />
                         </Button>
-                        <Button x:Name="btnGuardarServicio" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="382,158,0,0" VerticalAlignment="Top" Width="94" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic"/>
+                        <Button x:Name="btnGuardarServicio" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="382,158,0,0" VerticalAlignment="Top" Width="94" Height="34" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" FontFamily="Malgun Gothic" Click="btnGuardarServicio_Click"/>
                     </Grid>
                 </Border>
             </TabItem>

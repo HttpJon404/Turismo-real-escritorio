@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilidad;
 
 namespace TurismoNegocio
 {
@@ -49,5 +50,10 @@ namespace TurismoNegocio
                 throw;
             }
         }
+
+
+        
+
+
     }
 }
