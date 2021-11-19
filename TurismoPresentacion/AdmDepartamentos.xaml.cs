@@ -260,8 +260,7 @@ namespace TurismoPresentacion
         public bool FormularioLleno()
         {
             if (txtMetros.Text != string.Empty && txtDormitorios.Text != string.Empty && txtBanos.Text != string.Empty &&
-            txtDireccion.Text != string.Empty && cboRegion.SelectedIndex != -1 && cboComuna.SelectedIndex != -1 &&
-            cboEstado.SelectedIndex != -1 && txtValorArriendo.Text != string.Empty && txtCondiciones.Text != string.Empty &&
+            txtDireccion.Text != string.Empty && cboRegion.SelectedIndex != -1 && cboComuna.SelectedIndex != -1 && txtValorArriendo.Text != string.Empty && txtCondiciones.Text != string.Empty &&
             txtValorAdm.Text != string.Empty && txtDescripcion.Text != string.Empty)
             {
                 return true;
@@ -349,6 +348,7 @@ namespace TurismoPresentacion
                         {
                             var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
                             MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                            limpiarFormulario();
                         }
                         catch (Exception)
                         {

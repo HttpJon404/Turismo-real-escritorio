@@ -228,11 +228,16 @@ namespace TurismoPresentacion
             }
             else
             {
-                
+
                 string descripcion = txtDescripcionEditInv.Text;
                 int precio = Convert.ToInt32(txtPrecioEditInv.Text);
 
+                //string descripcion = txtDescripcionI.Text;
+                //int precio = Convert.ToInt32(txtPrecioInv.Text);
+
+
                 var resp = InventarioBl.GetInstance().ActualizarInventario(idInventario,descripcion, precio);
+
 
                 if (resp.EsPositiva)
                 {

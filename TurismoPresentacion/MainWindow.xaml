@@ -110,7 +110,7 @@
             <!--<Button ToolTip="Inhabilitar " x:Name="btnDeactive" HorizontalAlignment="Left" Margin="1010,334,0,0" VerticalAlignment="Top" Width="64" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnDeactive_Click_1">
                 <iconpacks:PackIconFontAwesome Kind="StoreSlashSolid" Height="32" Width="32"  />
             </Button>-->
-            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,128,0,10" Width="454"  >
+            <mah:Flyout Header="Ingresar check Out" Theme="Adapt" x:Name="FlyCheckOut" Position="Right" Margin="0,568,294,-430" Width="454"  >
                 <Grid  x:Name="GridAddUser2"  HorizontalAlignment="Left" Width="453">
                     <Label Content="Rut cliente:" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" FontSize="16"/>
                     <TextBlock x:Name="txtrutCliente1"  HorizontalAlignment="Left" Height="31" Margin="60,46,0,0" TextWrapping="Wrap" Text="11111111-1" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" IsEnabled="False"/>
