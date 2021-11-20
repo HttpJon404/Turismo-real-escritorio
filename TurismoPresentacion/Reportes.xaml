@@ -1,0 +1,30 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TurismoPresentacion"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Class="TurismoPresentacion.Reportes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Width="1085" Height="850"
+
+      Title="Reportes">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="24*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Reportes estadísticos" HorizontalAlignment="Left" Margin="290,21,0,0" VerticalAlignment="Top" Width="522" FontSize="48" FontFamily="Candara" Grid.RowSpan="2"/>
+
+        <mah:Tile x:Name="btnReporteReservas" Margin="242,149,615,247" Width="Auto" Title="Generar reporte de reservas" Height="Auto" RenderTransformOrigin="-0.532,0.48" Grid.Row="1" >
+            <iconpacks:PackIconFontAwesome Kind="HandPointUpSolid" Height="65" Width="75" />
+        </mah:Tile>
+        <mah:Tile x:Name="btnReporteEstadistico" Margin="584,149,273,247" Width="Auto" Title="Generar estadísticas" Height="Auto" RenderTransformOrigin="-0.532,0.48" Background="#FF688DB9" Grid.Row="1" >
+            <iconpacks:PackIconFontAwesome Kind="ChartLineSolid" Height="65" Width="75" />
+        </mah:Tile>
+
+    </Grid>
+</Page>

@@ -583,5 +583,12 @@ namespace TurismoPresentacion
         {
             CargarDeptos();
         }
+
+        private void btnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Reportes();
+            imgFondo.Visibility = Visibility.Hidden;
+            gridListaDpto.Visibility = Visibility.Hidden;
+        }
     }
 }

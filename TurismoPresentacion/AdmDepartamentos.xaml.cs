@@ -148,14 +148,8 @@ namespace TurismoPresentacion
 
                 }
 
-
-
-
-
-
             }
             
-
 
         }
 
@@ -323,6 +317,7 @@ namespace TurismoPresentacion
 
                             //Guardar rutas listas en la lista
                             rutaImagenesSave[i] = imagenDestino;
+
                         }
                         //Guardar rutas en donde se guardaron las imagenes/c/turismo/imagenX
 
