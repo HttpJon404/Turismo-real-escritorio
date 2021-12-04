@@ -13,9 +13,9 @@
         <Label Content="Email" HorizontalAlignment="Left" Margin="502,110,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="1.589,0.615" FontSize="14"/>
         <Button x:Name="btnLogin" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Iniciar sesión" Margin="573,283,107,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="Button_Click" FontSize="14"/>
         <Label Content="Contraseña" HorizontalAlignment="Left" Margin="502,181,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.636,0.577" FontSize="14"/>
-        <TextBox Text="admin" x:Name="txtEmail" HorizontalAlignment="Left" Height="32" Margin="502,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" FontSize="14"/>
+        <TextBox Text="diego@gmail.com" x:Name="txtEmail" HorizontalAlignment="Left" Height="32" Margin="502,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" FontSize="14"/>
         <Image HorizontalAlignment="Left" Height="422" Margin="0,0,0,-2" VerticalAlignment="Top" Width="474" Source="images/ImagenLogin.jpg" Stretch="Fill"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="502,210,0,0" VerticalAlignment="Top" Width="310" Height="32" FontSize="14"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="502,210,0,0" VerticalAlignment="Top" Width="310" Height="32" FontSize="14" Password="123123"/>
 
     </Grid>
 </mah:MetroWindow>

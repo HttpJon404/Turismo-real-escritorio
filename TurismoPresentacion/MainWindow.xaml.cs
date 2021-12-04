@@ -26,15 +26,29 @@ namespace TurismoPresentacion
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public MainWindow()
+        public MainWindow(int rol)
         {
             InitializeComponent();
             menu.IsOpen = true;
             swTema.Content = "Oscuro";
 
             gridListaDpto.Visibility = Visibility.Hidden;
-
+            if (rol ==1)
+            {
+                //Modo admin
+                //ModoAdmin();
+            }else if (rol == 3)
+            {
+                //Modo funcionario
+                ModoFuncionario();
+            }
         }
+
+        private void ModoFuncionario()
+        {
+            
+        }
+
         private int idDpto = 0;
         List<DepartamentoTabla> dptos = new List<DepartamentoTabla>();
         List<EstadoDepto> estadosDepto = new List<EstadoDepto>();
@@ -584,11 +598,6 @@ namespace TurismoPresentacion
             CargarDeptos();
         }
 
-        private void btnReportes_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new Reportes();
-            imgFondo.Visibility = Visibility.Hidden;
-            gridListaDpto.Visibility = Visibility.Hidden;
-        }
+        
     }
 }

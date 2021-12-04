@@ -23,6 +23,28 @@ namespace TurismoNegocio
         }
 
 
+        public List<ImagesDepto> GetImagenesDpto(int id)
+        {
+            try
+            {
+                DBApi dbapi = new DBApi();
+                dynamic inventarios = dbapi.Get("https://localhost:44358/api/imagenes/" + id);
+                var resp = inventarios.ToString();
+                List<ImagesDepto> jsonDes = JsonConvert.DeserializeObject<List<ImagesDepto>>(resp);
+
+
+               
+                return jsonDes;
+
+            }
+            catch (Exception)
+            {
+
+                return new List<ImagesDepto>();
+            }
+        }
+
+
         public List<TipoInventario> GetinventarioPorDepto(int id)
         {
             try

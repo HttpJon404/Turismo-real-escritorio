@@ -78,18 +78,18 @@ namespace TurismoPresentacion
 
         private void btnEditarDepto_Click(object sender, RoutedEventArgs e)
         {
-            DepartamentoBl deptoBl = new DepartamentoBl();
-            List<DepartamentoTabla> dptos = deptoBl.GetDeptos();
-            int i = 0;
-            if (dgDeptos.SelectedIndex != -1)
-            {
-                i = dgDeptos.SelectedIndex;
+            //DepartamentoBl deptoBl = new DepartamentoBl();
+            //List<DepartamentoTabla> dptos = deptoBl.GetDeptos();
+            //int i = 0;
+            //if (dgDeptos.SelectedIndex != -1)
+            //{
+            //    i = dgDeptos.SelectedIndex;
 
-                if (i >= 0)
-                {
+            //    if (i >= 0)
+            //    {
 
-                    int idDepto;
-                    idDepto = (int)dptos[i].id;
+            //        int idDepto;
+            //        idDepto = (int)dptos[i].id;
 
                     //Cargar regiones
                     //UbicacionBl ubi = new UbicacionBl();
@@ -103,12 +103,12 @@ namespace TurismoPresentacion
 
                     //var depto = deptoBl.GetDeptoId(idDepto);
 
-                    MainWindow main = new MainWindow();
-                    main.Main.Content = new AdmDepartamentos(0);
+                    //MainWindow main = new MainWindow(1);
+                    //main.Main.Content = new AdmDepartamentos(0);
                     
 
-                }
-            }
+            //    }
+            //}
         }
 
         private void btnDptoAdd_Click(object sender, RoutedEventArgs e)

@@ -58,9 +58,24 @@ namespace TurismoPresentacion
                     if (resp.EsPositiva)
                     {
                         //Login correcto
-                        MainWindow main = new MainWindow();
-                        this.Close();
-                        main.Show();
+                        //Id usuario para saber su rol
+                        int idUsuario = int.Parse(resp.Elemento);
+
+                        var rol = UsuarioBl.GetInstance().CompletaSessionUsuario(idUsuario);
+
+                        var rolU = rol.Roles[0].Id;
+                        int rolUsuario = (int)rolU;
+
+                        if (rolUsuario==2)
+                        {
+                            await this.ShowMessageAsync("Error", "Solo los administradores y funcionarios pueden hacer uso de este software, Como usuario puedes visitar nuestra pagina web turismoreal.cl");
+                        }
+                        else
+                        {
+                            MainWindow main = new MainWindow(rolUsuario);
+                            this.Close();
+                            main.Show();
+                        }
 
                     }
                     else

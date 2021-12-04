@@ -74,6 +74,8 @@
             <Label Content="Inventario" HorizontalAlignment="Left" Margin="20,521,0,0" VerticalAlignment="Top" FontSize="16"/>
             <ComboBox x:Name="cboInventario" HorizontalAlignment="Left" Margin="128,520,0,0" VerticalAlignment="Top" Width="245" FontSize="16" FontFamily="Calibri" />
             <Button x:Name="btnAgregarInventario"  HorizontalAlignment="Left" Margin="384,520,0,0" VerticalAlignment="Top" Width="62" Content="{iconpacks:BootstrapIcons Save, Height=18, Width=18}" Height="32" ToolTip="Agregar al inventario" Click="btnAgregarInventario_Click"/>
+            <Image x:Name="img1Depto" HorizontalAlignment="Left" Height="100" Margin="451,207,0,0" VerticalAlignment="Top" Width="100"/>
+            <Image x:Name="img2Depto" HorizontalAlignment="Left" Height="100" Margin="451,320,0,0" VerticalAlignment="Top" Width="100"/>
 
 
 
@@ -87,7 +89,7 @@
                 <Button x:Name="btnCerrar" Margin="308,-72,0,672" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrar_Click" Foreground="#FFF90202" Background="White">
                     <iconpacks:FontAwesome Kind="TimesSolid" Height="25" Width="25"  />
                 </Button>
-                <Button ToolTip="Eliminar departamento" x:Name="btnEliminar" HorizontalAlignment="Left" Margin="283,120,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
+                <Button ToolTip="Eliminar inventario seleccionado" x:Name="btnEliminarInventario" HorizontalAlignment="Left" Margin="283,120,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnEliminarInventario_Click">
                     <iconpacks:PackIconFontAwesome Kind="TrashAltSolid" Height="32" Width="32"  />
                 </Button>
 

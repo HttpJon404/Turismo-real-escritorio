@@ -37,10 +37,12 @@ namespace TurismoPresentacion
         string[] rutaImagenesSave = new string[2];
         bool open = false;
 
+        List<Inventario> listaInventarioGlobal = new InventarioBl().Getinventario();
+
 
         public AdmDepartamentos(int id)
         {
-            
+
             InitializeComponent();
             ValidacionesInput();
             CargarEstadoDeptos();
@@ -48,7 +50,7 @@ namespace TurismoPresentacion
             lblEstado.Visibility = Visibility.Hidden;
             cboEstado.Visibility = Visibility.Hidden;
             CargarInventarios();
-            if (id!=0)
+            if (id != 0)
             {
                 //Modo editar departamento
                 modoEditarDepto(id);
@@ -75,7 +77,7 @@ namespace TurismoPresentacion
                 cboEstado.SelectedValuePath = "Id";
                 cboEstado.DisplayMemberPath = "Descripcion";
             }
-            
+
         }
 
         private void modoEditarDepto(int id)
@@ -138,7 +140,7 @@ namespace TurismoPresentacion
                     InventarioTabla inventario = new InventarioTabla()
                     {
                         Id = Convert.ToInt32(invt.id_inventario),
-                        Descripcion =invt.nombre_inventario,
+                        Descripcion = invt.nombre_inventario,
                         Precio = Convert.ToInt32(invt.precio_inventario)
                     };
 
@@ -148,8 +150,27 @@ namespace TurismoPresentacion
 
                 }
 
+                //Imagenes
+                var images = deptoBl.GetImagenesDpto(id);
+
+                // Crear BitmapSource  
+                BitmapImage bitmap1 = new BitmapImage();
+                bitmap1.BeginInit();
+                bitmap1.UriSource = new Uri(images[0].ruta_archivo);
+                bitmap1.EndInit();
+                //Poner portada en la interfaz
+                img1Depto.Source = bitmap1;
+
+                // Crear BitmapSource  
+                BitmapImage bitmap2 = new BitmapImage();
+                bitmap2.BeginInit();
+                bitmap2.UriSource = new Uri(images[1].ruta_archivo);
+                bitmap2.EndInit();
+                //Poner portada en la interfaz
+                img2Depto.Source = bitmap2;
+
             }
-            
+
 
         }
 
@@ -275,7 +296,7 @@ namespace TurismoPresentacion
         {
             string accion = (string)btnGuardarDpto.Content;
 
-            if (accion=="Guardar")
+            if (accion == "Guardar")
             {
                 //Guardar nuevo departamento
                 DepartamentoBl deptoBl = new DepartamentoBl();
@@ -371,7 +392,7 @@ namespace TurismoPresentacion
         {
             dgInventario.Items.Refresh();
             FlyInventario.IsOpen = true;
-            open = true; 
+            open = true;
             dgInventario.ItemsSource = lInventario;
         }
         private void btnAbrirInventario_Click(object sender, RoutedEventArgs e)
@@ -436,16 +457,28 @@ namespace TurismoPresentacion
         private void btnAgregarInventario_Click(object sender, RoutedEventArgs e)
         {
 
-            InventarioTabla inventario = new InventarioTabla();
+
             decimal id = (decimal)cboInventario.SelectedValue;
             int idInventario = (int)id;
-            inventario.Id = (int)idInventario;
-            inventario.Descripcion = cboInventario.Text;
-            inventario.Precio = 50000;
-            lInventario.Add(inventario);
-            idsInventarioAdd.Add(idInventario);
-            CargarInventarioActual();
+            foreach (var i in listaInventarioGlobal)
+            {
+                if (Convert.ToInt32(i.Id) == idInventario)
+                {
 
+                    InventarioTabla inventario = new InventarioTabla()
+                    {
+                        Id = Convert.ToInt32(i.Id),
+                        Descripcion = i.Descripcion,
+                        Precio = Convert.ToInt32(i.Precio)
+                    };
+
+                    lInventario.Add(inventario);
+                    idsInventarioAdd.Add(idInventario);
+                    
+                    CargarInventarioActual();
+
+                }
+            }
 
         }
 
@@ -477,5 +510,42 @@ namespace TurismoPresentacion
 
             //}
         }
-    } 
+
+        private void btnEliminarInventario_Click(object sender, RoutedEventArgs e)
+        {
+            int idInventario;
+            var selected = dgInventario.SelectedItem;
+            var inventarioTabla = new InventarioTabla();
+
+            inventarioTabla = (InventarioTabla)selected;
+
+            if (selected != null)
+            {
+
+
+                MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+
+                    idInventario = inventarioTabla.Id;
+
+                    lInventario.Remove(inventarioTabla);
+                    dgInventario.Items.Refresh();
+                    dgInventario.ItemsSource = lInventario;
+                    idsInventarioAdd.Remove(idInventario);
+                }
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un inventario en la tabla para eliminarlo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            }
+        }
+
+    }
 }
+

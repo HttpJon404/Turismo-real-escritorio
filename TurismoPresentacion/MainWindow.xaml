@@ -18,7 +18,9 @@
 
 
     <Grid>
+        
         <Image x:Name="imgFondo" HorizontalAlignment="Left" Height="831" Margin="228,0,-1,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="-2.76,-0.24" Source="images/ImagenLogin.jpg" Stretch="UniformToFill" d:IsHidden="True"/>
+        
         <Frame x:Name="Main" Content="" HorizontalAlignment="Left" Width="1096" Height="831" Margin="199,0,-1,0" VerticalAlignment="Top"  NavigationUIVisibility="Hidden"/>
         <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="46" Click="Button_Click" >
             <iconPacks1:PackIconFontAwesome Kind="BarsSolid" Height="29" Width="35" />
@@ -26,24 +28,21 @@
         <mah:Flyout x:Name="menu" Width="228" Header="Turismo Real" Foreground="#FFE65D0F" Background="White">
             <Grid Height="774" Background="#CCFA6800">
 
-                <mah:Tile x:Name="btnGestionDpto" Margin="0,5,0,651" Height="Auto" Width="Auto" Title="Gestión departamentos" Click="btnGestionDpto_Click">
+                <mah:Tile x:Name="btnGestionDpto" Margin="0,0,0,629" Height="Auto" Width="Auto" Title="Gestión departamentos" Click="btnGestionDpto_Click">
                     <iconPacks1:PackIconFontAwesome Kind="CitySolid" Height="65" Width="75" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnApagar"  Height="Auto" Margin="0,590,0,107" Width="Auto" Click="btnApagar_Click"  >
+                <mah:Tile x:Name="btnApagar"  Height="Auto" Margin="0,580,0,107" Width="Auto" Click="btnApagar_Click"  >
                     <iconPacks1:PackIconFontAwesome Kind="PowerOffSolid" Height="65" Width="75" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnUsuarios" Margin="0,123,0,533" Width="Auto" Height="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
+                <mah:Tile x:Name="btnUsuarios" Margin="0,145,0,484" Width="Auto" Height="Auto" Title="Gestion de usuarios" Click="btnUsuarios_Click" >
                     <iconPacks1:PackIconFontAwesome Kind="UsersCogSolid" Height="65" Width="75" />
                 </mah:Tile>
-                <mah:Tile x:Name="btnListaUsuarios" Margin="0,241,0,415" Width="Auto" Title="Nuevo Departamento" Click="btnListaUsuarios_Click" Height="Auto" >
+                <mah:Tile x:Name="btnListaUsuarios" Margin="0,290,0,339" Width="Auto" Title="Nuevo Departamento" Click="btnListaUsuarios_Click" Height="Auto" >
                     <iconPacks1:PackIconFontAwesome Kind="PlusSolid" Height="65" Width="75" />
                 </mah:Tile>
                 <mah:ToggleSwitch x:Name="swTema"  HorizontalAlignment="Left" Height="75" Margin="39,679,0,0" VerticalAlignment="Top" Width="162" Content="On" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Left" ContentDirection="RightToLeft" FontSize="22" Foreground="White" Toggled="swTema_Toggled" Header="Tema" mah:HeaderedControlHelper.HeaderFontSize="25" OffContent="Claro" OnContent="Oscuro" mah:HeaderedControlHelper.HeaderFontFamily="Calibri"/>
-                <mah:Tile x:Name="btnAbrirInventarios" Margin="0,359,0,297" Width="Auto" Title="Gestion de inventarios" Click="btnAbrirInventarios_Click" Height="Auto" RenderTransformOrigin="-0.532,0.48" >
+                <mah:Tile x:Name="btnAbrirInventarios" Margin="0,435,0,194" Width="Auto" Title="Gestion de inventarios" Click="btnAbrirInventarios_Click" Height="Auto" RenderTransformOrigin="-0.532,0.48" >
                     <iconPacks1:PackIconFontAwesome Kind="BoxesSolid" Height="65" Width="75" />
-                </mah:Tile>
-                <mah:Tile x:Name="btnReportes" Margin="0,472,0,184" Width="Auto" Title="Reportes" Height="Auto" RenderTransformOrigin="-0.532,0.48" Click="btnReportes_Click" >
-                    <iconpacks:PackIconFontAwesome Kind="ChartPieSolid" Height="65" Width="75" />
                 </mah:Tile>
             </Grid>
 

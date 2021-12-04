@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvRol.cs" />
+    <Compile Include="AvUsuario.cs" />
     <Compile Include="Checkin.cs" />
     <Compile Include="Checkout.cs" />
     <Compile Include="Departamento.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="UsuarioCreate.cs" />
     <Compile Include="UsuarioDpto.cs" />
     <Compile Include="UsuarioEdit.cs" />
+    <Compile Include="UsuarioGet.cs" />
     <Compile Include="UsuarioTabla.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,6 +23,70 @@ namespace TurismoNegocio
             return instance;
         }
 
+
+
+        public AvUsuario CompletaSessionUsuario(int id)
+        {
+            try
+            {
+                DBApi dbApi = new DBApi();
+
+                dynamic user = dbApi.Get("https://localhost:44358//api/usuarios" + "/" + id);
+
+                var resp = user.ToString();
+
+                if (resp == "")
+                {
+                    return null;
+                }
+                else
+                {
+                    List<UsuarioGet> jsonDes = JsonConvert.DeserializeObject<List<UsuarioGet>>(resp);
+
+
+                    var userSession = new AvUsuario();
+                    userSession.ID = decimal.ToInt32(jsonDes[0].id);
+                    userSession.ID_COMUNA = decimal.ToInt32(jsonDes[0].id_comuna);
+                    userSession.ID_REGION = decimal.ToInt32(jsonDes[0].id_region);
+                    userSession.RUT = jsonDes[0].rut;
+                    userSession.NOMBRES = jsonDes[0].nombres;
+                    userSession.APELLIDOS = jsonDes[0].apellidos;
+                    userSession.DIRECCION = jsonDes[0].direccion;
+                    userSession.CORREO = jsonDes[0].correo;
+                    userSession.CELULAR = jsonDes[0].celular;
+                    userSession.EDAD = decimal.ToInt32(jsonDes[0].edad);
+                    userSession.GENERO = jsonDes[0].genero;
+
+                    //userSession.Roles = new List<AvRol>();
+
+                    List<AvRol> avrol = new List<AvRol>();
+                    var rol = new AvRol();
+                    for (int i = 0; i < jsonDes.Count; i++)
+                    {
+                        rol.Id = jsonDes[i].id_rol;
+                        rol.Descripcion = jsonDes[i].descripcion_rol;
+                        avrol.Add(rol);
+                        rol = new AvRol();
+                    }
+                    userSession.Roles = avrol;
+
+                    //userSession.Roles.Add(avrol);
+
+                    return userSession;
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Business().Error(e.Message, e);
+                return null;
+            }
+        }
+
+
+
         public List<Usuario> GetUsers()
         {
             try
