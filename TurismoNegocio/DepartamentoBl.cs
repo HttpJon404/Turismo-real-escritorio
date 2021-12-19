@@ -505,5 +505,89 @@ namespace TurismoNegocio
         }
 
 
+
+        public Respuesta<string> CrearMantencion(string descripcion, int valor, int id_depto)
+        {
+            try
+            {
+                DBApi dbApi = new DBApi();
+
+
+                DeptoMantencion depto = new DeptoMantencion()
+                {
+                    Descripcion = descripcion,
+                    Valor = valor,
+                    Id_depto = id_depto
+                    
+                };
+
+                //string json = JsonConvert.SerializeObject(depto);
+
+                //dynamic respuesta = dbApi.Post("https://localhost:44358/api/departamento/", json);
+
+                //var resp = respuesta.ToString();
+
+                //List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+
+
+
+                //Enviar depto a estado mantención
+
+                try
+                {
+                    ActivarDepto(id_depto, 3);
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = true,
+                        //Elemento = jsonDes[1],
+                        Mensaje = "Departamento enviado a mantención"
+                    };
+                }
+                catch (Exception)
+                {
+
+                    return new Respuesta<string>
+                    {
+                        EsPositiva = false,
+                        //Elemento = jsonDes[1],
+                        Mensaje = "Error En nuestra base de datos, intente mas tarde"
+                    };
+
+                }
+
+                //if (jsonDes[0] == "OK")
+                //{
+                //    return new Respuesta<string>
+                //    {
+                //        EsPositiva = true,
+                //        Elemento = jsonDes[1],
+                //        Mensaje = jsonDes[0]
+                //    };
+                //}
+                //else
+                //{
+                //    return new Respuesta<string>
+                //    {
+                //        EsPositiva = false,
+                //        Elemento = jsonDes[1],
+                //        Mensaje = jsonDes[0] + "En nuestra base de datos, intente recuperando su contraseña"
+                //    };
+                //}
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Business().Error(e.Message, e);
+                return new Respuesta<string>
+                {
+                    EsPositiva = false,
+                    Elemento = null,
+                    Mensaje = "Ha ocurrido un error al registrarse, por favor reintentelo nuevamente."
+                };
+            }
+        }
+
+
     }
 }

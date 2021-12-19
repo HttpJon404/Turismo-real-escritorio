@@ -14,88 +14,111 @@
     <Grid >
         <Label x:Name="lblTitulo" Content="Nuevo departamento" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="521" FontSize="48" FontFamily="Constantia"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="725,0,0,0" VerticalAlignment="Top" Width="350" Source="images/logo_turismo-removebg-preview.png"/>
-        <Grid x:Name="btnExaminar1" Margin="56,84,0,70">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" Foreground="Black"/>
-            <TextBox x:Name="txtDormitorios"  HorizontalAlignment="Left" Height="31" Margin="126,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <TextBox x:Name="txtBanos"  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
-            <mah:ToggleSwitch x:Name="swEstacionamiento"  HorizontalAlignment="Left" Height="35" Margin="18,166,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="LeftToRight" FontSize="16"/>
-            <TextBox x:Name="txtDireccion"  HorizontalAlignment="Left" Height="31" Margin="126,224,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <ComboBox x:Name="cboRegion" HorizontalAlignment="Left" Margin="126,275,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" SelectionChanged="cboRegion_SelectionChanged" >
-
-            </ComboBox>
-            <ComboBox x:Name="cboComuna" HorizontalAlignment="Left" Margin="126,321,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-
-            </ComboBox>
-            <ComboBox x:Name="cboEstado" HorizontalAlignment="Left" Margin="126,609,0,0" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" >
-
-
-            </ComboBox>
-            <TextBox x:Name="txtValorArriendo"  HorizontalAlignment="Left" Height="31" Margin="126,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
-            <TextBox x:Name="txtCondiciones"  HorizontalAlignment="Left" Height="93" Margin="126,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <TextBox x:Name="txtValorAdm"  HorizontalAlignment="Left" Height="31" Margin="625,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
-            <TextBox x:Name="txtDescripcion"  HorizontalAlignment="Left" Height="103" Margin="625,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
-            <Button x:Name="btnExaminarPort" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,225,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminarPort_Click" FontSize="16"/>
-            <Button x:Name="btnExaminar2" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,271,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16"/>
-
-
-
-
-            <Label Content="Gastos administrativos" HorizontalAlignment="Left" Margin="504,4,0,0" VerticalAlignment="Top" Width="132" Foreground="#FF513E3E" FontWeight="Bold"/>
-            <Image x:Name="imgPortadaDpto" HorizontalAlignment="Left" Height="203" Margin="517,375,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
-            <Rectangle RadiusX="3" RadiusY="3" HorizontalAlignment="Left" Height="174" Margin="507,23,0,0" Stroke="#CC815D43" VerticalAlignment="Top" Width="453"/>
-            <Label Content="Metros²" HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Dormitorios" HorizontalAlignment="Left" Margin="18,62,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Dirección" HorizontalAlignment="Left" Margin="18,224,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Valor arriendo" HorizontalAlignment="Left" Margin="16,369,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Condiciones" HorizontalAlignment="Left" Margin="16,420,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Valor" HorizontalAlignment="Left" Margin="516,30,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Baños" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" FontSize="16"/>
-
-            <Label Content="Región" HorizontalAlignment="Left" Margin="18,276,0,0" VerticalAlignment="Top" FontSize="16"/>
-
-            <Label Content="Comuna" HorizontalAlignment="Left" Margin="16,320,0,0" VerticalAlignment="Top" FontSize="16"/>
-
-            <Label x:Name="lblEstado" Content="Estado" HorizontalAlignment="Left" Margin="20,608,0,0" VerticalAlignment="Top" FontSize="16"/>
-
-            <Label Content="Descripción" HorizontalAlignment="Left" Margin="516,81,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Portada" HorizontalAlignment="Left" Margin="517,224,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Imagen 2" HorizontalAlignment="Left" Margin="517,270,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Label Content="Imagen 3" HorizontalAlignment="Left" Margin="517,320,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <Button x:Name="btnExaminar3" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Examinar" HorizontalAlignment="Left" Margin="625,321,0,0" VerticalAlignment="Top" Width="320" FontSize="16" Click="btnExaminar3_Click"/>
-            <Button x:Name="btnGuardarDpto" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" HorizontalAlignment="Left" Margin="818,602,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnGuardarDpto_Click"/>
-            <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="676,602,0,0" VerticalAlignment="Top" Width="126" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" Click="btnLimpiar_Click" />
-            <Button x:Name="btnAbrirInventario"  HorizontalAlignment="Left" Margin="128,561,0,0" VerticalAlignment="Top" Width="320" Click="btnAbrirInventario_Click" ToolTip="Ver inventario">
-                <iconpacks:BootstrapIcons Kind="BoxSeam" Height="18" Width="18"  />
-            </Button>
-            <Label Content="Inventario" HorizontalAlignment="Left" Margin="20,521,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <ComboBox x:Name="cboInventario" HorizontalAlignment="Left" Margin="128,520,0,0" VerticalAlignment="Top" Width="245" FontSize="16" FontFamily="Calibri" />
-            <Button x:Name="btnAgregarInventario"  HorizontalAlignment="Left" Margin="384,520,0,0" VerticalAlignment="Top" Width="62" Content="{iconpacks:BootstrapIcons Save, Height=18, Width=18}" Height="32" ToolTip="Agregar al inventario" Click="btnAgregarInventario_Click"/>
-            <Image x:Name="img1Depto" HorizontalAlignment="Left" Height="100" Margin="451,207,0,0" VerticalAlignment="Top" Width="100"/>
-            <Image x:Name="img2Depto" HorizontalAlignment="Left" Height="100" Margin="451,320,0,0" VerticalAlignment="Top" Width="100"/>
-
-
-
-
-        </Grid>
 
         <!--Inventario-->
-        <mah:Flyout Theme="Adapt" x:Name="FlyInventario" Width="368"  Header="Inventario actual" Position="Right" Margin="0,0,10,115" CloseButtonVisibility="Hidden" FontFamily="Corbel" FontSize="14" >
+        <mah:Flyout Theme="Adapt" x:Name="FlyInventario" Width="368"  Header="Inventario actual" Position="Right" Margin="0,-97,-549,212" CloseButtonVisibility="Hidden" FontFamily="Corbel" FontSize="14" >
             <Grid >
-                <DataGrid x:Name="dgInventario" HorizontalAlignment="Left" Height="337" Margin="10,86,0,0" VerticalAlignment="Top" Width="268" Cursor="Cross" GridLinesVisibility="All" IsReadOnly="True" AutoGeneratedColumns="dgInventario_AutoGeneratedColumns"/>
                 <Button x:Name="btnCerrar" Margin="308,-72,0,672" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnCerrar_Click" Foreground="#FFF90202" Background="White">
                     <iconpacks:FontAwesome Kind="TimesSolid" Height="25" Width="25"  />
                 </Button>
-                <Button ToolTip="Eliminar inventario seleccionado" x:Name="btnEliminarInventario" HorizontalAlignment="Left" Margin="283,120,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnEliminarInventario_Click">
+                <Button ToolTip="Eliminar inventario seleccionado" x:Name="was" HorizontalAlignment="Left" Margin="283,120,0,0" VerticalAlignment="Top" Width="65" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal">
                     <iconpacks:PackIconFontAwesome Kind="TrashAltSolid" Height="32" Width="32"  />
                 </Button>
 
             </Grid>
 
         </mah:Flyout>
+        <TabControl HorizontalAlignment="Left" Height="695" Margin="43,105,0,0" VerticalAlignment="Top" Width="1008">
+            <TabItem x:Name="tabDatos" Header="Datos departamento">
+
+                <Grid  Margin="0,0,0,-41">
+                    <Grid x:Name="btnExaminar1" Margin="0,0,-27,-46">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" Foreground="Black"/>
+                        <TextBox x:Name="txtDormitorios"  HorizontalAlignment="Left" Height="31" Margin="507,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+                        <TextBox x:Name="txtBanos"  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+                        <mah:ToggleSwitch x:Name="swEstacionamiento"  HorizontalAlignment="Left" Height="35" Margin="505,114,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="RightToLeft" FontSize="16"/>
+                        <TextBox x:Name="txtDireccion"  HorizontalAlignment="Left" Height="31" Margin="126,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri"/>
+                        <ComboBox x:Name="cboRegion" HorizontalAlignment="Left" Margin="505,180,0,0" VerticalAlignment="Top" Width="344" FontSize="16" FontFamily="Calibri" SelectionChanged="cboRegion_SelectionChanged" />
+                        <ComboBox x:Name="cboComuna" HorizontalAlignment="Left" Margin="126,252,0,0" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" />
+                        <ComboBox x:Name="cboEstado" HorizontalAlignment="Left" Margin="126,481,0,0" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" RenderTransformOrigin="-0.107,9.45" >
+
+                        </ComboBox>
+                        <TextBox x:Name="txtValorArriendo"  HorizontalAlignment="Left" Height="31" Margin="505,252,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="344" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" LostFocus="txtValorArriendo_LostFocus"/>
+                        <TextBox x:Name="txtCondiciones"  HorizontalAlignment="Left" Height="132" Margin="126,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="723" FontSize="16" FontFamily="Calibri"/>
+                        <TextBox x:Name="txtValorAdm"  HorizontalAlignment="Left" Height="30" Margin="571,792,0,-85" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
+                        <TextBox x:Name="txtDescripcion"  HorizontalAlignment="Left" Height="102" Margin="571,838,0,-203" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320" FontSize="16" FontFamily="Calibri"/>
+
+
+
+
+                        <Label Content="Gastos administrativos" HorizontalAlignment="Left" Margin="103,804,0,-93" VerticalAlignment="Top" Width="132" Foreground="#FF513E3E" FontWeight="Bold"/>
+                        <Rectangle RadiusX="3" RadiusY="3" HorizontalAlignment="Left" Height="174" Margin="100,816,0,-253" Stroke="#CC815D43" VerticalAlignment="Top" Width="452"/>
+                        <Label Content="Metros²" HorizontalAlignment="Left" Margin="126,23,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="Dormitorios" HorizontalAlignment="Left" Margin="505,23,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="Dirección" HorizontalAlignment="Left" Margin="126,149,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="Valor arriendo" HorizontalAlignment="Left" Margin="507,221,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="Condiciones" HorizontalAlignment="Left" Margin="126,282,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="-3.115,0.613"/>
+                        <Label Content="Valor" HorizontalAlignment="Left" Margin="115,830,0,-124" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="Baños" HorizontalAlignment="Left" Margin="126,85,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+                        <Label Content="Región" HorizontalAlignment="Left" Margin="505,149,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+                        <Label Content="Comuna" HorizontalAlignment="Left" Margin="126,216,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+                        <Label x:Name="lblEstado" Content="Estado" HorizontalAlignment="Left" Margin="126,450,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="-3.798,8.129"/>
+
+                        <Label Content="Descripción" HorizontalAlignment="Left" Margin="115,881,0,-175" VerticalAlignment="Top" FontSize="16"/>
+                        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="591,543,0,0" VerticalAlignment="Top" Width="126" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="16" Click="btnLimpiar_Click" />
+                        <Button x:Name="btnNext1" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Siguiente" HorizontalAlignment="Left" Margin="722,543,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnNext1_Click"/>
+
+
+
+
+
+                    </Grid>
+                </Grid>
+
+            </TabItem>
+            <TabItem x:Name="tabInventario" Header="Inventario">
+                <Grid >
+                    <Button x:Name="btnAbrirInventario"  HorizontalAlignment="Left" Margin="160,756,0,-152" VerticalAlignment="Top" Width="320" Click="btnAbrirInventario_Click" ToolTip="Ver inventario" Content="{iconpacks:BootstrapIcons BoxSeam, Height=32, Width=32}"/>
+                    <Label Content="Inventario" HorizontalAlignment="Left" Margin="250,34,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <ComboBox x:Name="cboInventario" HorizontalAlignment="Left" Margin="250,65,0,0" VerticalAlignment="Top" Width="287" FontSize="16" FontFamily="Calibri" />
+                    <Button x:Name="btnAgregarInventario"  HorizontalAlignment="Left" Margin="542,63,0,0" VerticalAlignment="Top" Width="91" Content="{iconpacks:BootstrapIcons Save, Height=18, Width=18}" Height="32" ToolTip="Agregar al inventario" Click="btnAgregarInventario_Click"/>
+                    <DataGrid x:Name="dgInventario" HorizontalAlignment="Left" Height="390" Margin="250,117,0,0" VerticalAlignment="Top" Width="334" Cursor="Cross" GridLinesVisibility="All" IsReadOnly="True"/>
+                    <Button ToolTip="Eliminar elemento" x:Name="btnEliminarInventario" HorizontalAlignment="Left" Margin="593,135,0,0" VerticalAlignment="Top" Width="62" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btnEliminarInventario_Click">
+                        <iconpacks:PackIconFontAwesome Kind="TrashAltRegular" Height="32" Width="32"  />
+                    </Button>
+
+                    <Button x:Name="btnNext2" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Siguiente" HorizontalAlignment="Left" Margin="722,543,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnNext2_Click"/>
+                    <Button x:Name="btnBack1"  Content="Anterior" HorizontalAlignment="Left" Margin="586,543,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnBack1_Click"/>
+                    <Label Content="Total: " HorizontalAlignment="Left" Margin="607,468,0,0" VerticalAlignment="Top" Width="61" FontSize="22"/>
+                    <Label x:Name="lblTotal" Content="$" HorizontalAlignment="Left" Margin="663,468,0,0" VerticalAlignment="Top" Width="150" FontSize="22"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabImagenes" Header="Imagenes">
+                <Grid Margin="0,0,-110,0">
+                    <Button x:Name="btnExaminarPort" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Portada" HorizontalAlignment="Left" Margin="106,35,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminarPort_Click" FontSize="16" mah:ControlsHelper.ContentCharacterCasing="Normal"/>
+                    <Button x:Name="btnExaminar2" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Imagen 1" HorizontalAlignment="Left" Margin="570,30,0,0" VerticalAlignment="Top" Width="320" Click="btnExaminar_Click" FontSize="16" mah:ControlsHelper.ContentCharacterCasing="Normal"/>
+
+
+
+
+                    <Image x:Name="imgPortadaDpto" HorizontalAlignment="Left" Height="204" Margin="58,68,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
+                    <Button x:Name="btnExaminar3" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Imagen 2" HorizontalAlignment="Left" Margin="106,289,0,0" VerticalAlignment="Top" Width="320" FontSize="16" Click="btnExaminar3_Click" mah:ControlsHelper.ContentCharacterCasing="Normal"/>
+                    <Image x:Name="img1Depto" HorizontalAlignment="Left" Height="204" Margin="525,68,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
+                    <Image x:Name="img2Depto" HorizontalAlignment="Left" Height="204" Margin="58,322,0,0" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.01,0.15" Source="images/depa.jpg" Stretch="Fill"/>
+                    <Button x:Name="btnBack2"  Content="Anterior" HorizontalAlignment="Left" Margin="590,543,0,0" VerticalAlignment="Top" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnBack2_Click"/>
+                    <Button x:Name="btnGuardarDpto" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Guardar" Width="127" Height="46" mah:ControlsHelper.ContentCharacterCasing="Normal" FontSize="18" FontFamily="Malgun Gothic" Click="btnGuardarDpto_Click" Margin="722,543,263,61"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
 
 
     </Grid>

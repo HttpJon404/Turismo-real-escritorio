@@ -441,29 +441,29 @@ namespace TurismoPresentacion
             dgClientes.Columns[0].Header = "Id";
             dgClientes.Columns[0].DisplayIndex = 0;
             dgClientes.Columns[1].Header = "Región";
-            dgClientes.Columns[1].DisplayIndex = 1;
+            dgClientes.Columns[1].DisplayIndex = 9;
             dgClientes.Columns[2].Header = "Comuna";
-            dgClientes.Columns[2].DisplayIndex = 2;
+            dgClientes.Columns[2].DisplayIndex = 10;
             dgClientes.Columns[3].Header = "Rut";
             dgClientes.Columns[3].DisplayIndex = 3;
             dgClientes.Columns[4].Header = "Nombres";
-            dgClientes.Columns[4].DisplayIndex = 4;
+            dgClientes.Columns[4].DisplayIndex = 1;
             dgClientes.Columns[5].Header = "Apellidos";
-            dgClientes.Columns[5].DisplayIndex = 5;
+            dgClientes.Columns[5].DisplayIndex = 2;
             dgClientes.Columns[6].Header = "Dirección";
-            dgClientes.Columns[6].DisplayIndex = 6;
+            dgClientes.Columns[6].DisplayIndex = 12;
             dgClientes.Columns[7].Header = "Email";
-            dgClientes.Columns[7].DisplayIndex = 7;
+            dgClientes.Columns[7].DisplayIndex = 8;
             dgClientes.Columns[8].Header = "Telefono";
-            dgClientes.Columns[8].DisplayIndex = 8;
+            dgClientes.Columns[8].DisplayIndex = 11;
             dgClientes.Columns[9].Header = "Edad";
-            dgClientes.Columns[9].DisplayIndex = 9;
+            dgClientes.Columns[9].DisplayIndex = 4;
             dgClientes.Columns[10].Header = "Genero";
-            dgClientes.Columns[10].DisplayIndex = 10;
+            dgClientes.Columns[10].DisplayIndex = 5;
             dgClientes.Columns[11].Header = "Estado";
-            dgClientes.Columns[11].DisplayIndex = 11;
+            dgClientes.Columns[11].DisplayIndex = 7;
             dgClientes.Columns[12].Header = "Tipo usuario";
-            dgClientes.Columns[12].DisplayIndex = 12;
+            dgClientes.Columns[12].DisplayIndex = 6;
         }
 
         private void btnGuardarUsuarioEdit_Click(object sender, RoutedEventArgs e)
@@ -571,7 +571,7 @@ namespace TurismoPresentacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un departamento en la tabla para cambiar su estado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Debe seleccionar un usuario en la tabla para cambiar su estado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -586,10 +586,16 @@ namespace TurismoPresentacion
         {
             UsuarioBl user = new UsuarioBl();
             string rut = txtRutFilter.Text;
-            List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
+            //List<UsuarioTabla> usuarios = user.FiltrarUsuarios(rut);
 
-            dgClientes.ItemsSource = null;
-            dgClientes.ItemsSource = usuarios;
+            //dgClientes.ItemsSource = null;
+            //dgClientes.ItemsSource = usuarios;
+
+
+            string nombreEstado = cboEstado2.Text;
+
+            
+            dgClientes.ItemsSource = usuarios.Where(d => d.estado.Contains(nombreEstado));
 
 
         }

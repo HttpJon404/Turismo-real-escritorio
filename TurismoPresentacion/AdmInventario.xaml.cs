@@ -260,27 +260,35 @@ namespace TurismoPresentacion
             var selected = dgInventarios.SelectedItem;
             var inventario = new Inventario();
 
-            MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
+            if (selected != null)
             {
-                inventario = (Inventario)selected;
-                idInventario = Convert.ToInt32(inventario.Id);
-                //Deshabilitar inventario
-                var resp = InventarioBl.GetInstance().DeleteInventario(idInventario);
 
-                if (resp.EsPositiva)
+                MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show(resp.Mensaje, "Exito");
-                    CargarInventarios();
-                    idInventario = 0;
-                }
-                else
-                {
-                    MessageBox.Show(resp.Mensaje, "Error");
-                }
+                    inventario = (Inventario)selected;
+                    idInventario = Convert.ToInt32(inventario.Id);
+                    //Deshabilitar inventario
+                    var resp = InventarioBl.GetInstance().DeleteInventario(idInventario);
+
+                    if (resp.EsPositiva)
+                    {
+                        MessageBox.Show(resp.Mensaje, "Exito");
+                        CargarInventarios();
+                        idInventario = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show(resp.Mensaje, "Error");
+                    }
 
 
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un registro para eliminar", "Error");
             }
         }
 
@@ -348,26 +356,36 @@ namespace TurismoPresentacion
             var selected = dgServicios.SelectedItem;
             var servicio = new Servicios();
 
-            MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
+            if (selected != null)
             {
-                servicio = (Servicios)selected;
-                idServicio = Convert.ToInt32(servicio.Id);
-                //Deshabilitar servicio
-                var resp = ServicioBl.GetInstance().DeleteServicio(idServicio);
 
-                if (resp.EsPositiva)
+                MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show(resp.Mensaje, "Exito");
-                    CargarServicios();
-                    idServicio = 0;
+                    servicio = (Servicios)selected;
+                    idServicio = Convert.ToInt32(servicio.Id);
+                    //Deshabilitar servicio
+                    var resp = ServicioBl.GetInstance().DeleteServicio(idServicio);
+
+                    if (resp.EsPositiva)
+                    {
+                        MessageBox.Show(resp.Mensaje, "Exito");
+                        CargarServicios();
+                        idServicio = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show(resp.Mensaje, "Error");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(resp.Mensaje, "Error");
-                }
+
             }
+            else
+            {
+                MessageBox.Show("Seleccione un registro para eliminar", "Error");
+            }
+
         }
     }
 }

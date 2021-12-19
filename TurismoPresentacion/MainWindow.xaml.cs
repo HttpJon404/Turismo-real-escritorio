@@ -46,7 +46,12 @@ namespace TurismoPresentacion
 
         private void ModoFuncionario()
         {
-            
+            btnUsuarios.IsEnabled = false;
+            btnUsuarios.IsEnabled = false;
+            btnListaUsuarios.IsEnabled = false;
+            btnAbrirInventarios.IsEnabled = false;
+            btnEditarDepto.IsEnabled = false;
+            btnDeactive.IsEnabled = false;
         }
 
         private int idDpto = 0;
@@ -62,31 +67,14 @@ namespace TurismoPresentacion
         {
             CargarDeptos();
             CargarEstadosFilter();
-            CargarRegiones();
+
             Main.Content = null;
             gridListaDpto.Visibility = Visibility.Visible;
             imgFondo.Visibility = Visibility.Hidden;
         }
 
 
-        private void CargarRegiones()
-        {
-            UbicacionBl ubi = new UbicacionBl();
-            List<GetComunas> comunas = ubi.GetRegion();
-            if (comunas.Count >= 1)
-            {
-                cboRegionFilter.ItemsSource = null;
-                cboRegionFilter.ItemsSource = comunas;
-                cboRegionFilter.SelectedValuePath = "id_region";
-                cboRegionFilter.DisplayMemberPath = "nombre_region";
-            }
-            else
-            {
-                cboRegionFilter.ItemsSource = null;
-                MessageBox.Show("Ha ocurrido un error de red al cargar los datos, reintente nuevamente", "Error de red", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
 
-        }
 
 
         private void CargarEstadosFilter()
@@ -264,7 +252,7 @@ namespace TurismoPresentacion
             var depto = new DepartamentoTabla();
             if (selected == null)
             {
-                MessageBox.Show("Seleccione un departamento en Reserva", "Error");
+                MessageBox.Show("Seleccione un departamento en Reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -314,7 +302,7 @@ namespace TurismoPresentacion
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione un departamento en Reserva", "Error");
+                    MessageBox.Show("Seleccione un departamento en Reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 }
 
@@ -338,7 +326,7 @@ namespace TurismoPresentacion
             var depto = new DepartamentoTabla();
             if (selected == null)
             {
-                MessageBox.Show("Seleccione un departamento en Check-in", "Error");
+                MessageBox.Show("Seleccione un departamento en Check-in", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -365,17 +353,12 @@ namespace TurismoPresentacion
                             listBoxCheckout.ItemsSource = inventario;
 
 
-
-
-
-
                         }
                         else
                         {
                             MessageBox.Show("Ocurrio un error inesperado, reintente nuevamente", "Error");
 
                         }
-
 
                     }
                     else
@@ -474,7 +457,7 @@ namespace TurismoPresentacion
         {
             string nombreEstado = cboEstadoFilter.Text;
 
-            string region = cboRegionFilter.Text;
+            //string region = cboRegionFilter.Text;
             dgDeptos.ItemsSource = dptos.Where(d => d.nombre_estado.Contains(nombreEstado));
             //dgDeptos.ItemsSource = dptos.Where(d => d.nombre_region.Contains(region));
         }
@@ -491,9 +474,6 @@ namespace TurismoPresentacion
                 dgDeptos.ItemsSource = dptos.Where(d => d.direccion.Contains(direccion));
             }
         }
-
-
-
 
 
         private void BtnCheckIn(object sender, RoutedEventArgs e)
@@ -545,27 +525,7 @@ namespace TurismoPresentacion
 
             }
         }
-        private void cboRegionFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //MessageBox.Show("here");
-            try
-            {
-                UbicacionBl ubi = new UbicacionBl();
-
-                int idRegion = cboRegionFilter.SelectedIndex + 1;
-
-                //Console.WriteLine(idRegion);
-                List<GetComunas> comunas = ubi.GetRegionPorComuna(idRegion);
-                cboComunaFilter.ItemsSource = comunas;
-                cboComunaFilter.SelectedValuePath = "id_comuna";
-                cboComunaFilter.DisplayMemberPath = "nombre_comuna";
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+      
         private void btnCheckOut_Click_1(object sender, RoutedEventArgs e)
         {
             if (idDpto != 0)
@@ -598,6 +558,86 @@ namespace TurismoPresentacion
             CargarDeptos();
         }
 
-        
+        private void btnCerrarCheckOut1_Click(object sender, RoutedEventArgs e)
+        {
+            CerrarFlyMantencion();
+        }
+
+        private void btnMantencion_Click(object sender, RoutedEventArgs e)
+        {
+           
+            var selected = dgDeptos.SelectedItem;
+            var deptoTabla = new DepartamentoTabla();
+
+            deptoTabla = (DepartamentoTabla)selected;
+
+
+            if (selected != null)
+            {
+                idDpto = (int)deptoTabla.id;
+                //MessageBox.Show(deptoTabla.id.ToString());
+                txtDireccionDepto.Text = deptoTabla.direccion;
+                FlyMantencion.IsOpen = true;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un departamento en la tabla para poder ingresar su mantencion", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private void btnIngresarMantencion_Click(object sender, RoutedEventArgs e)
+        {
+            //Ingresar departamento a mantención
+            if (FormularioMantencionLleno())
+            {
+                try
+                {
+                    string descripcion = txtDescripcionMantencion.Text;
+                    int valor = Int32.Parse(txtValorManrtencion.Text);
+                    DepartamentoBl depa = new DepartamentoBl();
+
+                    var selected = dgDeptos.SelectedItem;
+                    var deptoTabla = new DepartamentoTabla();
+
+                    deptoTabla = (DepartamentoTabla)selected;
+
+                    int id_dpto = (int)deptoTabla.id;
+
+                    var resp = depa.CrearMantencion(descripcion, valor, id_dpto);
+
+                    CargarDeptos();
+                    MessageBox.Show(resp.Mensaje, "Éxito", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    CerrarFlyMantencion();
+                
+
+                }
+                catch (Exception)
+                {
+
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Debe completar el formulario para enviar este departamento a mantención", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void CerrarFlyMantencion()
+        {
+            txtDescripcionMantencion.Text = "";
+            txtValorManrtencion.Text = "";
+            FlyMantencion.IsOpen = false;
+        }
+
+        private bool FormularioMantencionLleno()
+        {
+            if (txtDescripcionMantencion.Text != string.Empty && txtValorManrtencion.Text != string.Empty)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

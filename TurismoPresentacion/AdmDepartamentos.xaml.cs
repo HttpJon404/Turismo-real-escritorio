@@ -72,7 +72,7 @@ namespace TurismoPresentacion
             }
             else
             {
-                cboEstado.ItemsSource = null;
+
                 cboEstado.ItemsSource = comunas;
                 cboEstado.SelectedValuePath = "Id";
                 cboEstado.DisplayMemberPath = "Descripcion";
@@ -118,7 +118,7 @@ namespace TurismoPresentacion
                 cboRegion.SelectedValue = dpto.id_region;
                 cboComuna.SelectedValue = dpto.id_comuna;
                 cboEstado.SelectedValue = dpto.id_estado;
-                txtValorArriendo.Text = valor.ToString();
+                txtValorArriendo.Text = "$" + valor.ToString();
                 txtCondiciones.Text = dpto.condiciones;
 
                 // Crear BitmapSource  
@@ -151,24 +151,32 @@ namespace TurismoPresentacion
                 }
 
                 //Imagenes
-                var images = deptoBl.GetImagenesDpto(id);
+                try
+                {
+                    var images = deptoBl.GetImagenesDpto(id);
 
-                // Crear BitmapSource  
-                BitmapImage bitmap1 = new BitmapImage();
-                bitmap1.BeginInit();
-                bitmap1.UriSource = new Uri(images[0].ruta_archivo);
-                bitmap1.EndInit();
-                //Poner portada en la interfaz
-                img1Depto.Source = bitmap1;
+                    // Crear BitmapSource  
+                    BitmapImage bitmap1 = new BitmapImage();
+                    bitmap1.BeginInit();
+                    bitmap1.UriSource = new Uri(images[0].ruta_archivo);
+                    bitmap1.EndInit();
+                    //Poner portada en la interfaz
+                    img1Depto.Source = bitmap1;
 
-                // Crear BitmapSource  
-                BitmapImage bitmap2 = new BitmapImage();
-                bitmap2.BeginInit();
-                bitmap2.UriSource = new Uri(images[1].ruta_archivo);
-                bitmap2.EndInit();
-                //Poner portada en la interfaz
-                img2Depto.Source = bitmap2;
+                    // Crear BitmapSource  
+                    BitmapImage bitmap2 = new BitmapImage();
+                    bitmap2.BeginInit();
+                    bitmap2.UriSource = new Uri(images[1].ruta_archivo);
+                    bitmap2.EndInit();
+                    //Poner portada en la interfaz
+                    img2Depto.Source = bitmap2;
 
+                }
+                catch (Exception)
+                {
+
+
+                }
             }
 
 
@@ -216,6 +224,22 @@ namespace TurismoPresentacion
             cboRegion.DisplayMemberPath = "nombre_region";
         }
 
+        //Portada
+        private void btnExaminarPort_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "jpg(*.jpg)|*.jpg|png(*.png)|*.png|gif(*.gif)|*.gif|bmp(*.bmp)|*.bmp|All Files(*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                portadaOrigen = openFileDialog.FileName;
+                imgPortadaDpto.Source = new BitmapImage(fileUri);
+                archivoPortada = openFileDialog.SafeFileName;
+            }
+
+        }
+
         //Imagen 1
         private void btnExaminar_Click(object sender, RoutedEventArgs e)
         {
@@ -226,7 +250,7 @@ namespace TurismoPresentacion
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
                 var rutaOrigen = openFileDialog.FileName;
-
+                img1Depto.Source = new BitmapImage(fileUri);
                 listaOrigen[0] = rutaOrigen;
                 nombreImagenes[0] = openFileDialog.SafeFileName;
 
@@ -242,7 +266,7 @@ namespace TurismoPresentacion
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
                 var rutaOrigen = openFileDialog.FileName;
-
+                img2Depto.Source = new BitmapImage(fileUri);
                 listaOrigen[1] = rutaOrigen;
                 nombreImagenes[1] = openFileDialog.SafeFileName;
 
@@ -275,8 +299,7 @@ namespace TurismoPresentacion
         public bool FormularioLleno()
         {
             if (txtMetros.Text != string.Empty && txtDormitorios.Text != string.Empty && txtBanos.Text != string.Empty &&
-            txtDireccion.Text != string.Empty && cboRegion.SelectedIndex != -1 && cboComuna.SelectedIndex != -1 && txtValorArriendo.Text != string.Empty && txtCondiciones.Text != string.Empty &&
-            txtValorAdm.Text != string.Empty && txtDescripcion.Text != string.Empty)
+            txtDireccion.Text != string.Empty && cboRegion.SelectedIndex != -1 && cboComuna.SelectedIndex != -1 && txtValorArriendo.Text != string.Empty && txtCondiciones.Text != string.Empty)
             {
                 return true;
             }
@@ -315,13 +338,20 @@ namespace TurismoPresentacion
                             estacionamiento = 1;
                         }
                         string direccion = txtDireccion.Text;
+
                         decimal id_comuna = decimal.Parse(cboComuna.SelectedValue.ToString());
+
                         int comuna = (int)id_comuna;
+
                         decimal id_region = decimal.Parse(cboRegion.SelectedValue.ToString());
-                        //Estado
-                        int valorArriendo = int.Parse(txtValorArriendo.Text);
+                        string arriendo = txtValorArriendo.Text.Remove(0, 1);
+
+                        int valorArriendo = int.Parse(arriendo);
+
                         string condiciones = txtCondiciones.Text;
+
                         int estado = 1;
+
                         //lista imagenes
                         string rutaDestino = @"C:\Turismo";
 
@@ -363,8 +393,18 @@ namespace TurismoPresentacion
                         try
                         {
                             var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
-                            MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                            limpiarFormulario();
+                            if (resp.EsPositiva)
+                            {
+                                MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                                limpiarFormulario();
+                                tabDatos.Focus();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo agregar el departamento, verifique el formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            }
+
                         }
                         catch (Exception)
                         {
@@ -439,20 +479,7 @@ namespace TurismoPresentacion
 
 
         //Portada
-        private void btnExaminarPort_Click(object sender, RoutedEventArgs e)
-        {
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "jpg(*.jpg)|*.jpg|png(*.png)|*.png|gif(*.gif)|*.gif|bmp(*.bmp)|*.bmp|All Files(*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                portadaOrigen = openFileDialog.FileName;
-                imgPortadaDpto.Source = new BitmapImage(fileUri);
-                archivoPortada = openFileDialog.SafeFileName;
-            }
-
-        }
 
         private void btnAgregarInventario_Click(object sender, RoutedEventArgs e)
         {
@@ -474,14 +501,26 @@ namespace TurismoPresentacion
 
                     lInventario.Add(inventario);
                     idsInventarioAdd.Add(idInventario);
-                    
+
                     CargarInventarioActual();
 
                 }
             }
+            CalcularTotalInventario();
 
         }
+        private void CalcularTotalInventario()
+        {
 
+            int total = 0;
+            //Calcular total inventario
+            foreach (var inv in lInventario)
+            {
+                total = total + inv.Precio;
+            }
+            lblTotal.Content = "$" + total.ToString();
+
+        }
 
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -523,7 +562,7 @@ namespace TurismoPresentacion
             {
 
 
-                MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este registro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("¿Desea Eliminar este inventario?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -534,6 +573,8 @@ namespace TurismoPresentacion
                     dgInventario.Items.Refresh();
                     dgInventario.ItemsSource = lInventario;
                     idsInventarioAdd.Remove(idInventario);
+
+                    CalcularTotalInventario();
                 }
 
 
@@ -545,6 +586,51 @@ namespace TurismoPresentacion
 
             }
         }
+
+
+
+
+        //----------Tabulacion-----------------//
+        private void btnNext1_Click(object sender, RoutedEventArgs e)
+        {
+            tabInventario.Focus();
+        }
+
+        private void btnNext2_Click(object sender, RoutedEventArgs e)
+        {
+            tabImagenes.Focus();
+        }
+
+        private void btnBack1_Click(object sender, RoutedEventArgs e)
+        {
+            tabDatos.Focus();
+        }
+
+        private void btnBack2_Click(object sender, RoutedEventArgs e)
+        {
+            tabInventario.Focus();
+        }
+
+
+        private void txtValorArriendo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string texto = txtValorArriendo.Text;
+
+            if (texto.Contains("$"))
+            {
+                txtValorArriendo.Text = texto;
+                string text = texto.Remove(0, 1);
+                MessageBox.Show(text);
+            }
+            else
+            {
+                txtValorArriendo.Text = "$" + texto;
+            }
+
+        }
+
+
+
 
     }
 }
