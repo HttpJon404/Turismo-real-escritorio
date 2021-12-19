@@ -521,13 +521,13 @@ namespace TurismoNegocio
                     
                 };
 
-                //string json = JsonConvert.SerializeObject(depto);
+                string json = JsonConvert.SerializeObject(depto);
 
-                //dynamic respuesta = dbApi.Post("https://localhost:44358/api/departamento/", json);
+                dynamic respuesta = dbApi.Post("https://localhost:44358/api/GASTOS_ADMINISTRATIVOS", json);
 
-                //var resp = respuesta.ToString();
+                var resp = respuesta.ToString();
 
-                //List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
+                List<string> jsonDes = JsonConvert.DeserializeObject<List<string>>(resp);
 
 
 
