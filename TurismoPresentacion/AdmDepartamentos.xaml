@@ -37,7 +37,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" Foreground="Black"/>
+                        <TextBox x:Name="txtMetros"  HorizontalAlignment="Left" Height="31" Margin="126,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers" />
                         <TextBox x:Name="txtDormitorios"  HorizontalAlignment="Left" Height="31" Margin="507,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
                         <TextBox x:Name="txtBanos"  HorizontalAlignment="Left" Height="31" Margin="126,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="342" FontSize="16" FontFamily="Calibri" PreviewTextInput="OnlyNumbers"/>
                         <mah:ToggleSwitch x:Name="swEstacionamiento"  HorizontalAlignment="Left" Height="35" Margin="505,114,0,0" VerticalAlignment="Top" Width="224" Content="Estacionamiento" mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Right" ContentDirection="RightToLeft" FontSize="16"/>

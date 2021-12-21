@@ -393,17 +393,11 @@ namespace TurismoPresentacion
                         try
                         {
                             var resp = deptoBl.RegistrarDepartamento(dormitorios, baños, metrosm2, estacionamiento, direccion, comuna, estado, valorArriendo, condiciones, inventarios, rutaImagenesSave, portadaDestino);
-                            if (resp.EsPositiva)
-                            {
-                                MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                                limpiarFormulario();
-                                tabDatos.Focus();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo agregar el departamento, verifique el formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                            }
+                
+                            MessageBox.Show("Departamento agregado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                            limpiarFormulario();
+                            tabDatos.Focus();
+                         
 
                         }
                         catch (Exception)

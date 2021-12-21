@@ -18,6 +18,7 @@ using MahApps.Metro.Controls.Dialogs;
 using TurismoNegocio;
 using EntidadServicio;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace TurismoPresentacion
 {
@@ -639,5 +640,12 @@ namespace TurismoPresentacion
             }
             return false;
         }
+
+
+        private void SoloNumeros(object sender, TextCompositionEventArgs e)
+        {
+                e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
     }
 }
